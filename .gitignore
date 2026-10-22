@@ -1,0 +1,15 @@
+# Material del profesorado (solo en local)
+**/Materiales/
+
+# Credenciales y claves
+*.pem
+*.ppk
+credentials
+.aws/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+*~
+.vscode/
+.idea/
