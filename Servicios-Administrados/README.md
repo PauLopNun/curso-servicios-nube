@@ -9,9 +9,11 @@
 
 Despliegue de aplicaciones sobre servicios administrados de AWS.
 
-## Tareas
+## Prácticas
 
-Todavía no hay tareas.
+| Práctica | Descripción |
+|:--|:--|
+| [Práctica 1 - Despliegue con CI/CD](Practica-1-Despliegue-CICD) | Web estática de login usada como aplicación de prueba para un despliegue CI/CD |
 
 ---
 
