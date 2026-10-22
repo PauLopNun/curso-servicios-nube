@@ -49,7 +49,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Bases-de-Datos-y-Almacenamiento`](Bases-de-Datos-y-Almacenamiento) | 0 |
 | **Administración de Recursos de Computación en la Nube** | [`Recursos-de-Computacion`](Recursos-de-Computacion) | 1 |
 | **Administración de Redes en la Nube** | [`Redes-en-la-Nube`](Redes-en-la-Nube) | 1 |
-| **Despliegue de Servicios Administrados en la Nube** | [`Servicios-Administrados`](Servicios-Administrados) | 1 |
+| **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios`](Despliegue-de-Servicios) | 1 |
 
 </div>
 
@@ -63,7 +63,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 |:--|:--|:-:|:-:|
 | Recursos de Computación | [Tarea 1.1 - Cambiar el tipo de una instancia con AWS CLI](Recursos-de-Computacion/Tarea-1.1-Cambiar-Tipo-Instancia) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Redes en la Nube | [Práctica 1 - Creación de redes públicas](Redes-en-la-Nube/Practica-1-Redes-Publicas) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
-| Servicios Administrados | [Práctica 1 - Despliegue con CI/CD](Servicios-Administrados/Practica-1-Despliegue-CICD) | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | ![En curso](https://img.shields.io/badge/En%20curso-dbab09?style=flat-square) |
+| Despliegue de Servicios | [Práctica 1 - Despliegue con CI/CD](Despliegue-de-Servicios/Practica-1-Despliegue-CICD) | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | ![En curso](https://img.shields.io/badge/En%20curso-dbab09?style=flat-square) |
 
 </div>
 
@@ -84,7 +84,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 │       └── entrega/
 ├── Redes-en-la-Nube/
 │   └── Practica-1-Redes-Publicas/
-└── Servicios-Administrados/
+└── Despliegue-de-Servicios/
     └── Practica-1-Despliegue-CICD/
 ```
 
