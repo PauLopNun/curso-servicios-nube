@@ -33,7 +33,7 @@ Abrir `http://localhost:8080`.
 
 ## Integración continua
 
-El workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) se ejecuta en cada push y pull request a `main`, y también se puede lanzar a mano. Tiene dos trabajos:
+El workflow [`ci-despliegue-practica-1.yml`](../../.github/workflows/ci-despliegue-practica-1.yml) está en la raíz del repositorio, porque GitHub Actions solo lee los workflows de `.github/workflows/` en la raíz. Con `paths` se ejecuta únicamente cuando cambia algo de esta práctica, y con `working-directory` todos los comandos se lanzan desde esta carpeta. También se puede lanzar a mano desde la pestaña Actions. Tiene dos trabajos:
 
 | Trabajo | Qué comprueba |
 |:--|:--|
@@ -49,7 +49,7 @@ El workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) se ejecuta en
 | [`app/index.html`](app/index.html) | Página de login |
 | [`app/css/style.css`](app/css/style.css) | Estilos |
 | [`app/js/app.js`](app/js/app.js) | Validación del formulario y comprobación de credenciales |
-| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Workflow de integración continua |
+| [`../../.github/workflows/ci-despliegue-practica-1.yml`](../../.github/workflows/ci-despliegue-practica-1.yml) | Workflow de integración continua |
 
 ---
 
