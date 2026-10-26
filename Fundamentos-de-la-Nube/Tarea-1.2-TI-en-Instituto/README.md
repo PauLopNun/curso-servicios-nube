@@ -4,6 +4,7 @@
 
 ![Diseño](https://img.shields.io/badge/Dise%C3%B1o-Infraestructura%20TI-232F3E?style=for-the-badge)
 ![AWS](https://img.shields.io/badge/AWS-Nube%20h%C3%ADbrida-FF9900?style=for-the-badge)
+![draw.io](https://img.shields.io/badge/draw.io-F08705?style=for-the-badge&logo=diagramsdotnet&logoColor=white)
 
 </div>
 
@@ -28,6 +29,7 @@ Diseñar la infraestructura TI del nuevo IES Peset Aleixandre (32 unidades, unos
 ## Entrega
 
 - [`entrega/fci_t1.2_lopez_nunez.docx`](entrega/fci_t1.2_lopez_nunez.docx)
+- Diagrama hecho con draw.io: [`capturas/01-diagrama-red.drawio`](capturas/01-diagrama-red.drawio) (editable en [app.diagrams.net](https://app.diagrams.net))
 
 ---
 

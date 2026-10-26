@@ -13,3 +13,6 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# Bloqueos de LibreOffice
+.~lock.*#

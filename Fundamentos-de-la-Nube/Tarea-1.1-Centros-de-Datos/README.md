@@ -27,7 +27,7 @@ Investigar un centro de datos situado en España a partir de DataCenterMap y la 
 ## Entrega
 
 - [`entrega/fci_t1.1_lopez_nunez.docx`](entrega/fci_t1.1_lopez_nunez.docx)
-- La captura del mapa se guarda en `capturas/`.
+- Capturas en `capturas/`: ficha del centro en la web de Templus y ubicación en el mapa de DataCenterMap.
 
 ---
 
