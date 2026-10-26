@@ -14,6 +14,7 @@ Gestión de instancias EC2: tipos de instancia, ciclo de vida y automatización 
 | Unidad | Tarea | Descripción |
 |:-:|:--|:--|
 | UD01 | [Tarea 1.1 - Cambiar el tipo de una instancia](Tarea-1.1-Cambiar-Tipo-Instancia) | Script que cambia el tipo de una instancia EC2 de forma segura |
+| UD01 | [Actividad 1.7 - Plantilla LAMP, IP elástica y Session Manager](Actividad-1.7-Plantilla-LAMP-EIP-SSM) | Plantilla de lanzamiento versionada, IP elástica y Session Manager (en curso) |
 
 ---
 
