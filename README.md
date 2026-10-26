@@ -45,7 +45,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 
 | Asignatura | Carpeta | Tareas |
 |:--|:--|:-:|
-| **Fundamentos y Configuración Inicial de Servicios en la Nube** | [`Fundamentos-de-la-Nube`](Fundamentos-de-la-Nube) | 0 |
+| **Fundamentos y Configuración Inicial de Servicios en la Nube** | [`Fundamentos-de-la-Nube`](Fundamentos-de-la-Nube) | 2 |
 | **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Bases-de-Datos-y-Almacenamiento`](Bases-de-Datos-y-Almacenamiento) | 0 |
 | **Administración de Recursos de Computación en la Nube** | [`Recursos-de-Computacion`](Recursos-de-Computacion) | 1 |
 | **Administración de Redes en la Nube** | [`Redes-en-la-Nube`](Redes-en-la-Nube) | 1 |
@@ -61,6 +61,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 
 | Asignatura | Tarea | Tecnologías | Estado |
 |:--|:--|:-:|:-:|
+| Fundamentos de la Nube | [Tarea 1.1 - Centros de datos](Fundamentos-de-la-Nube/Tarea-1.1-Centros-de-Datos) | ![Investigación](https://img.shields.io/badge/Investigaci%C3%B3n-232F3E?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
+| Fundamentos de la Nube | [Tarea 1.2 - TI en instituto](Fundamentos-de-la-Nube/Tarea-1.2-TI-en-Instituto) | ![Diseño](https://img.shields.io/badge/Dise%C3%B1o-232F3E?style=flat-square) ![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Recursos de Computación | [Tarea 1.1 - Cambiar el tipo de una instancia con AWS CLI](Recursos-de-Computacion/Tarea-1.1-Cambiar-Tipo-Instancia) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Redes en la Nube | [Práctica 1 - Creación de redes públicas](Redes-en-la-Nube/Practica-1-Redes-Publicas) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Despliegue de Servicios | [Práctica 1 - Despliegue con CI/CD](Despliegue-de-Servicios/Practica-1-Despliegue-CICD) | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | ![En curso](https://img.shields.io/badge/En%20curso-dbab09?style=flat-square) |
@@ -74,6 +76,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 ```text
 .
 ├── Fundamentos-de-la-Nube/
+│   ├── Tarea-1.1-Centros-de-Datos/
+│   └── Tarea-1.2-TI-en-Instituto/
 ├── Bases-de-Datos-y-Almacenamiento/
 ├── Recursos-de-Computacion/
 │   └── Tarea-1.1-Cambiar-Tipo-Instancia/
