@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validar:
+    name: Validar la aplicación
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validar el HTML
+        run: npx --yes html-validate@9 app/index.html
+
+      - name: Comprobar la sintaxis del JavaScript
+        run: node --check app/js/app.js
+
+  prueba-humo:
+    name: Prueba de humo
+    runs-on: ubuntu-latest
+    needs: validar
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Arrancar un servidor web
+        run: |
+          cd app
+          python3 -m http.server 8080 &
+          sleep 2
+
+      - name: Comprobar que se sirven los ficheros
+        run: |
+          for ruta in / /css/style.css /js/app.js; do
+            codigo=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:8080$ruta")
+            echo "$ruta -> $codigo"
+            test "$codigo" = "200"
+          done
+
+      - name: Comprobar el contenido de la página
+        run: |
+          pagina=$(curl -s http://localhost:8080/)
+          echo "$pagina" | grep -q 'id="loginForm"'
+          echo "$pagina" | grep -q 'id="email"'
+          echo "$pagina" | grep -q 'id="password"'
+          echo "La página de login contiene el formulario"

@@ -5,6 +5,7 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
 </div>
 
@@ -30,6 +31,17 @@ python3 -m http.server 8080
 
 Abrir `http://localhost:8080`.
 
+## Integración continua
+
+El workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) se ejecuta en cada push y pull request a `main`, y también se puede lanzar a mano. Tiene dos trabajos:
+
+| Trabajo | Qué comprueba |
+|:--|:--|
+| `validar` | Valida `index.html` con html-validate y la sintaxis de `app.js` con `node --check` |
+| `prueba-humo` | Sirve la web con `python3 -m http.server`, comprueba que la página, el CSS y el JS responden con 200 y que el formulario de login está en la página |
+
+`prueba-humo` solo se ejecuta si `validar` termina bien.
+
 ## Contenido
 
 | Ruta | Descripción |
@@ -37,6 +49,7 @@ Abrir `http://localhost:8080`.
 | [`app/index.html`](app/index.html) | Página de login |
 | [`app/css/style.css`](app/css/style.css) | Estilos |
 | [`app/js/app.js`](app/js/app.js) | Validación del formulario y comprobación de credenciales |
+| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Workflow de integración continua |
 
 ---
 
