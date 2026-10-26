@@ -4,18 +4,18 @@ on:
   push:
     branches: [main]
     paths:
-      - "Despliegue-de-Servicios/Practica-1-Despliegue-CICD/**"
+      - "Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD/**"
       - ".github/workflows/ci-despliegue-practica-1.yml"
   pull_request:
     branches: [main]
     paths:
-      - "Despliegue-de-Servicios/Practica-1-Despliegue-CICD/**"
+      - "Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD/**"
       - ".github/workflows/ci-despliegue-practica-1.yml"
   workflow_dispatch:
 
 defaults:
   run:
-    working-directory: Despliegue-de-Servicios/Practica-1-Despliegue-CICD
+    working-directory: Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD
 
 jobs:
   validar:
