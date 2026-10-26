@@ -15,6 +15,7 @@ Diseño de redes en AWS: VPC, subredes, direccionamiento, Internet Gateway, tabl
 | Práctica | Descripción |
 |:--|:--|
 | [Práctica 1 - Creación de redes públicas](Practica-1-Redes-Publicas) | EC2 en una red pública, VPC con subredes desde la consola y desde la CLI |
+| [Scripting con Boto3](Scripting-Boto3) | Scripts en Python para comprobar la conexión, terminar instancias y controlar el gasto |
 
 ---
 

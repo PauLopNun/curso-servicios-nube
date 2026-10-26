@@ -29,10 +29,11 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 ## Tecnologías
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=aws,linux,ubuntu,bash,docker,git,github,vscode&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=aws,linux,ubuntu,bash,python,docker,git,github,vscode&theme=dark" />
 </p>
 
 - **AWS** - EC2, VPC, S3, IAM y servicios administrados desde la consola y la **AWS CLI v2**
+- **Python** - Scripts con Boto3 para gestionar recursos de AWS
 - **Bash** - Automatización de tareas con la CLI, validaciones y scripts de datos de usuario
 - **Linux** - Instancias Ubuntu, SSH, Apache y administración básica
 - **Redes** - Direccionamiento CIDR, subredes, Internet Gateway, tablas de rutas y grupos de seguridad
@@ -87,7 +88,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 │       ├── capturas/
 │       └── entrega/
 ├── Redes-en-la-Nube/
-│   └── Practica-1-Redes-Publicas/
+│   ├── Practica-1-Redes-Publicas/
+│   └── Scripting-Boto3/
 └── Despliegue-de-Servicios/
     └── Practica-1-Despliegue-CICD/
 ```
