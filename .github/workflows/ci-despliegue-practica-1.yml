@@ -24,12 +24,12 @@ jobs:
 
     steps:
       - name: Descargar el código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Instalar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Validar el HTML
         run: npx --yes html-validate@9 app/index.html
@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: Descargar el código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Arrancar un servidor web
         run: |
