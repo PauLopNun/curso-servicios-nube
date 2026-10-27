@@ -1,72 +1,242 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Acerca de mí - Pau López Núñez</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Acerca de mi - Pau Lopez Nunez</title>
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
 
-		<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="title">Hyperspace</a>
-				<nav>
-					<ul>
-						<li><a href="index.html">Inicio</a></li>
-						<li><a href="acerca.html" class="active">Acerca de mí</a></li>
-					</ul>
-				</nav>
-			</header>
+		body {
+			background: #000;
+			color: #fff;
+			font-family: 'Courier New', monospace;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-height: 100vh;
+			padding: 40px 20px;
+		}
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+		canvas#stars {
+			position: fixed;
+			top: 0; left: 0;
+			width: 100%; height: 100%;
+			z-index: 0;
+			pointer-events: none;
+		}
 
-				<!-- Main -->
-					<section id="main" class="wrapper">
-						<div class="inner">
-							<h1 class="major">Acerca de mí</h1>
-							<span class="image fit"><img src="images/pic04.jpg" alt="Acerca de mí" /></span>
-							<h2>Pau López Núñez</h2>
-							<p>Estudiante de Administración de Sistemas en Red, apasionado por los servicios en la nube y la infraestructura tecnológica. Actualmente cursando el módulo de <strong>Servicios en la Nube con AWS</strong>, aprendiendo a desplegar y gestionar recursos en Amazon Web Services.</p>
-							<h3>Tecnologías que estoy aprendiendo</h3>
-							<ul>
-								<li>☁️ Amazon Web Services (AWS)</li>
-								<li>🗄️ Amazon S3 — Almacenamiento de objetos</li>
-								<li>🖥️ Amazon EC2 — Computación en la nube</li>
-								<li>🔐 AWS IAM — Gestión de identidades</li>
-								<li>🌐 AWS VPC — Redes en la nube</li>
-								<li>🐳 Docker y contenedores</li>
-							</ul>
-							<h3>Esta práctica</h3>
-							<p>Este sitio web estático ha sido desplegado en <strong>Amazon S3</strong> utilizando la AWS CLI desde Visual Studio Code, como parte de la actividad 3.4 del curso de Servicios en la Nube.</p>
-							<ul class="actions">
-								<li><a href="index.html" class="button">Volver al inicio</a></li>
-							</ul>
-						</div>
-					</section>
+		.container {
+			position: relative;
+			z-index: 1;
+			max-width: 700px;
+			width: 100%;
+		}
 
-			</div>
+		h1 {
+			color: #ffff00;
+			font-size: 2.2rem;
+			letter-spacing: 6px;
+			text-transform: uppercase;
+			text-align: center;
+			margin-bottom: 8px;
+			text-shadow: 0 0 20px #ffff00;
+		}
 
-		<!-- Footer -->
-			<footer id="footer" class="wrapper alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Pau López Núñez. Todos los derechos reservados.</li>
-						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
+		.subtitle {
+			text-align: center;
+			color: #aaa;
+			font-size: 0.85rem;
+			letter-spacing: 3px;
+			margin-bottom: 40px;
+		}
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		.card {
+			border: 2px solid #ffff00;
+			padding: 30px;
+			margin-bottom: 24px;
+			background: rgba(255,255,0,0.03);
+			position: relative;
+		}
 
-	</body>
+		.card h2 {
+			color: #ffff00;
+			font-size: 0.9rem;
+			letter-spacing: 4px;
+			text-transform: uppercase;
+			margin-bottom: 16px;
+			border-bottom: 1px solid #333;
+			padding-bottom: 8px;
+		}
+
+		.card p {
+			color: #ccc;
+			font-size: 0.9rem;
+			line-height: 1.8;
+		}
+
+		.skills {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 10px;
+		}
+
+		.skill {
+			font-size: 0.85rem;
+			color: #0ff;
+			padding: 6px 0;
+		}
+
+		.skill::before {
+			content: '> ';
+			color: #ffff00;
+		}
+
+		.info-row {
+			display: flex;
+			justify-content: space-between;
+			padding: 8px 0;
+			border-bottom: 1px dotted #222;
+			font-size: 0.85rem;
+		}
+
+		.info-row:last-child { border-bottom: none; }
+		.info-row .label { color: #888; }
+		.info-row .value { color: #0ff; }
+
+		.back-btn {
+			display: block;
+			margin: 0 auto 40px;
+			padding: 12px 36px;
+			border: 2px solid #ffff00;
+			color: #ffff00;
+			text-decoration: none;
+			font-family: 'Courier New', monospace;
+			font-size: 0.85rem;
+			letter-spacing: 4px;
+			text-transform: uppercase;
+			text-align: center;
+			transition: all 0.2s;
+			width: fit-content;
+		}
+
+		.back-btn:hover {
+			background: #ffff00;
+			color: #000;
+		}
+
+		.blink {
+			animation: blink 1s step-end infinite;
+		}
+		@keyframes blink {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0; }
+		}
+	</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+
+	<h1>Pau Lopez Nunez</h1>
+	<p class="subtitle">INSERT COIN TO CONTINUE<span class="blink">_</span></p>
+
+	<div class="card">
+		<h2>// Player Info</h2>
+		<div class="info-row">
+			<span class="label">NOMBRE</span>
+			<span class="value">Pau Lopez Nunez</span>
+		</div>
+		<div class="info-row">
+			<span class="label">MODULO</span>
+			<span class="value">Administracion de Sistemas en Red</span>
+		</div>
+		<div class="info-row">
+			<span class="label">ASIGNATURA</span>
+			<span class="value">Servicios en la Nube - AWS</span>
+		</div>
+		<div class="info-row">
+			<span class="label">PRACTICA</span>
+			<span class="value">Act 3.4 - Sitio web estatico en S3</span>
+		</div>
+		<div class="info-row">
+			<span class="label">CLOUD</span>
+			<span class="value">Amazon Web Services</span>
+		</div>
+	</div>
+
+	<div class="card">
+		<h2>// Skills Desbloqueadas</h2>
+		<div class="skills">
+			<span class="skill">Amazon S3</span>
+			<span class="skill">AWS CLI</span>
+			<span class="skill">Amazon EC2</span>
+			<span class="skill">AWS IAM</span>
+			<span class="skill">Amazon VPC</span>
+			<span class="skill">Docker</span>
+			<span class="skill">Linux</span>
+			<span class="skill">Git</span>
+		</div>
+	</div>
+
+	<div class="card">
+		<h2>// Sobre esta practica</h2>
+		<p>
+			Sitio web estatico desplegado en Amazon S3 usando AWS CLI
+			desde Visual Studio Code. El bucket tiene acceso publico
+			habilitado mediante bucket policy y el hosting estatico
+			configurado con index.html como documento raiz.
+		</p>
+	</div>
+
+	<a href="index.html" class="back-btn">&lt; Volver al juego</a>
+
+</div>
+
+<script>
+	const canvas = document.getElementById('stars');
+	const ctx = canvas.getContext('2d');
+	let stars = [];
+
+	function resize() {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	}
+
+	function initStars() {
+		stars = [];
+		for (let i = 0; i < 120; i++) {
+			stars.push({
+				x: Math.random() * canvas.width,
+				y: Math.random() * canvas.height,
+				r: Math.random() * 1.5 + 0.3,
+				speed: Math.random() * 0.4 + 0.1,
+				opacity: Math.random()
+			});
+		}
+	}
+
+	function drawStars() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		stars.forEach(s => {
+			ctx.beginPath();
+			ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+			ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
+			ctx.fill();
+			s.y += s.speed;
+			s.opacity = 0.4 + Math.sin(Date.now() / 800 + s.x) * 0.4;
+			if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+		});
+		requestAnimationFrame(drawStars);
+	}
+
+	window.addEventListener('resize', () => { resize(); initStars(); });
+	resize();
+	initStars();
+	drawStars();
+</script>
+
+</body>
 </html>
