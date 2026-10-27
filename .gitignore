@@ -16,3 +16,13 @@ Thumbs.db
 
 # Bloqueos de LibreOffice
 .~lock.*#
+
+# Archivos innecesarios de webs clonadas
+**/website/sound/
+**/website/*.zip
+**/website/LICENSE
+**/website/README.md
+**/website/img/github.png
+**/website/img/preview.png
+**/website/js/jquery-mobile.js
+**/.git/
