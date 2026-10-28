@@ -14,6 +14,11 @@ def nombre(recurso):
     return next((t["Value"] for t in recurso.get("Tags", []) if t["Key"] == "Name"), "-")
 
 
+def marca(recurso):
+    # Señala lo creado por crear_vpc_ec2.py
+    return "  [Boto3]" if {"Key": "CreadoPor", "Value": "Boto3"} in recurso.get("Tags", []) else ""
+
+
 try:
     # 1. Cuenta en la que estamos
     identidad = boto3.client("sts", region_name=REGION).get_caller_identity()
@@ -32,7 +37,7 @@ try:
     for inst in instancias:
         lanzada = inst["LaunchTime"].strftime("%d/%m %H:%M")
         print(f"  {inst['InstanceId']}  {inst['State']['Name']:<10} {inst['InstanceType']:<10} "
-              f"{inst.get('PublicIpAddress', '-'):<15} {inst.get('VpcId', '-'):<22} {lanzada}  {nombre(inst)}")
+              f"{inst.get('PublicIpAddress', '-'):<15} {inst.get('VpcId', '-'):<22} {lanzada}  {nombre(inst)}{marca(inst)}")
 
     # 3. VPC con sus subredes, Internet Gateways y grupos de seguridad
     print("\nVPC")
@@ -42,7 +47,7 @@ try:
     for vpc in ec2.describe_vpcs()["Vpcs"]:
         vpc_id = vpc["VpcId"]
         defecto = "  (por defecto)" if vpc["IsDefault"] else ""
-        print(f"  {vpc_id}  {vpc['CidrBlock']:<16} {nombre(vpc)}{defecto}")
+        print(f"  {vpc_id}  {vpc['CidrBlock']:<16} {nombre(vpc)}{defecto}{marca(vpc)}")
 
         for sub in (s for s in subredes if s["VpcId"] == vpc_id):
             tipo = "pública" if sub["MapPublicIpOnLaunch"] else "privada"

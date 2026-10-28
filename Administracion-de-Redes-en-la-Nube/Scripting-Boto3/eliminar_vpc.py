@@ -14,6 +14,11 @@ def nombre(recurso):
     return next((t["Value"] for t in recurso.get("Tags", []) if t["Key"] == "Name"), "-")
 
 
+def marca(recurso):
+    # Señala lo creado por crear_vpc_ec2.py
+    return "  [Boto3]" if {"Key": "CreadoPor", "Value": "Boto3"} in recurso.get("Tags", []) else ""
+
+
 def eliminar_vpc(vpc_id):
     filtro = [{"Name": "vpc-id", "Values": [vpc_id]}]
 
@@ -70,11 +75,16 @@ try:
         raise SystemExit
 
     for i, vpc in enumerate(vpcs, 1):
-        print(f"  {i}. {vpc['VpcId']}  {vpc['CidrBlock']:<16} {nombre(vpc)}")
+        print(f"  {i}. {vpc['VpcId']}  {vpc['CidrBlock']:<16} {nombre(vpc)}{marca(vpc)}")
 
-    respuesta = input("\nNúmeros de las VPC a eliminar separados por comas, 'todas' o Enter para cancelar: ").strip().lower()
+    respuesta = input("\nNúmeros de las VPC a eliminar separados por comas, 'boto3' (solo las marcadas), 'todas' o Enter para cancelar: ").strip().lower()
     if respuesta == "todas":
         elegidas = vpcs
+    elif respuesta == "boto3":
+        elegidas = [v for v in vpcs if marca(v)]
+        if not elegidas:
+            print("No hay VPC creadas con Boto3")
+            raise SystemExit
     elif respuesta:
         elegidas = [vpcs[int(n) - 1] for n in respuesta.split(",")]
     else:

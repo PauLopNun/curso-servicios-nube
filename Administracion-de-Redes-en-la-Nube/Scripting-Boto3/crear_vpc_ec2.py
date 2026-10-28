@@ -29,7 +29,11 @@ ssm = boto3.client("ssm", region_name=REGION)
 
 
 def etiquetas(tipo, nombre):
-    return [{"ResourceType": tipo, "Tags": [{"Key": "Name", "Value": f"{PREFIJO}-{nombre}"}]}]
+    # CreadoPor permite a listar_recursos.py y eliminar_vpc.py distinguir lo creado por este script
+    return [{"ResourceType": tipo, "Tags": [
+        {"Key": "Name", "Value": f"{PREFIJO}-{nombre}"},
+        {"Key": "CreadoPor", "Value": "Boto3"},
+    ]}]
 
 
 def crear_vpc():
