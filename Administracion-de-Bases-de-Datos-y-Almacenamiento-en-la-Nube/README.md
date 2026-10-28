@@ -12,7 +12,9 @@ Almacenamiento de objetos, bases de datos relacionales y NoSQL en AWS.
 
 ## Tareas
 
-Todavía no hay tareas.
+| Unidad | Tarea | Descripción |
+|:-:|:--|:--|
+| UD01 | [Actividad 3.4 - Sitio web estático en Amazon S3](Actividad-3.4-Sitio-Web-Estatico-S3) | Despliegue de sitio web estático en S3 con bucket policy pública y AWS CLI |
 
 ---
 
