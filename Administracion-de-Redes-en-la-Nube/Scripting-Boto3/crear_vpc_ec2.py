@@ -123,6 +123,13 @@ def lanzar_instancia(subred_id, sg_id):
 
 if __name__ == "__main__":
     try:
+        identidad = boto3.client("sts", region_name=REGION).get_caller_identity()
+        print(f"Cuenta : {identidad['Account']}")
+        print(f"ARN    : {identidad['Arn']}")
+        print(f"Región : {REGION}\n")
+        if input("¿Crear la VPC y la instancia en esta cuenta? (s/N): ").strip().lower() != "s":
+            raise SystemExit("Cancelado")
+
         vpc_id = crear_vpc()
         subred_publica = crear_subred(vpc_id, CIDR_PUBLICA, "subred-publica", publica=True)
         crear_subred(vpc_id, CIDR_PRIVADA, "subred-privada", publica=False)
