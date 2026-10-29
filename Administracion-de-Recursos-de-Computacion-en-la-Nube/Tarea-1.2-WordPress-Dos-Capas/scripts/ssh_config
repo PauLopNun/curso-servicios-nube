@@ -1,0 +1,11 @@
+# Equipo local: entradas añadidas a ~/.ssh/config
+Host wp-web
+    HostName 34.195.127.214
+    User ubuntu
+    IdentityFile ~/.ssh/labsuser.pem
+
+Host wp-bd
+    HostName 172.31.81.10
+    User ubuntu
+    IdentityFile ~/.ssh/labsuser.pem
+    ProxyJump wp-web

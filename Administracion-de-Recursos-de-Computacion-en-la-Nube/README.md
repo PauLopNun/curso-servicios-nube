@@ -15,6 +15,7 @@ Gestión de instancias EC2: tipos de instancia, ciclo de vida y automatización 
 |:-:|:--|:--|
 | UD01 | [Tarea 1.1 - Cambiar el tipo de una instancia](Tarea-1.1-Cambiar-Tipo-Instancia) | Script que cambia el tipo de una instancia EC2 de forma segura |
 | UD01 | [Actividad 1.7 - Plantilla LAMP, IP elástica y Session Manager](Actividad-1.7-Plantilla-LAMP-EIP-SSM) | Plantilla de lanzamiento versionada, IP elástica y Session Manager |
+| UD01 | [Tarea 1.2 - WordPress en dos capas](Tarea-1.2-WordPress-Dos-Capas) | WordPress con capa web y capa de datos MariaDB en instancias EC2 separadas |
 
 ---
 
