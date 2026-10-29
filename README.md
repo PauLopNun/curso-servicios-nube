@@ -47,7 +47,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | Asignatura | Carpeta | Tareas |
 |:--|:--|:-:|
 | **Fundamentos y Configuración Inicial de Servicios en la Nube** | [`Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube`](Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube) | 2 |
-| **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube`](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube) | 0 |
+| **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube`](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube) | 2 |
 | **Administración de Recursos de Computación en la Nube** | [`Administracion-de-Recursos-de-Computacion-en-la-Nube`](Administracion-de-Recursos-de-Computacion-en-la-Nube) | 3 |
 | **Administración de Redes en la Nube** | [`Administracion-de-Redes-en-la-Nube`](Administracion-de-Redes-en-la-Nube) | 1 |
 | **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios-Administrados-en-la-Nube`](Despliegue-de-Servicios-Administrados-en-la-Nube) | 1 |
@@ -64,6 +64,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 |:--|:--|:-:|:-:|
 | Fundamentos de la Nube | [Tarea 1.1 - Centros de datos](Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube/Tarea-1.1-Centros-de-Datos) | ![Investigación](https://img.shields.io/badge/Investigaci%C3%B3n-232F3E?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Fundamentos de la Nube | [Tarea 1.2 - TI en instituto](Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube/Tarea-1.2-TI-en-Instituto) | ![Diseño](https://img.shields.io/badge/Dise%C3%B1o-232F3E?style=flat-square) ![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
+| Bases de Datos y Almacenamiento | [Actividad 3.4 - Sitio web estático en S3 (Tarea 1.7)](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Actividad-3.4-Sitio-Web-Estatico-S3) | ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![CLI](https://img.shields.io/badge/AWS%20CLI-232F3E?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
+| Bases de Datos y Almacenamiento | [Práctica 1.8 - S3 Access Points](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Practica-1.8-S3-Access-Points) | ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![IAM](https://img.shields.io/badge/IAM-DD344C?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Recursos de Computación | [Tarea 1.1 - Cambiar el tipo de una instancia con AWS CLI](Administracion-de-Recursos-de-Computacion-en-la-Nube/Tarea-1.1-Cambiar-Tipo-Instancia) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Recursos de Computación | [Actividad 1.7 - Plantilla LAMP, IP elástica y Session Manager](Administracion-de-Recursos-de-Computacion-en-la-Nube/Actividad-1.7-Plantilla-LAMP-EIP-SSM) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![SSM](https://img.shields.io/badge/SSM-232F3E?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Completada](https://img.shields.io/badge/Completada-2ea44f?style=flat-square) |
 | Recursos de Computación | [Tarea 1.2 - WordPress en dos capas](Administracion-de-Recursos-de-Computacion-en-la-Nube/Tarea-1.2-WordPress-Dos-Capas) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![WordPress](https://img.shields.io/badge/WordPress-21759B?style=flat-square&logo=wordpress&logoColor=white) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
@@ -82,6 +84,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 │   ├── Tarea-1.1-Centros-de-Datos/
 │   └── Tarea-1.2-TI-en-Instituto/
 ├── Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/
+│   ├── Actividad-3.4-Sitio-Web-Estatico-S3/
+│   └── Practica-1.8-S3-Access-Points/
 ├── Administracion-de-Recursos-de-Computacion-en-la-Nube/
 │   ├── Tarea-1.1-Cambiar-Tipo-Instancia/
 │   ├── Tarea-1.2-WordPress-Dos-Capas/

@@ -1,10 +1,13 @@
 <div align="center">
 
-# Actividad 3.4 — Sitio Web Estático en Amazon S3
+# Actividad 3.4 - Sitio web estático en Amazon S3
 
 ![S3](https://img.shields.io/badge/AWS-S3-569A31?style=for-the-badge&logoColor=white)
 ![CLI](https://img.shields.io/badge/AWS-CLI-232F3E?style=for-the-badge&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-Canvas-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![Estado](https://img.shields.io/badge/Estado-Completado-brightgreen?style=for-the-badge)
+
+Entregada en Aules como **Tarea 1.7**, junto con la [Práctica 1.8](../Practica-1.8-S3-Access-Points).
 
 </div>
 
@@ -69,7 +72,7 @@ cd website/
 aws s3 sync . s3://website-pln-1234
 ```
 
-### 6. Reto — Crear página `acerca.html`
+### 6. Reto - Crear página `acerca.html`
 
 Página personal con estética arcade retro y fondo de estrellas animado en Canvas, accesible en:
 
@@ -108,6 +111,15 @@ aws s3 ls
 aws s3 ls s3://website-pln-1234
 ```
 
+## Contenido
+
+| Ruta | Descripción |
+|:--|:--|
+| [`scripts/politica-bucket.json`](scripts/politica-bucket.json) | Política de bucket con lectura pública de los objetos |
+| [`capturas/`](capturas) | Consola de S3, VS Code, terminal y navegador (incluido el error 403) |
+| [`entrega/LopezPau_Tarea1-7_1-8.pdf`](entrega/LopezPau_Tarea1-7_1-8.pdf) | Documento entregado (Tarea 1.7 y extra 1.8) |
+| [`enunciado.md`](enunciado.md) | Resumen del enunciado |
+
 ---
 
-[Volver al módulo](../README.md)
+[Volver a la asignatura](../README.md)

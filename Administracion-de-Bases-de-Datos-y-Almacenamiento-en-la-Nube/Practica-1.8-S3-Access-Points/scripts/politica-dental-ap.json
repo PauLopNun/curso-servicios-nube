@@ -1,0 +1,18 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::805614495212:user/DentalUser"},
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:us-east-1:805614495212:accesspoint/dental-ap"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::805614495212:user/DentalUser"},
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:us-east-1:805614495212:accesspoint/dental-ap/object/*",
+            "Condition": {"StringEquals": {"s3:ExistingObjectTag/recordtype": "dental"}}
+        }
+    ]
+}

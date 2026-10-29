@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {"AWS": "*"},
+            "Action": "*",
+            "Resource": [
+                "arn:aws:s3:::medical-records-948806926",
+                "arn:aws:s3:::medical-records-948806926/*"
+            ],
+            "Condition": {"StringEquals": {"s3:DataAccessPointAccount": "805614495212"}}
+        }
+    ]
+}

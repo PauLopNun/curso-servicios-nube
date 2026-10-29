@@ -1,0 +1,25 @@
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:ListBucket",
+            "Resource": [
+                "arn:aws:s3:::medical-records-948806926",
+                "arn:aws:s3:us-east-1:805614495212:accesspoint/dental-ap",
+                "arn:aws:s3:us-east-1:805614495212:accesspoint/xray-ap"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": [
+                "arn:aws:s3:::medical-records-948806926/*",
+                "arn:aws:s3:us-east-1:805614495212:accesspoint/dental-ap/object/*",
+                "arn:aws:s3:us-east-1:805614495212:accesspoint/xray-ap/object/*"
+            ]
+        }
+    ]
+}
