@@ -1,0 +1,13 @@
+digraph G{rankdir=TB;compound=true;nodesep=.18;ranksep=.32;splines=true;fontname="Liberation Sans";bgcolor="#ffffff";
+node[shape=box,style="rounded,filled",fontname="Liberation Sans",fontsize=12,color="#555555",fillcolor="#ffffff",margin="0.12,0.07"];edge[color="#555555",fontname="Liberation Sans",fontsize=10,arrowsize=.6];
+subgraph cluster_c{label="Recursos comunes (en los dos escenarios)";labelloc=t;style="rounded,filled";fillcolor="#f0efec";color="#8a8984";fontsize=13;
+ usu[label="Aulas, departamentos,\ndirección y puestos de trabajo"];ap[label="40 puntos de acceso Wi-Fi 6"];acc[label="7 switches de acceso PoE"];core[label="Switch de núcleo L3"];fw[label="Cortafuegos UTM\n(doble WAN, VPN)"];nas1[label="NAS principal\n2 x 8 TB RAID 1"];}
+subgraph cluster_l{label="Escenario 1: solo en el CPD local";labelloc=t;style="rounded,filled";fillcolor="#cde2fb";color="#2a78d6";fontsize=13;
+ srv[label="2 servidores Proxmox\n(servicios locales, web,\nintranet y base de datos)"];nas2[label="NAS de copias\n2 x 8 TB RAID 1\n(otro edificio)"];sai[label="SAI 3000 VA"];}
+subgraph cluster_a{label="Escenario 2: alternativa con AWS";labelloc=t;style="rounded,filled";fillcolor="#fbe0d5";color="#eb6834";fontsize=13;
+ loc[label="En el centro: servidor pequeño\n(DNS/DHCP, impresión, LliureX,\nWi-Fi) y SAI 1500 VA"];
+ subgraph cluster_v{label="AWS eu-south-2 (España)";labelloc=t;style="rounded,filled";fillcolor="#ffffff";color="#eb6834";
+ r53[label="Route 53"];alb[label="Balanceador ALB"];ec2[label="2 EC2 t3.small"];rds[label="RDS MySQL\nMulti-AZ"];nat[label="NAT Gateway"];vpn[label="VPN sitio a sitio"];s3[label="S3 y Glacier\n(2 TB de copias)"];}}
+inet[label="Internet\n(dos operadores)",shape=ellipse];saas[label="SaaS Conselleria\ny Microsoft 365",shape=ellipse];
+usu->ap;usu->acc;ap->acc;acc->core;core->fw;core->nas1;fw->inet;inet->saas;
+core->srv[lhead=cluster_l];core->loc;fw->vpn[style=dashed];inet->r53;r53->alb;alb->ec2;ec2->rds;ec2->nat;vpn->s3;srv->nas2[constraint=false];srv->sai[style=invis];}
