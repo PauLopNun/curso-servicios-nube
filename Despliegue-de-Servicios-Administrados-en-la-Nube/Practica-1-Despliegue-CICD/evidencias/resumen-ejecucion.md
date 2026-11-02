@@ -75,3 +75,11 @@ Para tener un «antes» y un «después» reales se hizo un tercer push que camb
 | Bucket después | ![Después](../capturas/05-bucket-despues.jpg) |
 | Ejecución correcta (#4) | ![Ejecución](../capturas/06-ejecucion-correcta.jpg) |
 | Alojamiento web estático del bucket (ampliación T.6) | ![Hosting](../capturas/07-s3-hosting-web-estatico.jpg) |
+
+## Documentación y tareas en Notion
+
+La página «Práctica CI/CD con GitHub Actions» está creada en Notion (espacio privado) con el resumen, los enlaces, el flujo de ramas, el pipeline, la nota de seguridad y un tablero con las 12 tareas. Los ficheros de [`notion/`](../notion) son el origen de ese contenido.
+
+| Página de Notion | Tablero de tareas |
+|:--|:--|
+| ![Página](../capturas/08-notion-pagina.jpg) | ![Tablero](../capturas/09-notion-tablero-tareas.jpg) |
