@@ -50,6 +50,10 @@ Como se usa AWS Academy, las credenciales caducan al cerrar el laboratorio y los
 
 ## Entrega
 
+Documento para entregar: [`entrega/cicd_p1_lopez_nunez.docx`](entrega/cicd_p1_lopez_nunez.docx), con las capturas, el `s3.yml` y los enlaces. El workflow suelto está en [`entrega/s3.yml`](entrega/s3.yml).
+
+El detalle de cada entregable del enunciado:
+
 | Pide el enunciado | Dónde está |
 |:--|:--|
 | Captura del bucket creado | [`capturas/04-bucket-antes.jpg`](capturas/04-bucket-antes.jpg) |
@@ -65,6 +69,7 @@ Un resumen en texto de las ejecuciones, los Secrets y el contenido del bucket es
 
 | Ruta | Descripción |
 |:--|:--|
+| [`entrega/`](entrega) | Documento para entregar y `s3.yml` |
 | [`material/`](material) | Enunciado en PDF |
 | [`capturas/`](capturas) | Capturas de la entrega |
 | [`evidencias/`](evidencias) | Resumen de las ejecuciones |

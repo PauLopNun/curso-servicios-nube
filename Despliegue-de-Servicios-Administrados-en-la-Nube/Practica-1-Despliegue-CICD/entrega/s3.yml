@@ -1,0 +1,37 @@
+name: Copia a S3
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy-s3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código del repositorio
+        uses: actions/checkout@v5
+
+      - name: Configurar credenciales de AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Copiar los archivos al bucket
+        run: |
+          aws s3 sync . s3://${{ secrets.S3_BUCKET }} --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "node_modules/*" \
+            --exclude "coverage/*" \
+            --exclude "tests/*" \
+            --exclude "package*.json" \
+            --exclude "*.cjs" \
+            --exclude ".*" \
+            --exclude "README.md"
+
+      - name: Mostrar el contenido del bucket
+        run: aws s3 ls s3://${{ secrets.S3_BUCKET }} --recursive
