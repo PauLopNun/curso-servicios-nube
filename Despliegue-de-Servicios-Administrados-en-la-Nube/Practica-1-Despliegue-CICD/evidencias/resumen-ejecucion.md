@@ -59,3 +59,19 @@ Antes del segundo push `index.html` pesaba 1222 bytes (botón «Entrar»); despu
 
 - GitHub Pages: https://paulopnun.github.io/login-app-cicd/
 - Sitio web estático de S3: http://login-cicd-paulopez-2627.s3-website-us-east-1.amazonaws.com/
+
+## Tercer push (antes y después en la consola de S3)
+
+Para tener un «antes» y un «después» reales se hizo un tercer push que cambia el texto del botón a «Iniciar sesión». En la consola de S3, `index.html` pasó de la última modificación `2 Nov 2026 6:25:05 PM CET` a `2 Nov 2026 6:36:39 PM CET`. La ejecución #4 de «Copia a S3» terminó en verde en 18 s.
+
+## Capturas
+
+| Entregable | Captura |
+|:--|:--|
+| Secrets de GitHub (solo nombres) | ![Secrets](../capturas/01-secrets-github.jpg) |
+| Workflow «Copia a S3» en la pestaña Actions | ![Actions](../capturas/02-actions-copia-a-s3.jpg) |
+| Archivo `s3.yml` | ![s3.yml](../capturas/03-s3-yml.jpg) |
+| Bucket antes del segundo push con cambios | ![Antes](../capturas/04-bucket-antes.jpg) |
+| Bucket después | ![Después](../capturas/05-bucket-despues.jpg) |
+| Ejecución correcta (#4) | ![Ejecución](../capturas/06-ejecucion-correcta.jpg) |
+| Alojamiento web estático del bucket (ampliación T.6) | ![Hosting](../capturas/07-s3-hosting-web-estatico.jpg) |
