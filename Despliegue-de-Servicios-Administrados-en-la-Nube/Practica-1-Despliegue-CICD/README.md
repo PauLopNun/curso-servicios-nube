@@ -9,6 +9,12 @@
 
 </div>
 
+## Repositorio de la práctica
+
+> **El pipeline completo (CI, tests, GitHub Pages y copia a S3) está en su propio repositorio: [PauLopNun/login-app-cicd](https://github.com/PauLopNun/login-app-cicd).** Web publicada: <https://paulopnun.github.io/login-app-cicd/>.
+>
+> Esta carpeta conserva la primera versión de la app y el enunciado en [`material/`](material/enunciado-cicd-github-actions-s3.pdf).
+
 ## Objetivo
 
 Actividad de prueba de despliegue: una web estática con un formulario de login que se usa como aplicación de ejemplo para montar un flujo de integración y despliegue continuo (CI/CD).
@@ -46,6 +52,7 @@ El workflow [`ci-despliegue-practica-1.yml`](../../.github/workflows/ci-desplieg
 
 | Ruta | Descripción |
 |:--|:--|
+| [`material/enunciado-cicd-github-actions-s3.pdf`](material/enunciado-cicd-github-actions-s3.pdf) | Enunciado de la práctica |
 | [`app/index.html`](app/index.html) | Página de login |
 | [`app/css/style.css`](app/css/style.css) | Estilos |
 | [`app/js/app.js`](app/js/app.js) | Validación del formulario y comprobación de credenciales |

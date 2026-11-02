@@ -13,7 +13,7 @@ Despliegue de aplicaciones sobre servicios administrados de AWS.
 
 | Práctica | Descripción |
 |:--|:--|
-| [Práctica 1 - Despliegue con CI/CD](Practica-1-Despliegue-CICD) | Web estática de login usada como aplicación de prueba para un despliegue CI/CD |
+| [Práctica 1 - Despliegue con CI/CD](Practica-1-Despliegue-CICD) | CI/CD con GitHub Actions, GitHub Pages y copia a S3. **El código vive en su propio repositorio: [PauLopNun/login-app-cicd](https://github.com/PauLopNun/login-app-cicd)** |
 
 ---
 
