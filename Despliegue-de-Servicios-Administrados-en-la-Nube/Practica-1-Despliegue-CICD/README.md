@@ -53,6 +53,8 @@ El workflow [`ci-despliegue-practica-1.yml`](../../.github/workflows/ci-desplieg
 | Ruta | Descripción |
 |:--|:--|
 | [`material/enunciado-cicd-github-actions-s3.pdf`](material/enunciado-cicd-github-actions-s3.pdf) | Enunciado de la práctica |
+| [`evidencias/resumen-ejecucion.md`](evidencias/resumen-ejecucion.md) | Ejecuciones de los workflows, Secrets, ramas y contenido del bucket |
+| [`notion/`](notion) | Tablero de tareas (CSV) y página del proyecto para importar en Notion |
 | [`app/index.html`](app/index.html) | Página de login |
 | [`app/css/style.css`](app/css/style.css) | Estilos |
 | [`app/js/app.js`](app/js/app.js) | Validación del formulario y comprobación de credenciales |
