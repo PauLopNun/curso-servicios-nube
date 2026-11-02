@@ -1,6 +1,6 @@
 # Evidencias de ejecución
 
-Datos reales obtenidos el 2026-11-02 del repositorio [login-app-cicd](https://github.com/PauLopNun/login-app-cicd). Las capturas de pantalla de la entrega (consola de S3, Secrets y pestaña Actions) se sacan de las consolas web; este documento recoge los mismos datos en texto.
+Resumen en texto de lo que se ve en las capturas, sacado del repositorio [login-app-cicd](https://github.com/PauLopNun/login-app-cicd) el 2026-11-02.
 
 ## Ejecuciones de los workflows
 
@@ -78,7 +78,7 @@ Para tener un «antes» y un «después» reales se hizo un tercer push que camb
 
 ## Documentación y tareas en Notion
 
-La página «Práctica CI/CD con GitHub Actions» está creada en Notion (espacio privado) con el resumen, los enlaces, el flujo de ramas, el pipeline, la nota de seguridad y un tablero con las 12 tareas. Los ficheros de [`notion/`](../notion) son el origen de ese contenido.
+La página «Práctica CI/CD con GitHub Actions» está creada en Notion (espacio privado) con el resumen, los enlaces, el flujo de ramas, el pipeline, una nota sobre las credenciales y un tablero con las 12 tareas.
 
 | Página de Notion | Tablero de tareas |
 |:--|:--|

@@ -33,6 +33,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 </p>
 
 - **AWS** - EC2, VPC, S3, IAM y servicios administrados desde la consola y la **AWS CLI v2**
+- **GitHub Actions** - Pipelines de CI/CD: lint, tests, GitHub Pages y copia automática a S3
 - **Python** - Scripts con Boto3 para gestionar recursos de AWS
 - **Bash** - Automatización de tareas con la CLI, validaciones y scripts de datos de usuario
 - **Linux** - Instancias Ubuntu, SSH, Apache y administración básica
@@ -73,7 +74,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | Recursos de Computación | [Tarea 1.2 - WordPress en dos capas](Administracion-de-Recursos-de-Computacion-en-la-Nube/Tarea-1.2-WordPress-Dos-Capas) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![WordPress](https://img.shields.io/badge/WordPress-21759B?style=flat-square&logo=wordpress&logoColor=white) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Redes en la Nube | [Práctica 1 - Creación de redes con scripts](Administracion-de-Redes-en-la-Nube/Practica-1-Scripts-Crear-VPC) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) | ![Pendiente](https://img.shields.io/badge/Pendiente-orange?style=flat-square) |
 | Redes en la Nube | [Práctica 1 - Creación de redes públicas](Administracion-de-Redes-en-la-Nube/Practica-1-Redes-Publicas) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
-| Despliegue de Servicios | [Práctica 1 - Despliegue con CI/CD](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD) ([repo propio: login-app-cicd](https://github.com/PauLopNun/login-app-cicd)) | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | ![Completada](https://img.shields.io/badge/Completada-2ea44f?style=flat-square) |
+| Despliegue de Servicios | [Práctica 1 - Despliegue con CI/CD](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD) · **código en su propio repositorio: [login-app-cicd](https://github.com/PauLopNun/login-app-cicd)** | ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white) ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![Jest](https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white) | ![Completada](https://img.shields.io/badge/Completada-2ea44f?style=flat-square) |
 
 </div>
 

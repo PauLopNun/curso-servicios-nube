@@ -2,64 +2,75 @@
 
 # Práctica 1 - Despliegue con CI/CD
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)
+![Amazon S3](https://img.shields.io/badge/Amazon%20S3-569A31?style=for-the-badge&logo=amazons3&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+
+**UP de Despliegue de servicios administrados en la nube**
 
 </div>
 
-## Repositorio de la práctica
+## Dónde está el código
 
-> **El pipeline completo (CI, tests, GitHub Pages y copia a S3) está en su propio repositorio: [PauLopNun/login-app-cicd](https://github.com/PauLopNun/login-app-cicd).** Web publicada: <https://paulopnun.github.io/login-app-cicd/>.
->
-> Esta carpeta conserva la primera versión de la app y el enunciado en [`material/`](material/enunciado-cicd-github-actions-s3.pdf).
+El código de esta práctica está en su **propio repositorio**, porque el pipeline de GitHub Actions necesita tener los workflows en la raíz y quedaba mejor separado del resto del curso:
 
-## Objetivo
+**https://github.com/PauLopNun/login-app-cicd**
 
-Actividad de prueba de despliegue: una web estática con un formulario de login que se usa como aplicación de ejemplo para montar un flujo de integración y despliegue continuo (CI/CD).
+En esta carpeta del curso queda el enunciado, las capturas de la entrega y la primera versión de la app.
 
-## Aplicación
-
-Formulario de inicio de sesión con validación en el navegador:
-
-- El correo debe tener un formato válido
-- La contraseña debe tener al menos 8 caracteres
-- Las credenciales se comprueban contra un usuario de demostración definido en `app/js/app.js`
-- Admite modo oscuro según la preferencia del sistema
-
-## Probar en local
-
-```bash
-cd app
-python3 -m http.server 8080
-```
-
-Abrir `http://localhost:8080`.
-
-## Integración continua
-
-El workflow [`ci-despliegue-practica-1.yml`](../../.github/workflows/ci-despliegue-practica-1.yml) está en la raíz del repositorio, porque GitHub Actions solo lee los workflows de `.github/workflows/` en la raíz. Con `paths` se ejecuta únicamente cuando cambia algo de esta práctica, y con `working-directory` todos los comandos se lanzan desde esta carpeta. También se puede lanzar a mano desde la pestaña Actions. Tiene dos trabajos:
-
-| Trabajo | Qué comprueba |
+| Enlace | Dirección |
 |:--|:--|
-| `validar` | Valida `index.html` con html-validate y la sintaxis de `app.js` con `node --check` |
-| `prueba-humo` | Sirve la web con `python3 -m http.server`, comprueba que la página, el CSS y el JS responden con 200 y que el formulario de login está en la página |
+| Repositorio | https://github.com/PauLopNun/login-app-cicd |
+| Web en GitHub Pages | https://paulopnun.github.io/login-app-cicd/ |
+| Web en S3 | http://login-cicd-paulopez-2627.s3-website-us-east-1.amazonaws.com/ |
 
-`prueba-humo` solo se ejecuta si `validar` termina bien.
+## Qué se pide
 
-## Contenido
+El enunciado ([PDF](material/enunciado-cicd-github-actions-s3.pdf)) parte de una página de login ya hecha y pide montar un ciclo completo de integración y despliegue continuo:
+
+1. Subir el proyecto a GitHub y organizar las ramas (`main` y `develop`).
+2. Un workflow de CI que revise el código (HTML, CSS y JavaScript) y pase los tests con Jest.
+3. Despliegue automático en GitHub Pages cuando el CI termina bien.
+4. Tarea final: un workflow que copie los archivos a un bucket de Amazon S3 en cada push a `main`, guardando las credenciales en los Secrets de GitHub.
+5. Ampliación opcional: servir la web directamente desde S3 como sitio estático.
+
+## Qué se ha hecho
+
+- Repositorio `login-app-cicd` con las ramas `main` y `develop`.
+- `ci.yml`: html-validate, stylelint, ESLint y 6 tests de Jest. Hubo que ajustar el CSS y las configuraciones de los linters hasta dejarlo en verde.
+- `deploy-pages.yml`: publicación en GitHub Pages después de un CI correcto.
+- `s3.yml`: `aws s3 sync` con `--delete` y exclusiones, con los cinco Secrets (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, `AWS_REGION` y `S3_BUCKET`).
+- Bucket `login-cicd-paulopez-2627` en `us-east-1`, creado con el acceso público bloqueado.
+- Ampliación: alojamiento de sitio web estático en el bucket, con una política de solo lectura.
+- Tres pushes a `main` comprobando que el bucket se actualiza (cambios en el texto del botón de login).
+- Documentación del proyecto en Notion.
+
+Como se usa AWS Academy, las credenciales caducan al cerrar el laboratorio y los Secrets hay que renovarlos en cada sesión.
+
+## Entrega
+
+| Pide el enunciado | Dónde está |
+|:--|:--|
+| Captura del bucket creado | [`capturas/04-bucket-antes.jpg`](capturas/04-bucket-antes.jpg) |
+| Captura de los Secrets (solo nombres) | [`capturas/01-secrets-github.jpg`](capturas/01-secrets-github.jpg) |
+| `s3.yml` y ejecución correcta en Actions | [`capturas/03-s3-yml.jpg`](capturas/03-s3-yml.jpg), [`capturas/02-actions-copia-a-s3.jpg`](capturas/02-actions-copia-a-s3.jpg), [`capturas/06-ejecucion-correcta.jpg`](capturas/06-ejecucion-correcta.jpg) |
+| Bucket antes y después de un segundo push con cambios | [`capturas/04-bucket-antes.jpg`](capturas/04-bucket-antes.jpg) y [`capturas/05-bucket-despues.jpg`](capturas/05-bucket-despues.jpg) |
+| Ampliación: sitio web estático | [`capturas/07-s3-hosting-web-estatico.jpg`](capturas/07-s3-hosting-web-estatico.jpg) |
+| Documentación en Notion | [`capturas/08-notion-pagina.jpg`](capturas/08-notion-pagina.jpg), [`capturas/09-notion-tablero-tareas.jpg`](capturas/09-notion-tablero-tareas.jpg) |
+
+Un resumen en texto de las ejecuciones, los Secrets y el contenido del bucket está en [`evidencias/resumen-ejecucion.md`](evidencias/resumen-ejecucion.md).
+
+## Contenido de esta carpeta
 
 | Ruta | Descripción |
 |:--|:--|
-| [`material/enunciado-cicd-github-actions-s3.pdf`](material/enunciado-cicd-github-actions-s3.pdf) | Enunciado de la práctica |
-| [`capturas/`](capturas) | Capturas de la entrega: Secrets, Actions, bucket antes y después y hosting web |
-| [`evidencias/resumen-ejecucion.md`](evidencias/resumen-ejecucion.md) | Ejecuciones de los workflows, Secrets, ramas y contenido del bucket |
-| [`notion/`](notion) | Tablero de tareas (CSV) y página del proyecto para importar en Notion |
-| [`app/index.html`](app/index.html) | Página de login |
-| [`app/css/style.css`](app/css/style.css) | Estilos |
-| [`app/js/app.js`](app/js/app.js) | Validación del formulario y comprobación de credenciales |
-| [`../../.github/workflows/ci-despliegue-practica-1.yml`](../../.github/workflows/ci-despliegue-practica-1.yml) | Workflow de integración continua |
+| [`material/`](material) | Enunciado en PDF |
+| [`capturas/`](capturas) | Capturas de la entrega |
+| [`evidencias/`](evidencias) | Resumen de las ejecuciones |
+| [`app/`](app) | Primera versión de la página de login, antes de pasarla al repositorio propio |
+
+La carpeta `app/` tiene su propio workflow en la raíz de este repositorio (`.github/workflows/ci-despliegue-practica-1.yml`), una validación sencilla que se hizo antes de pasar la práctica al repositorio nuevo. Para probar esa versión en local: `cd app && python3 -m http.server 8080` y abrir `http://localhost:8080`.
 
 ---
 
