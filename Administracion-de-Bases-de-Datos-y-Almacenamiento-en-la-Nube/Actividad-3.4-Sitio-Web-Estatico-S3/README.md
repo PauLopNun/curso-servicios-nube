@@ -5,7 +5,7 @@
 ![S3](https://img.shields.io/badge/AWS-S3-569A31?style=for-the-badge&logoColor=white)
 ![CLI](https://img.shields.io/badge/AWS-CLI-232F3E?style=for-the-badge&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-Canvas-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Completado-brightgreen?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 Entregada en Aules como **Tarea 1.7**, junto con la [Práctica 1.8](../Practica-1.8-S3-Access-Points).
 
