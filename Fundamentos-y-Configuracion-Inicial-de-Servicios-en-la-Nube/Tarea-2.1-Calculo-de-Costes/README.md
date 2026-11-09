@@ -3,7 +3,7 @@
 # Tarea 2.1 - Cálculo de costes
 
 ![AWS](https://img.shields.io/badge/AWS-Pricing%20Calculator-232F3E?style=for-the-badge&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Pendiente-orange?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 **UP2 - Fundamentos y configuración inicial de servicios en la nube**
 
