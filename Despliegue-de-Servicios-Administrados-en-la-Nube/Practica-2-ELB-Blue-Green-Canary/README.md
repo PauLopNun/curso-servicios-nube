@@ -85,6 +85,19 @@ La variable `INI` cambia el sufijo de los nombres (por defecto `pln`). La prueba
 
 En el navegador la conexión se reutiliza y al recargar suele salir la misma versión; para ver el reparto es mejor `comprobar.sh`, que abre una conexión nueva en cada petición.
 
+## Entrega
+
+Documento para entregar: [`entrega/elb_p2_lopez_nunez.docx`](entrega/elb_p2_lopez_nunez.docx) (también en [PDF](entrega/elb_p2_lopez_nunez.pdf)), con los comandos, la salida de cada script y las capturas.
+
+| Pide el enunciado | Dónde está |
+|:--|:--|
+| Instancias blue y green con servidor web | [`01-instancias-blue-green.jpg`](capturas/01-instancias-blue-green.jpg), [`02-grupo-seguridad-instancias.jpg`](capturas/02-grupo-seguridad-instancias.jpg), [`01-paginas-instancias.txt`](evidencias/01-paginas-instancias.txt) |
+| Balanceador de red, grupo de seguridad y grupo de destino | [`03-balanceadores-de-carga.jpg`](capturas/03-balanceadores-de-carga.jpg), [`04-nlb-detalles.jpg`](capturas/04-nlb-detalles.jpg), [`05-grupos-de-destino.jpg`](capturas/05-grupos-de-destino.jpg) |
+| Primero se muestra blue | [`06-nlb-destino-blue.jpg`](capturas/06-nlb-destino-blue.jpg), [`07-web-nlb-blue.jpg`](capturas/07-web-nlb-blue.jpg) |
+| Después se muestra green | [`08-nlb-destino-green.jpg`](capturas/08-nlb-destino-green.jpg), [`09-web-nlb-green.jpg`](capturas/09-web-nlb-green.jpg) |
+| Balanceador creado con la CLI | [`scripts/`](scripts) y la salida en [`evidencias/`](evidencias) |
+| Ampliación Canary | [`10-alb-canary-pesos-90-10.jpg`](capturas/10-alb-canary-pesos-90-10.jpg), [`04-alb-canary.txt`](evidencias/04-alb-canary.txt) |
+
 ## Contenido de esta carpeta
 
 | Ruta | Descripción |
