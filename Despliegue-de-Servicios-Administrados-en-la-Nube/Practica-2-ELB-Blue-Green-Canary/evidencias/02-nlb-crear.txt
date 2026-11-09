@@ -1,0 +1,8 @@
+Esperando a que el NLB esté activo...
+Esperando a que i-02cccc57ae6fafbdb esté healthy...
+------------------------------------
+|       DescribeTargetHealth       |
++----------------------+-----------+
+|  i-02cccc57ae6fafbdb |  healthy  |
++----------------------+-----------+
+NLB: http://nlb-pln-1465fd12fa71a8ae.elb.us-east-1.amazonaws.com

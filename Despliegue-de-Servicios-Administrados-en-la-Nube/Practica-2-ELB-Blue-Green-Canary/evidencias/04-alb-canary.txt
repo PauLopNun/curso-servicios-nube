@@ -1,0 +1,12 @@
+Esperando a que el ALB esté activo...
+Pesos: blue 100 / green 0
+ALB: http://alb-pln-1771049037.us-east-1.elb.amazonaws.com
+     20 Versión blue
+Pesos: blue 90 / green 10
+     36 Versión blue
+      4 Versión green
+Pesos: blue 50 / green 50
+     25 Versión blue
+     15 Versión green
+Pesos: blue 0 / green 100
+     40 Versión green

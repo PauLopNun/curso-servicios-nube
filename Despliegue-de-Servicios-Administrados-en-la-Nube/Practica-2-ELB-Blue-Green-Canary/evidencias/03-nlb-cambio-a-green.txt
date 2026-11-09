@@ -1,0 +1,7 @@
+Esperando a que i-0e6b9270ed779640f esté healthy...
+------------------------------------
+|       DescribeTargetHealth       |
++----------------------+-----------+
+|  i-0e6b9270ed779640f |  healthy  |
++----------------------+-----------+
+     20 Versión green

@@ -1,0 +1,35 @@
+== 1. Entorno ==
+Grupo de seguridad sec-pln2-web: sg-0876ef801d39904e0
+blue: i-0559eb5711a699182
+green: i-0fb6efaf37f741bef
+  blue   i-0559eb5711a699182  us-east-1a  http://ec2-13-222-140-14.compute-1.amazonaws.com
+  green  i-0fb6efaf37f741bef  us-east-1b  http://ec2-52-87-160-49.compute-1.amazonaws.com
+
+== 2. NLB con la versión blue ==
+Grupo de seguridad sec-pln2-nlb: sg-01809253180ef2ab6
+Esperando a que el NLB esté activo...
+Esperando a que i-0559eb5711a699182 esté healthy...
+  i-0559eb5711a699182  healthy
+NLB: http://nlb-pln2-9e6c201c60aa7d01.elb.us-east-1.amazonaws.com
+  blue: 20
+
+== 3. Blue/Green: paso a la versión green ==
+Esperando a que i-0fb6efaf37f741bef esté healthy...
+Versión activa en el NLB: green
+  i-0fb6efaf37f741bef  healthy
+  green: 20
+
+== 4. Canary con ALB ==
+Grupo de seguridad sec-pln2-alb: sg-029c5ad4b1c6afa38
+Esperando a que el ALB esté activo...
+Esperando a que i-0559eb5711a699182 esté healthy...
+Esperando a que i-0fb6efaf37f741bef esté healthy...
+Pesos: blue 100 / green 0
+ALB: http://alb-pln2-1841900196.us-east-1.elb.amazonaws.com
+  blue: 20
+Pesos: blue 90 / green 10
+  blue: 38, green: 2
+Pesos: blue 50 / green 50
+  blue: 19, green: 21
+Pesos: blue 0 / green 100
+  green: 40

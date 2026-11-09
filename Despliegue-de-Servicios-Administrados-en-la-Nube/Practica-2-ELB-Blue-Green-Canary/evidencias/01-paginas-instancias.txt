@@ -1,0 +1,4 @@
+  <h1>Versión blue</h1>
+  <h2>Servidor: ip-172-31-3-206.ec2.internal</h2>
+  <h1>Versión green</h1>
+  <h2>Servidor: ip-172-31-84-11.ec2.internal</h2>
