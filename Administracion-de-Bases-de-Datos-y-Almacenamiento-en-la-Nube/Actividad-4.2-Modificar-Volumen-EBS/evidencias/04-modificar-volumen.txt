@@ -1,0 +1,132 @@
+$ aws ec2 modify-volume --volume-id vol-0a12169682acc42f2 --size 10
+{
+    "VolumeModification": {
+        "VolumeId": "vol-0a12169682acc42f2",
+        "ModificationState": "modifying",
+        "TargetSize": 10,
+        "TargetIops": 3000,
+        "TargetVolumeType": "gp3",
+        "TargetThroughput": 125,
+        "TargetMultiAttachEnabled": false,
+        "OriginalSize": 8,
+        "OriginalIops": 3000,
+        "OriginalVolumeType": "gp3",
+        "OriginalThroughput": 125,
+        "OriginalMultiAttachEnabled": false,
+        "Progress": 0,
+        "StartTime": "2026-11-10T15:48:05+00:00"
+    }
+}
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+--------------------------------------------------------
+|             DescribeVolumesModifications             |
++------------------------+------------+----+-----+-----+
+|  vol-0a12169682acc42f2 |  modifying |  8 |  10 |  0  |
++------------------------+------------+----+-----+-----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+---------------------------------------------------------
+|             DescribeVolumesModifications              |
++------------------------+--------------+----+-----+----+
+|  vol-0a12169682acc42f2 |  optimizing  |  8 |  10 |  0 |
++------------------------+--------------+----+-----+----+
+
+$ aws ec2 describe-volumes-modifications --volume-ids vol-0a12169682acc42f2 --query VolumesModifications[].[VolumeId,ModificationState,OriginalSize,TargetSize,Progress] --output table
+----------------------------------------------------------
+|              DescribeVolumesModifications              |
++------------------------+------------+----+-----+-------+
+|  vol-0a12169682acc42f2 |  completed |  8 |  10 |  100  |
++------------------------+------------+----+-----+-------+
+
+$ aws ec2 describe-volumes --volume-ids vol-0a12169682acc42f2 --query Volumes[].[VolumeId,Size,VolumeType,State] --output table
+--------------------------------------------------
+|                 DescribeVolumes                |
++------------------------+-----+------+----------+
+|  vol-0a12169682acc42f2 |  10 |  gp3 |  in-use  |
++------------------------+-----+------+----------+
+

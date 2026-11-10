@@ -1,0 +1,40 @@
+$ aws ec2 create-snapshot --volume-id vol-0a12169682acc42f2 --description Copia de vol-0a12169682acc42f2 antes de ampliarlo a 10 GB --tag-specifications ResourceType=snapshot,Tags=[{Key=Name,Value=sna-pln}]
+{
+    "Tags": [
+        {
+            "Key": "Name",
+            "Value": "sna-pln"
+        }
+    ],
+    "SnapshotId": "snap-03c8269fd5526102b",
+    "VolumeId": "vol-0a12169682acc42f2",
+    "State": "pending",
+    "StartTime": "2026-11-10T15:47:18.926000+00:00",
+    "Progress": "",
+    "OwnerId": "670655164748",
+    "Description": "Copia de vol-0a12169682acc42f2 antes de ampliarlo a 10 GB",
+    "VolumeSize": 8,
+    "Encrypted": false
+}
+
+$ aws ec2 describe-snapshots --snapshot-ids snap-03c8269fd5526102b --query Snapshots[].[SnapshotId,VolumeId,VolumeSize,State,Progress] --output table
+---------------------------------------------------------------------------
+|                            DescribeSnapshots                            |
++-------------------------+-------------------------+----+----------+-----+
+|  snap-03c8269fd5526102b |  vol-0a12169682acc42f2  |  8 |  pending |  0% |
++-------------------------+-------------------------+----+----------+-----+
+
+$ aws ec2 describe-snapshots --snapshot-ids snap-03c8269fd5526102b --query Snapshots[].[SnapshotId,VolumeId,VolumeSize,State,Progress] --output table
+---------------------------------------------------------------------------
+|                            DescribeSnapshots                            |
++-------------------------+-------------------------+----+----------+-----+
+|  snap-03c8269fd5526102b |  vol-0a12169682acc42f2  |  8 |  pending |  0% |
++-------------------------+-------------------------+----+----------+-----+
+
+$ aws ec2 describe-snapshots --snapshot-ids snap-03c8269fd5526102b --query Snapshots[].[SnapshotId,VolumeId,VolumeSize,State,Progress] --output table
+-------------------------------------------------------------------------------
+|                              DescribeSnapshots                              |
++-------------------------+-------------------------+----+------------+-------+
+|  snap-03c8269fd5526102b |  vol-0a12169682acc42f2  |  8 |  completed |  100% |
++-------------------------+-------------------------+----+------------+-------+
+

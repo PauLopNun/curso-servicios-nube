@@ -1,0 +1,17 @@
+$ aws ec2 delete-snapshot --snapshot-id snap-03c8269fd5526102b
+
+$ aws ec2 describe-snapshots --owner-ids self --query Snapshots[].SnapshotId
+[]
+
+$ aws ec2 terminate-instances --instance-ids i-01e9c91eb49de19ba --query TerminatingInstances[].[InstanceId,PreviousState.Name,CurrentState.Name] --output table
+-----------------------------------------------------
+|                TerminateInstances                 |
++----------------------+----------+-----------------+
+|  i-01e9c91eb49de19ba |  running |  shutting-down  |
++----------------------+----------+-----------------+
+
+$ aws ec2 wait instance-terminated --instance-ids i-01e9c91eb49de19ba
+
+$ aws ec2 describe-volumes --filters Name=volume-id,Values=vol-0a12169682acc42f2 --query Volumes[].VolumeId
+[]
+

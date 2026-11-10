@@ -1,0 +1,22 @@
+$ aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 --query Parameter.Value --output text
+ami-09bf9dfeeb1e9adbc
+
+$ aws ec2 run-instances --image-id ami-09bf9dfeeb1e9adbc --instance-type t3.micro --key-name vockey --iam-instance-profile Name=LabInstanceProfile --block-device-mappings [{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":8,"VolumeType":"gp3","DeleteOnTermination":true}}] --tag-specifications ResourceType=instance,Tags=[{Key=Name,Value=ec2-pln}] --query Instances[0].[InstanceId,InstanceType,State.Name,Placement.AvailabilityZone] --output table
+-------------------------
+|     RunInstances      |
++-----------------------+
+|  i-01e9c91eb49de19ba  |
+|  t3.micro             |
+|  pending              |
+|  us-east-1b           |
++-----------------------+
+
+$ aws ec2 wait instance-running --instance-ids i-01e9c91eb49de19ba
+
+$ aws ssm describe-instance-information --filters Key=InstanceIds,Values=i-01e9c91eb49de19ba --query InstanceInformationList[].[InstanceId,PingStatus,PlatformName,PlatformVersion] --output table
+-----------------------------------------------------------
+|               DescribeInstanceInformation               |
++----------------------+---------+----------------+-------+
+|  i-01e9c91eb49de19ba |  Online |  Amazon Linux  |  2023 |
++----------------------+---------+----------------+-------+
+
