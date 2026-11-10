@@ -48,7 +48,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | Asignatura | Carpeta | Tareas |
 |:--|:--|:-:|
 | **Fundamentos y Configuración Inicial de Servicios en la Nube** | [`Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube`](Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube) | 3 |
-| **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube`](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube) || 4 |
+| **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube`](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube) | 5 |
 | **Administración de Recursos de Computación en la Nube** | [`Administracion-de-Recursos-de-Computacion-en-la-Nube`](Administracion-de-Recursos-de-Computacion-en-la-Nube) | 3 |
 | **Administración de Redes en la Nube** | [`Administracion-de-Redes-en-la-Nube`](Administracion-de-Redes-en-la-Nube) |2 |
 | **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios-Administrados-en-la-Nube`](Despliegue-de-Servicios-Administrados-en-la-Nube) | 2 |
@@ -69,6 +69,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | Bases de Datos y Almacenamiento | [Práctica 1.3 - Introducción a Amazon S3](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Practica-1.3-Introduccion-S3) | ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![IAM](https://img.shields.io/badge/IAM-DD344C?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Bases de Datos y Almacenamiento | [Actividad 3.4 - Sitio web estático en S3 (Tarea 1.7)](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Actividad-3.4-Sitio-Web-Estatico-S3) | ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![CLI](https://img.shields.io/badge/AWS%20CLI-232F3E?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Bases de Datos y Almacenamiento | [Práctica 1.8 - S3 Access Points](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Practica-1.8-S3-Access-Points) | ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![IAM](https://img.shields.io/badge/IAM-DD344C?style=flat-square) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
+| Bases de Datos y Almacenamiento | [Laboratorio 4 - Working with EBS](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Laboratorio-4-Trabajar-con-EBS) | ![EBS](https://img.shields.io/badge/EBS-FF9900?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![SSM](https://img.shields.io/badge/SSM-232F3E?style=flat-square) | ![Realizado](https://img.shields.io/badge/Realizado%20(sin%20entregable)-0366d6?style=flat-square) |
 | Bases de Datos y Almacenamiento | [Actividad 4.2 - Modificación de un volumen EBS](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube/Actividad-4.2-Modificar-Volumen-EBS) | ![EBS](https://img.shields.io/badge/EBS-FF9900?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Realizada](https://img.shields.io/badge/Realizada%20(sin%20entregable)-0366d6?style=flat-square) |
 | Recursos de Computación | [Tarea 1.1 - Cambiar el tipo de una instancia con AWS CLI](Administracion-de-Recursos-de-Computacion-en-la-Nube/Tarea-1.1-Cambiar-Tipo-Instancia) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Recursos de Computación | [Actividad 1.7 - Plantilla LAMP, IP elástica y Session Manager](Administracion-de-Recursos-de-Computacion-en-la-Nube/Actividad-1.7-Plantilla-LAMP-EIP-SSM) | ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![SSM](https://img.shields.io/badge/SSM-232F3E?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
@@ -94,6 +95,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 │   ├── Practica-1.3-Introduccion-S3/
 │   ├── Actividad-3.4-Sitio-Web-Estatico-S3/
 │   ├── Practica-1.8-S3-Access-Points/
+│   ├── Laboratorio-4-Trabajar-con-EBS/
 │   └── Actividad-4.2-Modificar-Volumen-EBS/
 ├── Administracion-de-Recursos-de-Computacion-en-la-Nube/
 │   ├── Tarea-1.1-Cambiar-Tipo-Instancia/
