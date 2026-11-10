@@ -1,0 +1,7 @@
+sync (en la instancia, antes del snapshot): Success
+CreateSnapshot: SnapshotId=snap-0647a78e7c56b36f6 VolumeId=vol-0c8efcaed11b3246d VolumeSize=1 Tag Name="My Snapshot" State=pending StartTime=2026-11-10T15:38:50+00:00
+Estados: pending 0% ... completed 100%
+
++ sudo rm /mnt/data-store/file.txt
++ ls /mnt/data-store/
+lost+found

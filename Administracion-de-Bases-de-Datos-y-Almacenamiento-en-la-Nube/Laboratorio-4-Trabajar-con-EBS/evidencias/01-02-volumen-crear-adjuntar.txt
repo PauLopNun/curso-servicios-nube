@@ -1,0 +1,3 @@
+CreateVolume: VolumeId=vol-0c8efcaed11b3246d Size=1 VolumeType=gp2 AvailabilityZone=us-east-1a Tag Name="My Volume" State=creating CreateTime=2026-11-10T15:37:43+00:00
+AttachVolume: VolumeId=vol-0c8efcaed11b3246d InstanceId=i-0f0618422d22d9f2c Device=/dev/sdb State=attaching
+Estado final: in-use / attached / /dev/sdb

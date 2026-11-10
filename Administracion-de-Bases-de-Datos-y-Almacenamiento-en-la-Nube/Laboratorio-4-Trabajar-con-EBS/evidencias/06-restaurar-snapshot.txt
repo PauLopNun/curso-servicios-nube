@@ -1,0 +1,28 @@
+CreateVolume: VolumeId=vol-004988c1425e02c02 Size=1 VolumeType=gp2 AvailabilityZone=us-east-1a SnapshotId=snap-0647a78e7c56b36f6 Tag Name="Restored Volume" CreateTime=2026-11-10T15:39:44+00:00
+AttachVolume: VolumeId=vol-004988c1425e02c02 InstanceId=i-0f0618422d22d9f2c Device=/dev/sdc State=attaching
+
++ ls -l /dev/sdc
+lrwxrwxrwx. 1 root root 4 Nov 10 15:39 /dev/sdc -> xvdc
++ sudo mkdir /mnt/data-store2
++ sudo mount /dev/sdc /mnt/data-store2
++ ls /mnt/data-store2/
+file.txt
+lost+found
++ cat /mnt/data-store2/file.txt
+some text has been written
++ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           479M     0  479M   0% /dev/shm
+tmpfs           192M  460K  192M   1% /run
+/dev/xvda1      8.0G  1.6G  6.4G  20% /
+tmpfs           479M   12K  479M   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+/dev/xvdb       975M   60K  924M   1% /mnt/data-store
+tmpfs            96M     0   96M   0% /run/user/1000
+/dev/xvdc       975M   64K  924M   1% /mnt/data-store2
+
+Volúmenes finales:
+vol-0d1c384129a7864ce  8 GiB  in-use  /dev/xvda  (raíz)
+vol-0c8efcaed11b3246d  1 GiB  in-use  /dev/sdb   My Volume
+vol-004988c1425e02c02  1 GiB  in-use  /dev/sdc   Restored Volume (desde snap-0647a78e7c56b36f6)
