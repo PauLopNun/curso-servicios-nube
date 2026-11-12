@@ -1,0 +1,16 @@
+$ aws cloudwatch put-dashboard --dashboard-name panel-$OWNER \
+>   --dashboard-body file://$EVID/panel-pln.json
+{
+    "DashboardValidationMessages": []
+}
+
+$ aws cloudwatch list-dashboards --output table \
+>   --query "DashboardEntries[].{Panel:DashboardName,Bytes:Size}"
+------------------------
+|    ListDashboards    |
++--------+-------------+
+|  Bytes |    Panel    |
++--------+-------------+
+|  834   |  panel-pln  |
++--------+-------------+
+

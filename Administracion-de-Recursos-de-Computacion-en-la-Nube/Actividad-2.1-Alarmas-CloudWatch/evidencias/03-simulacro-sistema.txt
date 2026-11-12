@@ -1,0 +1,20 @@
+$ aws cloudwatch set-alarm-state --alarm-name mon-$OWNER-sistema \
+>   --state-value ALARM --state-reason "Simulacro de fallo del host"
+
+$ aws ec2 describe-instances --instance-ids $ID \
+>   --query "Reservations[0].Instances[0].State.Name" --output text
+stopping
+
+$ aws cloudwatch describe-alarm-history --alarm-name mon-$OWNER-sistema \
+>   --output table --query "AlarmHistoryItems[].{Hora:Timestamp,Tipo:HistoryItemType,Resumen:HistorySummary}"
+--------------------------------------------------------------------------------------------------------------------------------------
+|                                                        DescribeAlarmHistory                                                        |
++-----------------------------------+-------------------------------------------------------------------------+----------------------+
+|               Hora                |                                 Resumen                                 |        Tipo          |
++-----------------------------------+-------------------------------------------------------------------------+----------------------+
+|  2026-11-12T16:27:00.251000+01:00 |  Stop EC2 Instance 'i-07df4a781ae3b354d' action completed successfully  |  Action              |
+|  2026-11-12T16:26:59.851000+01:00 |  Alarm updated from OK to ALARM                                         |  StateUpdate         |
+|  2026-11-12T16:21:57.086000+01:00 |  Alarm updated from INSUFFICIENT_DATA to OK                             |  StateUpdate         |
+|  2026-11-12T16:20:54.268000+01:00 |  Alarm "mon-pln-sistema" created                                        |  ConfigurationUpdate |
++-----------------------------------+-------------------------------------------------------------------------+----------------------+
+

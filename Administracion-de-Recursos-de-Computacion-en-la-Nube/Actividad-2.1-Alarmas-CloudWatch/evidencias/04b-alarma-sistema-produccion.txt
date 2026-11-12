@@ -1,0 +1,9 @@
+$ aws cloudwatch describe-alarms --alarm-names mon-$OWNER-sistema \
+>   --query "MetricAlarms[0].AlarmActions" --output table
+---------------------------------------------------
+|                 DescribeAlarms                  |
++-------------------------------------------------+
+|  arn:aws:automate:us-east-1:ec2:recover         |
+|  arn:aws:sns:us-east-1:216772830502:avisos-pln  |
++-------------------------------------------------+
+

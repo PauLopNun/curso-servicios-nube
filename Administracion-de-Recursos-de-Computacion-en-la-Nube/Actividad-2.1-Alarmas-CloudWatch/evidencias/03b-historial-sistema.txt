@@ -1,0 +1,24 @@
+$ aws cloudwatch describe-alarm-history --alarm-name mon-$OWNER-sistema \
+>   --history-item-type StateUpdate --output table \
+>   --query "AlarmHistoryItems[].{Hora:Timestamp,Resumen:HistorySummary}"
+------------------------------------------------------------------------------------
+|                               DescribeAlarmHistory                               |
++-----------------------------------+----------------------------------------------+
+|               Hora                |                   Resumen                    |
++-----------------------------------+----------------------------------------------+
+|  2026-11-12T16:35:14.006000+01:00 |  Alarm updated from OK to INSUFFICIENT_DATA  |
+|  2026-11-12T16:28:14.004000+01:00 |  Alarm updated from ALARM to OK              |
+|  2026-11-12T16:26:59.851000+01:00 |  Alarm updated from OK to ALARM              |
+|  2026-11-12T16:21:57.086000+01:00 |  Alarm updated from INSUFFICIENT_DATA to OK  |
++-----------------------------------+----------------------------------------------+
+
+$ aws ec2 start-instances --instance-ids $ID --output table \
+>   --query "StartingInstances[].{ID:InstanceId,Antes:PreviousState.Name,Ahora:CurrentState.Name}"
+-----------------------------------------------
+|               StartInstances                |
++---------+----------+------------------------+
+|  Ahora  |  Antes   |          ID            |
++---------+----------+------------------------+
+|  pending|  stopped |  i-07df4a781ae3b354d   |
++---------+----------+------------------------+
+

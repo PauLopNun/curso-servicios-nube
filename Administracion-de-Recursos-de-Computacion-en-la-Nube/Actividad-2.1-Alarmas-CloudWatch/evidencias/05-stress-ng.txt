@@ -1,0 +1,7 @@
+$ ssh -i ~/.ssh/labsuser.pem ubuntu@3.90.44.127
+ubuntu@ip-172-31-21-203:~$ date -u +%T
+15:46:45
+ubuntu@ip-172-31-21-203:~$ stress-ng --cpu 0 --timeout 8m --metrics-brief
+stress-ng: info:  [1289] setting to a 8 mins run per stressor
+stress-ng: info:  [1289] dispatching hogs: 2 cpu
+stress-ng: info:  [1289] note: system has only 354 MB of free memory and swap, recommend using --oom-avoid

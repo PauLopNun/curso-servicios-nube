@@ -1,0 +1,17 @@
+{
+  "widgets": [
+    {"type": "metric", "x": 0, "y": 0, "width": 8, "height": 6,
+     "properties": {"title": "CPUUtilization", "view": "timeSeries", "region": "us-east-1",
+       "period": 60, "stat": "Average",
+       "metrics": [["AWS/EC2", "CPUUtilization", "InstanceId", "i-07df4a781ae3b354d"]]}},
+    {"type": "alarm", "x": 8, "y": 0, "width": 16, "height": 2,
+     "properties": {"title": "Alarmas de mon-pln", "alarms": [
+       "arn:aws:cloudwatch:us-east-1:216772830502:alarm:mon-pln-cpu",
+       "arn:aws:cloudwatch:us-east-1:216772830502:alarm:mon-pln-instancia",
+       "arn:aws:cloudwatch:us-east-1:216772830502:alarm:mon-pln-sistema"]}},
+    {"type": "metric", "x": 8, "y": 2, "width": 6, "height": 4,
+     "properties": {"title": "StatusCheckFailed", "view": "singleValue", "region": "us-east-1",
+       "period": 300, "stat": "Maximum",
+       "metrics": [["AWS/EC2", "StatusCheckFailed", "InstanceId", "i-07df4a781ae3b354d"]]}}
+  ]
+}

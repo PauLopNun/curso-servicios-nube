@@ -1,0 +1,31 @@
+$ aws cloudwatch put-metric-alarm --alarm-name mon-$OWNER-cpu-cli \
+>   --namespace AWS/EC2 --metric-name CPUUtilization \
+>   --dimensions Name=InstanceId,Value=$ID \
+>   --statistic Average --period 60 --threshold 70 \
+>   --comparison-operator GreaterThanThreshold \
+>   --evaluation-periods 5 --datapoints-to-alarm 3 \
+>   --treat-missing-data missing \
+>   --alarm-actions $TOPIC --ok-actions $TOPIC
+
+$ aws cloudwatch describe-alarms --alarm-name-prefix mon-$OWNER-cpu --output table \
+>   --query "MetricAlarms[].{Nombre:AlarmName,Metrica:MetricName,Est:Statistic,Per:Period,Umbral:Threshold,Op:ComparisonOperator,M:DatapointsToAlarm,N:EvaluationPeriods,Ausentes:TreatMissingData}"
+-----------------------------------------------------------------------------------------------------------------
+|                                                DescribeAlarms                                                 |
++----------+----------+----+-----------------+----+------------------+-----------------------+-------+----------+
+| Ausentes |   Est    | M  |     Metrica     | N  |     Nombre       |          Op           |  Per  | Umbral   |
++----------+----------+----+-----------------+----+------------------+-----------------------+-------+----------+
+|  missing |  Average |  3 |  CPUUtilization |  5 |  mon-pln-cpu     |  GreaterThanThreshold |  60   |  70.0    |
+|  missing |  Average |  3 |  CPUUtilization |  5 |  mon-pln-cpu-cli |  GreaterThanThreshold |  60   |  70.0    |
++----------+----------+----+-----------------+----+------------------+-----------------------+-------+----------+
+
+$ aws cloudwatch describe-alarms --alarm-names mon-$OWNER-sistema mon-$OWNER-instancia \
+>   --output table --query "MetricAlarms[].{Nombre:AlarmName,Acciones:join(', ',AlarmActions)}"
+----------------------------------------------------------------------------------------------------------------
+|                                                DescribeAlarms                                                |
++-----------------------------------------------------------------------------------------+--------------------+
+|                                        Acciones                                         |      Nombre        |
++-----------------------------------------------------------------------------------------+--------------------+
+|  arn:aws:automate:us-east-1:ec2:reboot, arn:aws:sns:us-east-1:216772830502:avisos-pln   |  mon-pln-instancia |
+|  arn:aws:automate:us-east-1:ec2:recover, arn:aws:sns:us-east-1:216772830502:avisos-pln  |  mon-pln-sistema   |
++-----------------------------------------------------------------------------------------+--------------------+
+

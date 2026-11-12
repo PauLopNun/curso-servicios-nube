@@ -1,0 +1,5 @@
+ubuntu@ip-172-31-21-203:~$ sudo ip link set ens5 down
+(la sesión SSH se queda colgada)
+
+$ ssh -i ~/.ssh/labsuser.pem -o ConnectTimeout=5 ubuntu@3.90.44.127 true
+ssh: connect to host 3.90.44.127 port 22: Connection timed out

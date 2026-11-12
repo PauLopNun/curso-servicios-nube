@@ -1,0 +1,12 @@
+$ aws ec2 monitor-instances --instance-ids $ID
+{
+    "InstanceMonitorings": [
+        {
+            "InstanceId": "i-07df4a781ae3b354d",
+            "Monitoring": {
+                "State": "pending"
+            }
+        }
+    ]
+}
+

@@ -1,0 +1,13 @@
+ubuntu@ip-172-31-21-203:~$ sudo systemctl stop apache2
+ubuntu@ip-172-31-21-203:~$ systemctl is-active apache2
+inactive
+ubuntu@ip-172-31-21-203:~$ sudo systemctl start apache2
+ubuntu@ip-172-31-21-203:~$ curl -I http://localhost
+HTTP/1.1 200 OK
+Date: Thu, 12 Nov 2026 16:03:32 GMT
+Server: Apache/2.4.66 (Ubuntu)
+ubuntu@ip-172-31-21-203:~$ sudo systemctl stop apache2
+(comprobación apache-pln en Error: ConnectionRefused)
+ubuntu@ip-172-31-21-203:~$ sudo systemctl start apache2
+ubuntu@ip-172-31-21-203:~$ systemctl is-active apache2
+active

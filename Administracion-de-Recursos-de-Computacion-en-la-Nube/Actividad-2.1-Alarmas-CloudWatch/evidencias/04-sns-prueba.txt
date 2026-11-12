@@ -1,0 +1,22 @@
+$ TOPIC=$(aws sns list-topics --output text \
+>   --query "Topics[?ends_with(TopicArn,':avisos-$OWNER')].TopicArn")
+$ echo $TOPIC
+arn:aws:sns:us-east-1:216772830502:avisos-pln
+
+$ aws sns list-subscriptions-by-topic --topic-arn $TOPIC --output table \
+>   --query "Subscriptions[].{Protocolo:Protocol,Destino:Endpoint,Suscripcion:SubscriptionArn}"
+-------------------------------------------------------------------------------------------------------
+|                                      ListSubscriptionsByTopic                                       |
++-------------+---------------------------------------------------------------------------------------+
+|  Destino    |  paulopeznunez@gmail.com                                                              |
+|  Protocolo  |  email                                                                                |
+|  Suscripcion|  arn:aws:sns:us-east-1:216772830502:avisos-pln:e0a0abf3-91af-46ba-8874-6e10e0931a50   |
++-------------+---------------------------------------------------------------------------------------+
+
+$ aws sns publish --topic-arn $TOPIC \
+>   --subject "Prueba de avisos-pln" \
+>   --message "Mensaje de prueba enviado desde la AWS CLI para comprobar la suscripción."
+{
+    "MessageId": "1a533532-a28d-5086-a756-565d782741d8"
+}
+

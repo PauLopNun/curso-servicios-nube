@@ -1,0 +1,71 @@
+$ aws cloudwatch list-metrics --namespace AWS/EC2 \
+>   --dimensions Name=InstanceId,Value=$ID \
+>   --query "Metrics[].MetricName" --output text | tr '\t' '\n' | sort
+CPUCreditBalance
+CPUCreditUsage
+CPUSurplusCreditBalance
+CPUSurplusCreditsCharged
+CPUUtilization
+EBSByteBalance%
+EBSIOBalance%
+EBSReadBytes
+EBSReadOps
+EBSWriteBytes
+EBSWriteOps
+ImdsV1Enabled
+InstanceEBSIOPSExceededCheck
+InstanceEBSThroughputExceededCheck
+MetadataNoToken
+NetworkIn
+NetworkOut
+NetworkPacketsIn
+NetworkPacketsOut
+StatusCheckFailed
+StatusCheckFailed_AttachedEBS
+StatusCheckFailed_Instance
+StatusCheckFailed_System
+
+$ INI=$(date -u -d '-1 hour' +%FT%TZ)
+$ FIN=$(date -u +%FT%TZ)
+$ aws cloudwatch get-metric-statistics --namespace AWS/EC2 \
+>   --metric-name CPUUtilization --dimensions Name=InstanceId,Value=$ID \
+>   --start-time $INI --end-time $FIN --period 300 \
+>   --statistics Average Maximum --output table \
+>   --query "sort_by(Datapoints,&Timestamp)[].{Hora:Timestamp,Media:Average,Max:Maximum}"
+----------------------------------------------------------------------------
+|                            GetMetricStatistics                           |
++---------------------------+----------------------+-----------------------+
+|           Hora            |         Max          |         Media         |
++---------------------------+----------------------+-----------------------+
+|  2026-11-12T16:07:00+01:00|  16.586454395576947  |  4.474985130011076    |
+|  2026-11-12T16:12:00+01:00|  0.3493478839499601  |  0.27050408097034684  |
++---------------------------+----------------------+-----------------------+
+
+$ aws cloudwatch get-metric-statistics --namespace AWS/EC2 \
+>   --metric-name CPUUtilization --dimensions Name=InstanceId,Value=$ID \
+>   --start-time $INI --end-time $FIN --period 60 \
+>   --statistics Average Maximum --output table \
+>   --query "sort_by(Datapoints,&Timestamp)[].{Hora:Timestamp,Media:Average,Max:Maximum}"
+----------------------------------------------------------------------------
+|                            GetMetricStatistics                           |
++---------------------------+----------------------+-----------------------+
+|           Hora            |         Max          |         Media         |
++---------------------------+----------------------+-----------------------+
+|  2026-11-12T16:10:00+01:00|  16.586454395576947  |  4.474985130011076    |
+|  2026-11-12T16:15:00+01:00|  0.3493478839499601  |  0.27050408097034684  |
++---------------------------+----------------------+-----------------------+
+
+$ aws cloudwatch get-metric-statistics --namespace AWS/EC2 \
+>   --metric-name StatusCheckFailed_System --dimensions Name=InstanceId,Value=$ID \
+>   --start-time $INI --end-time $FIN --period 60 \
+>   --statistics Maximum --output table \
+>   --query "sort_by(Datapoints,&Timestamp)[].{Hora:Timestamp,Max:Maximum}"
+--------------------------------------
+|         GetMetricStatistics        |
++-----------------------------+------+
+|            Hora             | Max  |
++-----------------------------+------+
+|  2026-11-12T16:15:00+01:00  |  0.0 |
+|  2026-11-12T16:16:00+01:00  |  0.0 |
++-----------------------------+------+
+

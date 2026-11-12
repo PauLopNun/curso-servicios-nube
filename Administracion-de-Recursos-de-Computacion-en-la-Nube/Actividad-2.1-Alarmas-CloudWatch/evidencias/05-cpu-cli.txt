@@ -1,0 +1,44 @@
+$ aws cloudwatch describe-alarms --alarm-name-prefix mon-$OWNER \
+>   --output table --query "MetricAlarms[].{Nombre:AlarmName,Estado:StateValue,Metrica:MetricName}"
+---------------------------------------------------------------
+|                       DescribeAlarms                        |
++--------+------------------------------+---------------------+
+| Estado |           Metrica            |       Nombre        |
++--------+------------------------------+---------------------+
+|  OK    |  CPUUtilization              |  mon-pln-cpu        |
+|  OK    |  StatusCheckFailed_Instance  |  mon-pln-instancia  |
+|  OK    |  StatusCheckFailed_System    |  mon-pln-sistema    |
++--------+------------------------------+---------------------+
+
+$ aws cloudwatch describe-alarm-history --alarm-name mon-$OWNER-cpu \
+>   --history-item-type StateUpdate --output table \
+>   --query "AlarmHistoryItems[].{Hora:Timestamp,Resumen:HistorySummary}"
+------------------------------------------------------------------------------------
+|                               DescribeAlarmHistory                               |
++-----------------------------------+----------------------------------------------+
+|               Hora                |                   Resumen                    |
++-----------------------------------+----------------------------------------------+
+|  2026-11-12T16:59:40.648000+01:00 |  Alarm updated from ALARM to OK              |
+|  2026-11-12T16:51:40.650000+01:00 |  Alarm updated from OK to ALARM              |
+|  2026-11-12T16:46:40.650000+01:00 |  Alarm updated from INSUFFICIENT_DATA to OK  |
++-----------------------------------+----------------------------------------------+
+
+$ INI=$(date -u -d '-40 minutes' +%FT%TZ)
+$ FIN=$(date -u +%FT%TZ)
+$ aws cloudwatch get-metric-statistics --namespace AWS/EC2 \
+>   --metric-name CPUCreditBalance --dimensions Name=InstanceId,Value=$ID \
+>   --start-time $INI --end-time $FIN --period 300 --statistics Average \
+>   --output table --query "sort_by(Datapoints,&Timestamp)[].{Hora:Timestamp,Creditos:Average}"
+----------------------------------------------------
+|                GetMetricStatistics               |
++--------------------+-----------------------------+
+|      Creditos      |            Hora             |
++--------------------+-----------------------------+
+|  2.1994606         |  2026-11-12T16:21:00+01:00  |
+|  3.1814098         |  2026-11-12T16:36:00+01:00  |
+|  4.161595016666666 |  2026-11-12T16:41:00+01:00  |
+|  0.0               |  2026-11-12T16:46:00+01:00  |
+|  0.0               |  2026-11-12T16:51:00+01:00  |
+|  0.0               |  2026-11-12T16:56:00+01:00  |
++--------------------+-----------------------------+
+

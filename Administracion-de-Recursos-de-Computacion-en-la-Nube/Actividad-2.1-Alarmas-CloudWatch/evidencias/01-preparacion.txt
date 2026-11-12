@@ -1,0 +1,8 @@
+$ OWNER=pln
+$ ID=$(aws ec2 describe-instances \
+>   --filters "Name=tag:Name,Values=mon-$OWNER" \
+>   "Name=instance-state-name,Values=pending,running" \
+>   --query "Reservations[0].Instances[0].InstanceId" --output text)
+$ echo $ID
+i-07df4a781ae3b354d
+
