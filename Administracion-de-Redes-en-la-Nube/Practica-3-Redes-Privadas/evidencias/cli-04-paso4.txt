@@ -1,0 +1,13 @@
+
+=== Paso 4: añadir la ruta 0.0.0.0/0 hacia el Internet Gateway ===
+------------------------------------------------------
+|                 DescribeRouteTables                |
++----------------+-------------------------+---------+
+|     Destino    |       Destino_por       | Estado  |
++----------------+-------------------------+---------+
+|  172.16.0.0/16 |  local                  |  active |
+|  0.0.0.0/0     |  igw-062e3720e261feee5  |  active |
++----------------+-------------------------+---------+
+-> ssh ubuntu@100.55.6.104
+ssh: connect to host 100.55.6.104 port 22: Connection timed out
+   RESULTADO: SIN acceso por SSH desde el exterior

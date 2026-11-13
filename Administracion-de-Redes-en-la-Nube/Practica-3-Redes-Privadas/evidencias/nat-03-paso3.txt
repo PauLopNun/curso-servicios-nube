@@ -1,0 +1,12 @@
+
+=== Paso 3: tabla de rutas privada con 0.0.0.0/0 hacia el NAT Gateway ===
+------------------------------------------------------
+|                 DescribeRouteTables                |
++----------------+---------+-------------------------+
+|     Destino    | Estado  |           Por           |
++----------------+---------+-------------------------+
+|  172.16.0.0/16 |  active |  local                  |
+|  0.0.0.0/0     |  active |  nat-0daa2fec69f6963e4  |
++----------------+---------+-------------------------+
+-> desde 172.16.64.100: curl https://checkip.amazonaws.com
+   RESULTADO: el EC2 privado NO tiene salida a Internet

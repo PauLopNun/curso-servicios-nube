@@ -1,0 +1,12 @@
+
+=== Paso 2: adjuntar el Internet Gateway a la VPC ===
+----------------------------------------
+|       DescribeInternetGateways       |
++------------+-------------------------+
+|   Estado   |           VPC           |
++------------+-------------------------+
+|  available |  vpc-09dcbde13ce75c628  |
++------------+-------------------------+
+-> ssh ubuntu@100.55.6.104
+ssh: connect to host 100.55.6.104 port 22: Connection timed out
+   RESULTADO: SIN acceso por SSH desde el exterior

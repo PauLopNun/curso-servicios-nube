@@ -1,0 +1,23 @@
+
+=== Paso 4: asociar la tabla de rutas a la subred privada ===
+---------------------------------------------------------------------------------------------------
+|                                       DescribeRouteTables                                       |
++-----------------------+-------------------------+----------------------------+------------------+
+|          IGW          |           NAT           |          Subred            |      Tabla       |
++-----------------------+-------------------------+----------------------------+------------------+
+|  None                 |  None                   |  None                      |  None            |
+|  None                 |  nat-0daa2fec69f6963e4  |  subnet-03b1ae0bb0edf81c9  |  rtb-pln-privada |
+|  igw-062e3720e261feee5|  None                   |  subnet-0d7bcb6138a652056  |  rtb-pln-publica |
++-----------------------+-------------------------+----------------------------+------------------+
+Esperando 15 s a que se aplique la ruta...
+-> desde 172.16.64.100: curl https://checkip.amazonaws.com
+   RESULTADO: el EC2 privado sale a Internet con la IP 184.195.248.183
+IP elástica del NAT Gateway: 184.195.248.183
+-> El EC2 privado sigue sin IP pública, así que no se puede entrar a él desde fuera:
+----------------------------------------------------
+|                 DescribeInstances                |
++---------------+--------------+-------------------+
+|  IP_privada   | IP_publica   |      Nombre       |
++---------------+--------------+-------------------+
+|  172.16.64.100|  None        |  ec2-pln-privada  |
++---------------+--------------+-------------------+

@@ -1,0 +1,17 @@
+
+=== Paso 1: subred privada y EC2 privado ===
+Subred privada: subnet-03b1ae0bb0edf81c9 (172.16.64.0/20, sin IP pública)
+Grupo de seguridad: sg-0f3daaf56e6775922 (22/tcp desde sg-072d0d3c631c45397)
+----------------------------------------------------------------------------------
+|                                DescribeInstances                               |
++---------------+---------------+------------------+-----------------------------+
+|  IP_privada   |  IP_publica   |     Nombre       |           Subred            |
++---------------+---------------+------------------+-----------------------------+
+|  172.16.0.100 |  100.55.6.104 |  ec2-pln-publica |  subnet-0d7bcb6138a652056   |
+|  172.16.64.100|  None         |  ec2-pln-privada |  subnet-03b1ae0bb0edf81c9   |
++---------------+---------------+------------------+-----------------------------+
+Esperando 60 s a que arranque SSH...
+-> SSH al EC2 privado a través del público
+Conectado a ip-172-16-64-100 (172.16.64.100 )
+-> desde 172.16.64.100: curl https://checkip.amazonaws.com
+   RESULTADO: el EC2 privado NO tiene salida a Internet

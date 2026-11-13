@@ -1,0 +1,16 @@
+
+=== Base: VPC, subred pública, grupo de seguridad y EC2 ===
+VPC: vpc-09dcbde13ce75c628 (172.16.0.0/16)
+Subred pública: subnet-0d7bcb6138a652056 (172.16.0.0/20, IP pública automática)
+Grupo de seguridad: sg-072d0d3c631c45397 (22/tcp desde 0.0.0.0/0)
+--------------------------------------------------------------------
+|                         DescribeInstances                        |
++---------+---------------+---------------+------------------------+
+| Estado  |  IP_privada   |  IP_publica   |          Id            |
++---------+---------------+---------------+------------------------+
+|  running|  172.16.0.100 |  100.55.6.104 |  i-09319f7d228b738ed   |
++---------+---------------+---------------+------------------------+
+Esperando 60 s a que arranque SSH...
+-> ssh ubuntu@100.55.6.104
+ssh: connect to host 100.55.6.104 port 22: Connection timed out
+   RESULTADO: SIN acceso por SSH desde el exterior

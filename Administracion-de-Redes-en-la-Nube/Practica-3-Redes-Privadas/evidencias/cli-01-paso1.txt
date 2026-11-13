@@ -1,0 +1,12 @@
+
+=== Paso 1: crear el Internet Gateway ===
+---------------------------------------
+|      DescribeInternetGateways       |
++-----------+-------------------------+
+| Adjuntos  |           IGW           |
++-----------+-------------------------+
+|  0        |  igw-062e3720e261feee5  |
++-----------+-------------------------+
+-> ssh ubuntu@100.55.6.104
+ssh: connect to host 100.55.6.104 port 22: Connection timed out
+   RESULTADO: SIN acceso por SSH desde el exterior

@@ -1,0 +1,12 @@
+
+=== Paso 5: asociar la tabla de rutas a la subred pública ===
+------------------------------------------------------------
+|                    DescribeRouteTables                   |
++-----------------------------+----------------------------+
+|         Asociacion          |          Subred            |
++-----------------------------+----------------------------+
+|  rtbassoc-05bab6c4c43625b77 |  subnet-0d7bcb6138a652056  |
++-----------------------------+----------------------------+
+-> ssh ubuntu@100.55.6.104
+Conectado a ip-172-16-0-100 (172.16.0.100 )
+   RESULTADO: hay acceso por SSH desde el exterior

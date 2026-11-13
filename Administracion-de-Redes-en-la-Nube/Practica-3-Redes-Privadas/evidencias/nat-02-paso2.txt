@@ -1,0 +1,14 @@
+
+=== Paso 2: IP elástica y NAT Gateway en la subred pública ===
+Esperando a que el NAT Gateway nat-0daa2fec69f6963e4 esté disponible...
+--------------------------------------------
+|            DescribeNatGateways           |
++-------------+----------------------------+
+|  Estado     |  available                 |
+|  IP_privada |  172.16.14.248             |
+|  IP_publica |  184.195.248.183           |
+|  NAT        |  nat-0daa2fec69f6963e4     |
+|  Subred     |  subnet-0d7bcb6138a652056  |
++-------------+----------------------------+
+-> desde 172.16.64.100: curl https://checkip.amazonaws.com
+   RESULTADO: el EC2 privado NO tiene salida a Internet
