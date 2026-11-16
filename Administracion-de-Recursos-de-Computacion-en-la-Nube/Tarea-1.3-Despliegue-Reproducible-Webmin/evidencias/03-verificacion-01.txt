@@ -1,0 +1,63 @@
+ubuntu@ip-172-31-90-188:~$ cloud-init status --wait
+....................
+status: done
+
+ubuntu@webmin-pln-01:~$ sudo tail -n 20 /var/log/cloud-init-output.log
+|  o +  . . o     |
+|   +..    . .    |
++----[SHA256]-----+
+Generating public/private ed25519 key pair.
+Your identification has been saved in /etc/ssh/ssh_host_ed25519_key
+Your public key has been saved in /etc/ssh/ssh_host_ed25519_key.pub
+The key fingerprint is:
+SHA256:rs4/JCvBxn2DkE639JmdZYY4Mz+csZCJAT3jYjFpC44 root@ip-172-31-90-188
+The key's randomart image is:
++--[ED25519 256]--+
+|    .+           |
+|  . = =          |
+| o o * = + .     |
+|E . B = O o +    |
+|   * * +S@ O     |
+|    * =.B O      |
+|   . . =.. .     |
+|    .....        |
+|     o+...       |
++----[SHA256]-----+
+
+ubuntu@webmin-pln-01:~$ hostname
+webmin-pln-01
+
+ubuntu@webmin-pln-01:~$ systemctl is-active webmin; sudo ss -tlnp | grep 10000
+active
+
+ubuntu@webmin-pln-01:~$ sudo cat /root/webmin-pass.txt
+bgBf/Citf1ks0w3/
+
+ubuntu@webmin-pln-01:~$ sudo md5sum /root/webmin-pass.txt
+2c076a790e06944d01139b1808af96cf  /root/webmin-pass.txt
+
+ubuntu@webmin-pln-01:~$ sudo bash /var/lib/cloud/instance/scripts/part-001 && echo OK
+  Downloading Webmin Developers key ..
+  .. done
+  Installing Webmin Developers key ..
+  .. done
+  Setting up Webmin stable repository ..
+  .. done
+  Cleaning repository metadata ..
+  .. done
+  Downloading repository metadata ..
+  .. done
+Reading package lists...
+Building dependency tree...
+Reading state information...
+webmin is already the newest version (2.670).
+Solving dependencies...
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+OK
+
+ubuntu@webmin-pln-01:~$ sudo md5sum /root/webmin-pass.txt
+2c076a790e06944d01139b1808af96cf  /root/webmin-pass.txt
+
+ubuntu@webmin-pln-01:~$ curl -s -o /dev/null -w "%{http_code}\n" http://169.254.169.254/latest/meta-data/
+401
+

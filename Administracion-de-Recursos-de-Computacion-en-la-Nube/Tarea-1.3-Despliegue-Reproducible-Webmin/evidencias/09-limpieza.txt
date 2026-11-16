@@ -1,0 +1,13 @@
+pau@portatil:~$ aws ec2 terminate-instances --instance-ids i-002872ad02d7a3109 i-0626d0e44e927cfe6 --query 'TerminatingInstances[].[InstanceId,CurrentState.Name]' --output table
+------------------------------------------
+|           TerminateInstances           |
++----------------------+-----------------+
+|  i-002872ad02d7a3109 |  shutting-down  |
+|  i-0626d0e44e927cfe6 |  shutting-down  |
++----------------------+-----------------+
+
+pau@portatil:~$ aws ec2 describe-instances --filters "Name=tag:Aplicacion,Values=webmin" "Name=instance-state-name,Values=pending,running,stopping,stopped" --query "Reservations[].Instances[].InstanceId"
+[]
+
+pau@portatil:~$ aws ec2 describe-volumes --filters "Name=tag:Aplicacion,Values=webmin" --query "Volumes[].VolumeId"
+[]

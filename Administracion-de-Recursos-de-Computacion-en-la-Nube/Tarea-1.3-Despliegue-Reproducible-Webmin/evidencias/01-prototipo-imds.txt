@@ -1,0 +1,21 @@
+ubuntu@ip-172-31-85-225:~$ IMDS=http://169.254.169.254/latest
+ubuntu@ip-172-31-85-225:~$ TOKEN=$(curl -s -X PUT $IMDS/api/token -H "X-aws-ec2-metadata-token-ttl-seconds: 300")
+ubuntu@ip-172-31-85-225:~$ curl -s -H "X-aws-ec2-metadata-token: $TOKEN" $IMDS/meta-data/tags/instance; echo
+Aplicacion
+Name
+Propietario
+Proyecto
+aws:ec2launchtemplate:id
+aws:ec2launchtemplate:version
+
+ubuntu@ip-172-31-85-225:~$ curl -s -H "X-aws-ec2-metadata-token: $TOKEN" $IMDS/meta-data/tags/instance/Name; echo
+webmin-pln-proto
+
+ubuntu@ip-172-31-85-225:~$ curl -s -o /dev/null -w "%{http_code}\n" $IMDS/meta-data/
+401
+
+ubuntu@ip-172-31-85-225:~$ sudo hostnamectl set-hostname "$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" $IMDS/meta-data/tags/instance/Name)"
+
+ubuntu@webmin-pln-proto:~$ hostname
+webmin-pln-proto
+

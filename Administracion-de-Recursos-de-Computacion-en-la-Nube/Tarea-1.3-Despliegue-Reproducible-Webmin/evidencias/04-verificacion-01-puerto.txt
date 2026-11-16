@@ -1,0 +1,19 @@
+ubuntu@webmin-pln-01:~$ sudo sed -n "450,458p" /var/log/cloud-init-output.log | cut -c1-110
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Password for Webmin user root updated successfully
+Cloud-init v. 26.2-0ubuntu1~26.04.1 finished at Mon, 16 Nov 2026 16:16:18 +0000. Datasource DataSourceEc2Local
+Generating public/private rsa key pair.
+Your identification has been saved in /etc/ssh/ssh_host_rsa_key
+Your public key has been saved in /etc/ssh/ssh_host_rsa_key.pub
+The key fingerprint is:
+
+ubuntu@webmin-pln-01:~$ systemctl is-active webmin; sudo ss -tlnp | grep 10000
+active
+LISTEN 0      4096         0.0.0.0:10000      0.0.0.0:*    users:(("miniserv.pl",pid=4183,fd=5))                 
+LISTEN 0      4096            [::]:10000         [::]:*    users:(("miniserv.pl",pid=4183,fd=6))                 
+
+ubuntu@webmin-pln-01:~$ cloud-init status
+status: done
+

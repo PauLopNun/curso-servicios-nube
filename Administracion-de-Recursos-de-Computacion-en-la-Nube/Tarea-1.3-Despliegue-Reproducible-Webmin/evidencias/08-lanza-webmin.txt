@@ -1,0 +1,25 @@
+pau@portatil:~/scripts$ ./lanza_webmin.sh webmin-pln-03
+Lanzando webmin-pln-03 desde la plantilla...
+Instancia: i-0626d0e44e927cfe6
+En ejecución con la IP pública 3.85.142.216. Esperando a Webmin...
+Aviso: el puerto 10000 no responde desde este equipo tras 300 s.
+Revisa cloud-init, las reglas del grupo de seguridad o el cortafuegos local.
+URL prevista: https://3.85.142.216:10000
+(código de salida: 2)
+
+pau@portatil:~/scripts$ aws ec2 describe-instances --instance-ids i-0626d0e44e927cfe6 --query 'Reservations[0].Instances[0].Tags[?!starts_with(Key,`aws:`)]' --output table
+----------------------------------
+|        DescribeInstances       |
++--------------+-----------------+
+|      Key     |      Value      |
++--------------+-----------------+
+|  Propietario |  pln            |
+|  Name        |  webmin-pln-03  |
+|  Proyecto    |  UD01           |
+|  Aplicacion  |  webmin         |
++--------------+-----------------+
+
+ubuntu@webmin-pln-03:~$ cloud-init status; systemctl is-active webmin; curl -sk -o /dev/null -w "%{http_code}\n" https://localhost:10000
+status: done
+active
+200

@@ -1,0 +1,4 @@
+Lanzamiento de webmin-pln-02: 17:44:17
+Instancia: i-00ceeb4b1176ca421
+En ejecución (running): 17:44:36 (+19 s)
+Webmin responde en el puerto 10000 (HTTP 200): 17:46:06 (+109 s)
