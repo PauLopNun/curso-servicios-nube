@@ -5,9 +5,9 @@
 ![EBS](https://img.shields.io/badge/AWS-EBS-FF9900?style=for-the-badge&logoColor=white)
 ![EC2](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logoColor=white)
 ![SSM](https://img.shields.io/badge/AWS-Systems%20Manager-232F3E?style=for-the-badge&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Realizado-0366d6?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
 
-**Laboratorio guiado de AWS Academy - sin entregable**
+**Tarea 2.1 - Laboratorio 4 del módulo 7 de AWS Academy Cloud Foundations**
 
 <img src="https://skillicons.dev/icons?i=aws,bash,linux" />
 
@@ -17,7 +17,11 @@
 
 Crear un volumen EBS, conectarlo a la instancia **Lab**, darle un sistema de archivos ext3, hacer un snapshot y restaurarlo en un volumen nuevo para comprobar que los datos se recuperan. Resumen en [`enunciado.md`](enunciado.md).
 
-## Qué se ha hecho
+## Entrega (Tarea 2.1)
+
+El laboratorio se repitió desde la consola el 18/11/2026 para la Tarea 2.1, con 14 capturas del proceso (carpeta [`capturas/`](capturas)) y el documento [`entrega/ebs_t21_lopez_nunez.pdf`](entrega/ebs_t21_lopez_nunez.pdf).
+
+## Primera realización (API y SSM Run Command)
 
 Todo desde la API de AWS y, dentro de la instancia, con SSM Run Command como `ec2-user` (los comandos están en [`comandos-instancia.sh`](scripts/comandos-instancia.sh)). Los nombres de los recursos son los que impone el laboratorio, porque el corrector los comprueba.
 
@@ -40,7 +44,9 @@ En la primera sesión la instancia Lab no llegó a arrancar: CloudFormation la c
 | Ruta | Descripción |
 |:--|:--|
 | [`scripts/`](scripts) | Comandos ejecutados dentro de la instancia |
-| [`evidencias/`](evidencias) | Ids de los recursos y salida de cada tarea |
+| [`evidencias/`](evidencias) | Ids de los recursos y salida de cada tarea (primera realización) |
+| [`capturas/`](capturas) | Capturas de la consola y de Session Manager |
+| [`entrega/`](entrega) | Documento de la Tarea 2.1 |
 
 ---
 
