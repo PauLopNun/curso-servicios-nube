@@ -1,0 +1,53 @@
+#!/bin/bash
+# User data para la instancia a monitorizar (Amazon Linux).
+# Instala Node Exporter y lo deja como servicio en el puerto 9100.
+# El user data se ejecuta como root, por eso no hace falta sudo.
+
+NODE_EXPORTER_VERSION="1.6.1"
+
+# Actualizar el sistema
+yum update -y
+
+# Descargar Node Exporter (versión fijada en la variable de arriba)
+cd /tmp
+wget "https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz"
+
+# Extraer los archivos y mover el binario
+tar xvfz "node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz"
+mv "node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64/node_exporter" /usr/local/bin/
+
+# Crear un usuario de servicio para Node Exporter (sin home y sin shell)
+useradd --no-create-home --shell /bin/false nodeusr
+
+# Dar permisos adecuados
+chown nodeusr:nodeusr /usr/local/bin/node_exporter
+
+# Crear archivo de servicio para Node Exporter
+cat <<'EOF' > /etc/systemd/system/node_exporter.service
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=nodeusr
+Group=nodeusr
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Iniciar Node Exporter y habilitarlo para que se inicie automáticamente
+systemctl daemon-reload
+systemctl enable node_exporter
+systemctl start node_exporter
+
+# Confirmación (solo si el servicio ha arrancado de verdad)
+if systemctl is-active --quiet node_exporter; then
+  echo "Node Exporter está corriendo y escuchando en el puerto 9100"
+else
+  echo "ERROR: Node Exporter no ha arrancado. Revisa: journalctl -u node_exporter"
+fi

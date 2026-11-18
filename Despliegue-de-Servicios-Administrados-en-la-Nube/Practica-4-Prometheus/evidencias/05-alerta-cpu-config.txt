@@ -1,0 +1,44 @@
+
+=== Subir prometheus.yml (con rule_files) y alert.rules.yml ===
+[ec2-user@172-31-23-210]$ cat /etc/prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/alert.rules.yml
+
+scrape_configs:
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['172.31.18.224:9100']
+[ec2-user@172-31-23-210]$ cat /etc/prometheus/alert.rules.yml
+groups:
+  - name: cpu_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 70
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Uso elevado de CPU en {{ $labels.instance }}"
+          description: "Uso actual: {{ $value | humanize }} % (umbral: 70 % durante 1 min)."
+
+=== Validar y reiniciar ===
+[ec2-user@172-31-23-210]$ sudo chown prometheus:prometheus /etc/prometheus/alert.rules.yml
+[ec2-user@172-31-23-210]$ promtool check config /etc/prometheus/prometheus.yml
+Checking /etc/prometheus/prometheus.yml
+  SUCCESS: 1 rule files found
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+Checking /etc/prometheus/alert.rules.yml
+  SUCCESS: 1 rules found
+
+[ec2-user@172-31-23-210]$ sudo systemctl restart prometheus
+[ec2-user@172-31-23-210]$ systemctl status prometheus --no-pager | head -n 5
+● prometheus.service - Prometheus Monitoring System
+     Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; preset: disabled)
+     Active: active (running) since Wed 2026-11-18 15:36:27 UTC; 6s ago
+   Main PID: 6094 (prometheus)
+      Tasks: 8 (limit: 1059)

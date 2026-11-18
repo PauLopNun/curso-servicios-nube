@@ -1,0 +1,29 @@
+
+=== Probar las expresiones (API de consultas, igual que la pestaña Graph) ===
+# up{job="node_exporter"}
+   ec2-pln-nodo3 172.31.16.153:9100 = 1.0
+   ec2-pln-nodo 172.31.22.219:9100 = 1.0
+   ec2-pln-nodo 172.31.27.149:9100 = 1.0
+# (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100
+   ec2-pln-nodo3 172.31.16.153:9100 = 32.22
+   ec2-pln-nodo 172.31.22.219:9100 = 34.26
+   ec2-pln-nodo 172.31.27.149:9100 = 30.96
+# (1 - node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100
+   ec2-pln-nodo3 172.31.16.153:9100 = 20.92
+   ec2-pln-nodo 172.31.22.219:9100 = 21.04
+   ec2-pln-nodo 172.31.27.149:9100 = 20.92
+
+=== Subir alert.rules.yml con las cuatro reglas ===
+[ec2-user@172-31-23-210]$ sudo chown prometheus:prometheus /etc/prometheus/alert.rules.yml
+[ec2-user@172-31-23-210]$ promtool check rules /etc/prometheus/alert.rules.yml
+Checking /etc/prometheus/alert.rules.yml
+  SUCCESS: 4 rules found
+
+[ec2-user@172-31-23-210]$ sudo systemctl restart prometheus && systemctl is-active prometheus
+active
+
+=== Plantilla del correo: nombre del nodo e id de instancia solo si existen ===
+[ec2-user@172-31-23-210]$ amtool check-config /etc/alertmanager/alertmanager.yml | head -n 1
+Checking '/etc/alertmanager/alertmanager.yml'  SUCCESS
+[ec2-user@172-31-23-210]$ sudo systemctl restart alertmanager && systemctl is-active alertmanager
+active

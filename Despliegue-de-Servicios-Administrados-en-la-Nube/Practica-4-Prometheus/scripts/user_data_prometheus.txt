@@ -1,0 +1,89 @@
+#!/bin/bash
+# User data para la instancia de Prometheus (Amazon Linux).
+# Instala Prometheus y lo deja como servicio en el puerto 9090.
+# El user data se ejecuta como root, por eso no hace falta sudo.
+
+# >>> ÚNICO VALOR A CAMBIAR <<<
+# Sustituye <IP-DE-LA-OTRA-EC2> por la IP privada de la instancia que quieres monitorizar.
+TARGET_IP="<IP-DE-LA-OTRA-EC2>"
+
+PROMETHEUS_VERSION="2.47.0"
+
+# Actualizar el sistema
+yum update -y
+
+# Crear usuario Prometheus (sin home y sin shell)
+useradd --no-create-home --shell /bin/false prometheus
+
+# Crear directorios necesarios
+# (consoles y console_libraries NO se crean aquí: se mueven completos desde el paquete)
+mkdir -p /etc/prometheus
+mkdir -p /var/lib/prometheus
+
+# Descargar Prometheus
+cd /tmp
+wget "https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz"
+
+# Extraer los archivos de Prometheus
+tar xvfz "prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz"
+cd "prometheus-${PROMETHEUS_VERSION}.linux-amd64"
+
+# Mover archivos binarios
+mv prometheus /usr/local/bin/
+mv promtool /usr/local/bin/
+
+# Mover las plantillas de consola a /etc/prometheus/consoles y /etc/prometheus/console_libraries
+mv consoles /etc/prometheus/
+mv console_libraries /etc/prometheus/
+
+# Crear archivo de configuración de Prometheus
+# Si necesitas más instancias, añade más direcciones en el bloque targets.
+cat <<EOF > /etc/prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['${TARGET_IP}:9100']
+EOF
+
+# Ajustar permisos (después de crear todos los ficheros)
+chown -R prometheus:prometheus /etc/prometheus
+chown -R prometheus:prometheus /var/lib/prometheus
+chown prometheus:prometheus /usr/local/bin/prometheus /usr/local/bin/promtool
+
+# Crear archivo de servicio para Prometheus
+cat <<'EOF' > /etc/systemd/system/prometheus.service
+[Unit]
+Description=Prometheus Monitoring System
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+  --config.file=/etc/prometheus/prometheus.yml \
+  --storage.tsdb.path=/var/lib/prometheus/ \
+  --web.console.templates=/etc/prometheus/consoles \
+  --web.console.libraries=/etc/prometheus/console_libraries
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Recargar systemd, habilitar e iniciar el servicio
+systemctl daemon-reload
+systemctl enable prometheus
+systemctl start prometheus
+
+# Verificación final
+if systemctl is-active --quiet prometheus; then
+  echo "Prometheus ha sido instalado y está monitorizando la IP: ${TARGET_IP}"
+else
+  echo "ERROR: Prometheus no ha arrancado. Revisa: journalctl -u prometheus"
+fi

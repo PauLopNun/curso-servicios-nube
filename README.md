@@ -33,6 +33,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 </p>
 
 - **AWS** - EC2, VPC, S3, IAM y servicios administrados desde la consola y la **AWS CLI v2**
+- **Prometheus** - Node Exporter, PromQL, descubrimiento de instancias EC2 y Alertmanager con avisos por SNS
 - **GitHub Actions** - Pipelines de CI/CD: lint, tests, GitHub Pages y copia automática a S3
 - **Python** - Scripts con Boto3 para gestionar recursos de AWS
 - **Bash** - Automatización de tareas con la CLI, validaciones y scripts de datos de usuario
@@ -50,8 +51,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | **Fundamentos y Configuración Inicial de Servicios en la Nube** | [`Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube`](Fundamentos-y-Configuracion-Inicial-de-Servicios-en-la-Nube) | 3 |
 | **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube`](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube) | 5 |
 | **Administración de Recursos de Computación en la Nube** | [`Administracion-de-Recursos-de-Computacion-en-la-Nube`](Administracion-de-Recursos-de-Computacion-en-la-Nube) |5 |
-| **Administración de Redes en la Nube** | [`Administracion-de-Redes-en-la-Nube`](Administracion-de-Redes-en-la-Nube) |2 |
-| **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios-Administrados-en-la-Nube`](Despliegue-de-Servicios-Administrados-en-la-Nube) | 2 |
+| **Administración de Redes en la Nube** | [`Administracion-de-Redes-en-la-Nube`](Administracion-de-Redes-en-la-Nube) |3 |
+| **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios-Administrados-en-la-Nube`](Despliegue-de-Servicios-Administrados-en-la-Nube) | 3 |
 
 </div>
 
@@ -78,8 +79,10 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | Recursos de Computación | [Actividad 2.1 - Alarmas de CloudWatch](Administracion-de-Recursos-de-Computacion-en-la-Nube/Actividad-2.1-Alarmas-CloudWatch) | ![CloudWatch](https://img.shields.io/badge/CloudWatch-FF4F8B?style=flat-square) ![SNS](https://img.shields.io/badge/SNS-FF4F8B?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Realizada](https://img.shields.io/badge/Realizada-0366d6?style=flat-square) |
 | Redes en la Nube | [Práctica 1 - Creación de redes con scripts](Administracion-de-Redes-en-la-Nube/Practica-1-Scripts-Crear-VPC) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Redes en la Nube | [Práctica 1 - Creación de redes públicas](Administracion-de-Redes-en-la-Nube/Practica-1-Redes-Publicas) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
+| Redes en la Nube | [Práctica 3 - Creación de redes privadas](Administracion-de-Redes-en-la-Nube/Practica-3-Redes-Privadas) | ![VPC](https://img.shields.io/badge/VPC-8C4FFF?style=flat-square) ![NAT](https://img.shields.io/badge/NAT%20Gateway-8C4FFF?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Realizada](https://img.shields.io/badge/Realizada-0366d6?style=flat-square) |
 | Despliegue de Servicios | [Práctica 1 - Despliegue con CI/CD](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD) · **código en su propio repositorio: [login-app-cicd](https://github.com/PauLopNun/login-app-cicd)** | ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white) ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![Jest](https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Despliegue de Servicios | [Práctica 2 - ELB Blue/Green y Canary](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-2-ELB-Blue-Green-Canary) | ![ELB](https://img.shields.io/badge/ELB-8C4FFF?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
+| Despliegue de Servicios | [Práctica 4 - Recogida de datos con Prometheus](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-4-Prometheus) | ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![SNS](https://img.shields.io/badge/SNS-FF4F8B?style=flat-square) | ![Realizada](https://img.shields.io/badge/Realizada-0366d6?style=flat-square) |
 
 </div>
 
@@ -111,10 +114,12 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 ├── Administracion-de-Redes-en-la-Nube/
 │   ├── Practica-1-Redes-Publicas/
 │   ├── Practica-1-Scripts-Crear-VPC/
+│   ├── Practica-3-Redes-Privadas/
 │   └── Scripting-Boto3/
 └── Despliegue-de-Servicios-Administrados-en-la-Nube/
     ├── Practica-1-Despliegue-CICD/
-    └── Practica-2-ELB-Blue-Green-Canary/
+    ├── Practica-2-ELB-Blue-Green-Canary/
+    └── Practica-4-Prometheus/
 ```
 
 Cada tarea sigue la misma organización:

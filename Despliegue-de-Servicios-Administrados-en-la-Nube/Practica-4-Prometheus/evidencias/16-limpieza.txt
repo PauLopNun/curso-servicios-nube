@@ -1,0 +1,10 @@
+
+=== Terminando instancias ===
+i-0d037e68b372ce9c4	i-000c32af6300f0421	i-09e6480459db53c89	i-04de45580ade694a5
+
+=== Borrando grupos de seguridad (primero el del nodo, que referencia al de Prometheus) ===
+sg-09008bc854667cb0b borrado
+sg-07658a09a8a1e4556 borrado
+
+=== Borrando el tema SNS (y su suscripción) ===
+arn:aws:sns:us-east-1:381492287993:alertas-prometheus borrado

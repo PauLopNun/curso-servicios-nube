@@ -1,0 +1,12 @@
+
+  - name: blackbox_alerts
+    rules:
+      # La sonda HTTP no obtiene respuesta correcta
+      - alert: WebsiteDown
+        expr: probe_success{job="blackbox"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "La web {{ $labels.instance }} no responde"
+          description: "La sonda HTTP del Blackbox Exporter falla desde hace más de 1 min."

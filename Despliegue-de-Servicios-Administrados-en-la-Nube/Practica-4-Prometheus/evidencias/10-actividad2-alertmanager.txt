@@ -1,0 +1,100 @@
+
+=== 3. Abrir el puerto 9093 en el grupo de seguridad de Prometheus ===
+------------------------------------------------------
+|            AuthorizeSecurityGroupIngress           |
++-----------------------+------------------+---------+
+|         Grupo         |     Origen       | Puerto  |
++-----------------------+------------------+---------+
+|  sg-07658a09a8a1e4556 |  213.0.87.30/32  |  9093   |
++-----------------------+------------------+---------+
+
+=== 2. Instalar Alertmanager 0.26.0 (binario, usuario y servicio) ===
+[ec2-user@172-31-23-210]$ alertmanager --version 2>&1 | head -n 1
+alertmanager, version 0.26.0 (branch: HEAD, revision: d7b4f0c7322e7151d6e3b1e31cbc15361e295d8d)
+
+=== 4. Receptor sns_configs con el ARN del tema ===
+[ec2-user@172-31-23-210]$ sudo chown -R alertmanager:alertmanager /etc/alertmanager /var/lib/alertmanager
+[ec2-user@172-31-23-210]$ cat /etc/alertmanager/alertmanager.yml
+# Alertmanager: todas las alertas van al tema SNS, que las reenvía por correo
+route:
+  receiver: correo-sns
+  group_by: ['alertname', 'instance']   # un correo por alerta e instancia
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 1h
+
+receivers:
+  - name: correo-sns
+    sns_configs:
+      - topic_arn: arn:aws:sns:us-east-1:381492287993:alertas-prometheus
+        sigv4:
+          region: us-east-1
+        send_resolved: true
+        subject: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity }} - {{ .CommonLabels.nombre }}'
+        message: |
+          {{ range .Alerts }}Alerta: {{ .Labels.alertname }}
+          Estado: {{ .Status }}
+          Severidad: {{ .Labels.severity }}
+          Instancia: {{ .Labels.instance }} ({{ .Labels.nombre }}, {{ .Labels.instance_id }})
+          Resumen: {{ .Annotations.summary }}
+          Detalle: {{ .Annotations.description }}
+          Desde: {{ .StartsAt }}
+          {{ end }}
+[ec2-user@172-31-23-210]$ amtool check-config /etc/alertmanager/alertmanager.yml
+Checking '/etc/alertmanager/alertmanager.yml'  SUCCESS
+Found:
+ - global config
+ - route
+ - 0 inhibit rules
+ - 1 receivers
+ - 0 templates
+
+[ec2-user@172-31-23-210]$ sudo systemctl daemon-reload && sudo systemctl enable --now alertmanager 2>&1; systemctl status alertmanager --no-pager | head -n 5
+Created symlink /etc/systemd/system/multi-user.target.wants/alertmanager.service → /etc/systemd/system/alertmanager.service.
+● alertmanager.service - Alertmanager
+     Loaded: loaded (/etc/systemd/system/alertmanager.service; enabled; preset: disabled)
+     Active: active (running) since Wed 2026-11-18 15:49:21 UTC; 21ms ago
+   Main PID: 10305 (alertmanager)
+      Tasks: 5 (limit: 1059)
+
+=== 5. Bloque alerting en prometheus.yml (localhost:9093) ===
+[ec2-user@172-31-23-210]$ cat /etc/prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['localhost:9093']
+
+rule_files:
+  - /etc/prometheus/alert.rules.yml
+
+scrape_configs:
+  - job_name: 'node_exporter'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+        filters:
+          - name: tag:Monitorizar
+            values: ['prometheus']
+    # Etiquetas extra a partir de los metadatos de EC2, para reconocer cada nodo
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: nombre
+      - source_labels: [__meta_ec2_instance_id]
+        target_label: instance_id
+[ec2-user@172-31-23-210]$ promtool check config /etc/prometheus/prometheus.yml
+Checking /etc/prometheus/prometheus.yml
+  SUCCESS: 1 rule files found
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+Checking /etc/prometheus/alert.rules.yml
+  SUCCESS: 1 rules found
+
+[ec2-user@172-31-23-210]$ sudo systemctl restart prometheus && systemctl is-active prometheus
+active
+[ec2-user@172-31-23-210]$ curl -s localhost:9090/api/v1/alertmanagers
+{"status":"success","data":{"activeAlertmanagers":[{"url":"http://localhost:9093/api/v2/alerts"}],"droppedAlertmanagers":[]}}
+Alertmanager: http://54.226.236.155:9093

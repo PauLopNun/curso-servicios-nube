@@ -1,0 +1,9 @@
+
+=== HighMemoryUsage: ocupar la memoria durante 5 min ===
+[ec2-user@172-31-22-219]$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:             913         170         342          10         400         596
+Swap:              0           0           0
+[ec2-user@172-31-22-219]$ sudo yum install stress -y -q; LIBRE=$(awk "/MemAvailable/ {print int(\$2*0.92/1024)}" /proc/meminfo); echo "stress --vm 1 --vm-bytes ${LIBRE}M --vm-keep --timeout 300"; stress --vm 1 --vm-bytes ${LIBRE}M --vm-keep --timeout 300
+stress --vm 1 --vm-bytes 524M --vm-keep --timeout 300
+stress: info: [27878] dispatching hogs: 0 cpu, 0 io, 1 vm, 0 hdd

@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/alert.rules.yml
+
+scrape_configs:
+  - job_name: 'node_exporter'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+        filters:
+          - name: tag:Monitorizar
+            values: ['prometheus']
+    # Etiquetas extra a partir de los metadatos de EC2, para reconocer cada nodo
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: nombre
+      - source_labels: [__meta_ec2_instance_id]
+        target_label: instance_id

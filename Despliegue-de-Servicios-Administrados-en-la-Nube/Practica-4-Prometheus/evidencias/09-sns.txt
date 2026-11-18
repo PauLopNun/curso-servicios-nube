@@ -1,0 +1,13 @@
+
+=== Tema SNS alertas-prometheus ===
+Tema: arn:aws:sns:us-east-1:381492287993:alertas-prometheus
+pending confirmation
+Confirma la suscripción desde el enlace del correo y comprueba:
+aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:381492287993:alertas-prometheus
+---------------------------------------------------------------------------------------------------------------
+|                                          ListSubscriptionsByTopic                                           |
++-------------+-----------------------------------------------------------------------------------------------+
+|  Destino    |  correo-personal@gmail.com                                                                      |
+|  Protocolo  |  email                                                                                        |
+|  Suscripcion|  arn:aws:sns:us-east-1:381492287993:alertas-prometheus:daec7bba-6be4-46e6-87f8-cfa31d7f677b   |
++-------------+-----------------------------------------------------------------------------------------------+

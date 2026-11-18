@@ -1,0 +1,10 @@
+
+=== InstanceDown: parar Node Exporter (no la instancia) ===
+[ec2-user@172-31-22-219]$ sudo systemctl stop node_exporter; systemctl is-active node_exporter
+inactive
+
+=== Dejar el nodo como estaba ===
+[ec2-user@172-31-22-219]$ sudo rm -f /var/tmp/relleno; sudo systemctl start node_exporter; systemctl is-active node_exporter; df -h /
+active
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p1  8.0G  1.7G  6.3G  22% /

@@ -1,0 +1,11 @@
+groups:
+  - name: cpu_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 70
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Uso elevado de CPU en {{ $labels.instance }}"
+          description: "Uso actual: {{ $value | humanize }} % (umbral: 70 % durante 1 min)."

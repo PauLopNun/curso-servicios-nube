@@ -1,0 +1,25 @@
+# Alertmanager: todas las alertas van al tema SNS, que las reenvía por correo
+route:
+  receiver: correo-sns
+  group_by: ['alertname', 'instance']   # un correo por alerta e instancia
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 1h
+
+receivers:
+  - name: correo-sns
+    sns_configs:
+      - topic_arn: SNS_ARN
+        sigv4:
+          region: us-east-1
+        send_resolved: true
+        subject: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity }} - {{ .CommonLabels.instance }}{{ with .CommonLabels.nombre }} ({{ . }}){{ end }}'
+        message: |
+          {{ range .Alerts }}Alerta: {{ .Labels.alertname }}
+          Estado: {{ .Status }}
+          Severidad: {{ .Labels.severity }}
+          Instancia: {{ .Labels.instance }}{{ with .Labels.nombre }} - {{ . }}{{ end }}{{ with .Labels.instance_id }} - {{ . }}{{ end }}
+          Resumen: {{ .Annotations.summary }}
+          Detalle: {{ .Annotations.description }}
+          Desde: {{ .StartsAt }}
+          {{ end }}

@@ -1,0 +1,9 @@
+
+=== Carga de CPU en ec2_a ===
+[ec2-user@172-31-18-224]$ sudo yum install stress -y 2>&1 | tail -n 3
+  stress-1.0.7-2.amzn2023.0.1.x86_64                                            
+
+Complete!
+[ec2-user@172-31-18-224]$ nproc; stress --cpu $(nproc) --timeout 300
+2
+stress: info: [25738] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd

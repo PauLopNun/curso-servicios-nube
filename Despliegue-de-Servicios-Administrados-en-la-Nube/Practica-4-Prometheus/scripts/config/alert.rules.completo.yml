@@ -1,0 +1,43 @@
+groups:
+  - name: cpu_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by (instance, nombre, instance_id) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 70
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Uso elevado de CPU en {{ $labels.instance }}"
+          description: "Uso actual: {{ $value | humanize }} % (umbral: 70 % durante 1 min)."
+
+  - name: nodo_alerts
+    rules:
+      # El target no entrega métricas: up vale 0
+      - alert: InstanceDown
+        expr: up{job="node_exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "El nodo {{ $labels.instance }} no responde"
+          description: "Prometheus no puede recoger métricas de {{ $labels.nombre }} desde hace más de 1 min."
+
+      # Memoria usada = 1 - disponible / total
+      - alert: HighMemoryUsage
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Uso elevado de memoria en {{ $labels.instance }}"
+          description: "Memoria usada: {{ $value | humanize }} % (umbral: 80 % durante 2 min)."
+
+      # Disco ocupado en / = 1 - libre / tamaño
+      - alert: LowDiskSpace
+        expr: (1 - node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Poco espacio en / en {{ $labels.instance }}"
+          description: "Disco ocupado: {{ $value | humanize }} % (umbral: 80 % durante 2 min)."

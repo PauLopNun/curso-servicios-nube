@@ -1,0 +1,33 @@
+
+=== Instalar Blackbox Exporter 0.24.0 (binario, usuario y servicio) ===
+Created symlink /etc/systemd/system/multi-user.target.wants/blackbox_exporter.service → /etc/systemd/system/blackbox_exporter.service.
+[ec2-user@172-31-26-231]$ systemctl status blackbox_exporter --no-pager | head -n 3
+● blackbox_exporter.service - Blackbox Exporter
+     Loaded: loaded (/etc/systemd/system/blackbox_exporter.service; enabled; preset: disabled)
+     Active: active (running) since Wed 2026-11-18 17:34:42 UTC; 7s ago
+[ec2-user@172-31-26-231]$ head -n 8 /etc/blackbox/blackbox.yml
+modules:
+  http_2xx:
+    prober: http
+    http:
+      preferred_ip_protocol: "ip4"
+  http_post_2xx:
+    prober: http
+    http:
+[ec2-user@172-31-26-231]$ curl -s 'localhost:9115/probe?module=http_2xx&target=https://prometheus.io' | grep -E '^probe_(success|http_status_code|duration_seconds)'
+probe_duration_seconds 0.904743884
+probe_http_status_code 200
+probe_success 1
+
+=== Job blackbox en prometheus.yml y alerta WebsiteDown ===
+[ec2-user@172-31-26-231]$ sudo chown prometheus:prometheus /etc/prometheus/*.yml
+[ec2-user@172-31-26-231]$ promtool check config /etc/prometheus/prometheus.yml
+Checking /etc/prometheus/prometheus.yml
+  SUCCESS: 1 rule files found
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+Checking /etc/prometheus/alert.rules.yml
+  SUCCESS: 5 rules found
+
+[ec2-user@172-31-26-231]$ sudo systemctl restart prometheus && systemctl is-active prometheus
+active

@@ -1,0 +1,24 @@
+
+=== prometheus: servicio y configuración ===
+[ec2-user@172-31-23-210]$ systemctl status prometheus --no-pager | head -n 6
+● prometheus.service - Prometheus Monitoring System
+     Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; preset: disabled)
+     Active: active (running) since Wed 2026-11-18 15:30:51 UTC; 1min 24s ago
+   Main PID: 2107 (prometheus)
+      Tasks: 7 (limit: 1059)
+     Memory: 19.7M
+[ec2-user@172-31-23-210]$ cat /etc/prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['172.31.18.224:9100']
+[ec2-user@172-31-23-210]$ promtool check config /etc/prometheus/prometheus.yml
+Checking /etc/prometheus/prometheus.yml
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+[ec2-user@172-31-23-210]$ curl -s localhost:9090/api/v1/targets | python3 -c 'import json,sys; [print(t["labels"]["job"], t["scrapeUrl"], t["health"]) for t in json.load(sys.stdin)["data"]["activeTargets"]]'
+node_exporter http://172.31.18.224:9100/metrics up

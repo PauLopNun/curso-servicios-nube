@@ -1,0 +1,32 @@
+
+=== ec2_a: Node Exporter ===
+[ec2-user@172-31-18-224]$ systemctl status node_exporter --no-pager | head -n 6
+● node_exporter.service - Node Exporter
+     Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; preset: disabled)
+     Active: active (running) since Wed 2026-11-18 15:30:15 UTC; 1min 35s ago
+   Main PID: 2107 (node_exporter)
+      Tasks: 4 (limit: 1059)
+     Memory: 6.2M
+[ec2-user@172-31-18-224]$ curl -s http://localhost:9100/metrics | head -n 20
+# HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 1.7133e-05
+go_gc_duration_seconds{quantile="0.25"} 1.7133e-05
+go_gc_duration_seconds{quantile="0.5"} 4.6394e-05
+go_gc_duration_seconds{quantile="0.75"} 4.6394e-05
+go_gc_duration_seconds{quantile="1"} 4.6394e-05
+go_gc_duration_seconds_sum 6.3527e-05
+go_gc_duration_seconds_count 2
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 8
+# HELP go_info Information about the Go environment.
+# TYPE go_info gauge
+go_info{version="go1.20.6"} 1
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 2.403416e+06
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
+# TYPE go_memstats_alloc_bytes_total counter
+[ec2-user@172-31-18-224]$ curl -s http://localhost:9100/metrics | grep -c '^node_'
+478
