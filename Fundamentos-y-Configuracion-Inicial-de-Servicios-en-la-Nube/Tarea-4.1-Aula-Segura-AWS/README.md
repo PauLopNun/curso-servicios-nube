@@ -37,7 +37,11 @@ El `labsuser.pem` guardado era de otra sesión del laboratorio, así que los sal
 
 ## Entrega
 
-[`entrega/fci_t4.1_lopez_nunez.zip`](entrega/fci_t4.1_lopez_nunez.zip) con el [informe](entrega/informe_fci_t4.1_lopez_nunez.pdf) (12 preguntas y tabla consola frente a CLI), las capturas y los scripts.
+[`entrega/fci_t4.1_lopez_nunez.zip`](entrega/fci_t4.1_lopez_nunez.zip) con:
+
+- la [memoria paso a paso](entrega/memoria_fci_t4.1_lopez_nunez.pdf), con los comandos y las 20 capturas de todas las fases;
+- el [informe](entrega/informe_fci_t4.1_lopez_nunez.pdf) de 2 páginas con las 12 preguntas y la tabla consola frente a CLI;
+- las capturas que pide el guion y los scripts.
 
 ## Contenido de esta carpeta
 
@@ -46,7 +50,7 @@ El `labsuser.pem` guardado era de otra sesión del laboratorio, así que los sal
 | [`scripts/`](scripts) | `index.html`, User Data de las dos instancias, política del bucket, dashboard y `reto.sh` |
 | [`evidencias/`](evidencias) | Comandos y salidas de las fases 4 a 7 y datos de los recursos |
 | [`capturas/`](capturas) | Capturas de la consola y del terminal |
-| [`entrega/`](entrega) | Informe en DOCX y PDF y el zip entregado |
+| [`entrega/`](entrega) | Memoria e informe en DOCX y PDF y el zip entregado |
 
 ---
 
