@@ -1,0 +1,4 @@
+$ aws cloudwatch put-dashboard --dashboard-name aula-segura --dashboard-body file://dashboard-aula-segura.json
+{
+    "DashboardValidationMessages": []
+}

@@ -1,0 +1,13 @@
+# labsuser.pem de esta sesión no coincidía con vockey: se usa una clave temporal enviada con EC2 Instance Connect
+$ aws ec2-instance-connect send-ssh-public-key --instance-id <ec2-web / ec2-privada> --instance-os-user ec2-user --ssh-public-key file://eic.pub
+$ ssh -i eic -o ProxyCommand="ssh -i eic -W %h:%p ec2-user@3.93.51.151" ec2-user@10.20.2.82
+[ec2-user@ip-10-20-2-82 ~]$ curl -m 5 -sI https://example.com ; echo "codigo: $?"
+codigo: 28
+[ec2-user@ip-10-20-2-82 ~]$ aws s3 ls s3://practica-lopez-26119/public/
+2026-11-19 17:02:10          0 
+2026-11-19 17:03:39        475 index.html
+[ec2-user@ip-10-20-2-82 ~]$ aws s3 ls s3://practica-lopez-26119/private/
+2026-11-19 17:02:54          0 
+2026-11-19 17:12:08         69 informe-i-0d56ce9361a35cd7e.txt
+[ec2-user@ip-10-20-2-82 ~]$ aws s3 cp s3://practica-lopez-26119/private/informe-i-0d56ce9361a35cd7e.txt -
+Informe de i-0d56ce9361a35cd7e generado Thu Nov 19 17:12:05 UTC 2026

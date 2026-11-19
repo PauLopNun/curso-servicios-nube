@@ -1,0 +1,30 @@
+$ export AWS_DEFAULT_REGION=us-east-1
+$ BUCKET=practica-lopez-26119
+$ SN_PRIV=$(aws ec2 describe-subnets --filters Name=tag:Name,Values=sn-privada --query 'Subnets[0].SubnetId' --output text)
+$ SG_PRIV=$(aws ec2 describe-security-groups --filters Name=group-name,Values=sgr-privada --query 'SecurityGroups[0].GroupId' --output text)
+$ AMI=$(aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 --query Parameter.Value --output text)
+$ echo $SN_PRIV $SG_PRIV $AMI
+subnet-031b21a5d29a987aa sg-0df3bf515a081495b ami-0add9dc62cfab3c11
+
+$ cp ud-privada.sh /tmp/ud-privada.sh && sed -i "s/__BUCKET__/$BUCKET/" /tmp/ud-privada.sh && cat /tmp/ud-privada.sh
+#!/bin/bash
+exec > /var/log/userdata-practica.log 2>&1
+export AWS_DEFAULT_REGION=us-east-1
+TOKEN=$(curl -sX PUT http://169.254.169.254/latest/api/token \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 60")
+IID=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/instance-id)
+echo "Informe de $IID generado $(date -u)" > /tmp/informe.txt
+aws s3 cp /tmp/informe.txt s3://practica-lopez-26119/private/informe-$IID.txt
+
+$ ID_PRIV=$(aws ec2 run-instances --image-id $AMI --instance-type t3.micro \
+  --key-name vockey --subnet-id $SN_PRIV --security-group-ids $SG_PRIV \
+  --iam-instance-profile Name=LabInstanceProfile \
+  --metadata-options HttpTokens=required \
+  --user-data file:///tmp/ud-privada.sh \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=ec2-privada}]' \
+  --query 'Instances[0].InstanceId' --output text)
+$ aws ec2 wait instance-running --instance-ids $ID_PRIV
+$ IP_PRIV=$(aws ec2 describe-instances --instance-ids $ID_PRIV --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text)
+$ echo $ID_PRIV $IP_PRIV
+i-0d56ce9361a35cd7e 10.20.2.82

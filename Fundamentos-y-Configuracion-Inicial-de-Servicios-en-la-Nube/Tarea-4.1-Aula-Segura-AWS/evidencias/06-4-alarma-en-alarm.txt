@@ -1,0 +1,2 @@
+$ aws cloudwatch describe-alarms --alarm-names cpu-alta-ec2-web --query 'MetricAlarms[0].[StateValue,StateReason]' --output text
+ALARM	Threshold Crossed: 2 datapoints [100.0 (19/11/26 17:20:00), 67.49499666444297 (19/11/26 17:19:00)] were greater than the threshold (60.0).

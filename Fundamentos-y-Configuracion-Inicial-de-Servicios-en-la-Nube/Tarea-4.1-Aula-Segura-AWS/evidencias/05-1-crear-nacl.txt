@@ -1,0 +1,22 @@
+$ NACL=$(aws ec2 create-network-acl --vpc-id vpc-0971bc47c782e6f04 --tag-specifications 'ResourceType=network-acl,Tags=[{Key=Name,Value=nacl-privada}]' --query NetworkAcl.NetworkAclId --output text)
+$ echo $NACL
+acl-040642651fb30408b
+$ aws ec2 create-network-acl-entry --network-acl-id $NACL --ingress --rule-number 100 --protocol tcp --port-range From=22,To=22 --cidr-block 10.20.1.0/24 --rule-action allow
+$ aws ec2 create-network-acl-entry --network-acl-id $NACL --ingress --rule-number 110 --protocol tcp --port-range From=1024,To=65535 --cidr-block 0.0.0.0/0 --rule-action allow
+$ aws ec2 create-network-acl-entry --network-acl-id $NACL --egress --rule-number 100 --protocol tcp --port-range From=443,To=443 --cidr-block 0.0.0.0/0 --rule-action allow
+$ aws ec2 create-network-acl-entry --network-acl-id $NACL --egress --rule-number 110 --protocol tcp --port-range From=1024,To=65535 --cidr-block 10.20.1.0/24 --rule-action allow
+# Asociar sn-privada: se sustituye su asociación actual (la NACL por defecto)
+$ ASOC=$(aws ec2 describe-network-acls --filters Name=association.subnet-id,Values=subnet-031b21a5d29a987aa --query "NetworkAcls[0].Associations[?SubnetId=='subnet-031b21a5d29a987aa'].NetworkAclAssociationId" --output text)
+$ aws ec2 replace-network-acl-association --association-id $ASOC --network-acl-id $NACL --output text
+aclassoc-050b4f371152a1af1
+$ aws ec2 describe-network-acls --network-acl-ids $NACL --query 'NetworkAcls[0].Entries[].[Egress,RuleNumber,Protocol,PortRange.From,PortRange.To,CidrBlock,RuleAction]' --output table
+--------------------------------------------------------------------
+|                        DescribeNetworkAcls                       |
++-------+--------+-----+-------+--------+----------------+---------+
+|  True |  100   |  6  |  443  |  443   |  0.0.0.0/0     |  allow  |
+|  True |  110   |  6  |  1024 |  65535 |  10.20.1.0/24  |  allow  |
+|  True |  32767 |  -1 |  None |  None  |  0.0.0.0/0     |  deny   |
+|  False|  100   |  6  |  22   |  22    |  10.20.1.0/24  |  allow  |
+|  False|  110   |  6  |  1024 |  65535 |  0.0.0.0/0     |  allow  |
+|  False|  32767 |  -1 |  None |  None  |  0.0.0.0/0     |  deny   |
++-------+--------+-----+-------+--------+----------------+---------+

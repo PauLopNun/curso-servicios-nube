@@ -1,0 +1,11 @@
+{
+  "widgets": [
+    {"type": "metric", "x": 0, "y": 0, "width": 12, "height": 6,
+     "properties": {"title": "CPUUtilization ec2-web / ec2-privada", "region": "us-east-1", "view": "timeSeries", "stat": "Average", "period": 60,
+       "metrics": [["AWS/EC2", "CPUUtilization", "InstanceId", "i-00e81041ac9bb105a", {"label": "ec2-web"}],
+                   ["AWS/EC2", "CPUUtilization", "InstanceId", "i-0d56ce9361a35cd7e", {"label": "ec2-privada"}]]}},
+    {"type": "metric", "x": 12, "y": 0, "width": 12, "height": 6,
+     "properties": {"title": "NetworkIn ec2-web", "region": "us-east-1", "view": "timeSeries", "stat": "Average", "period": 60,
+       "metrics": [["AWS/EC2", "NetworkIn", "InstanceId", "i-00e81041ac9bb105a", {"label": "ec2-web"}]]}}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SoloTLS",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": ["arn:aws:s3:::practica-lopez-26119", "arn:aws:s3:::practica-lopez-26119/*"],
+      "Condition": { "Bool": { "aws:SecureTransport": "false" } }
+    },
+    {
+      "Sid": "PrivateSoloDesdeEndpoint",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "arn:aws:s3:::practica-lopez-26119/private/*",
+      "Condition": { "StringNotEquals": { "aws:SourceVpce": "vpce-0ac7e414492dcd40b" } }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+[ec2-user@ip-10-20-1-196 ~]$ pkill yes
+[ec2-user@ip-10-20-1-196 ~]$ pgrep yes || echo sin procesos yes
+sin procesos yes
+$ aws cloudwatch describe-alarms --alarm-names cpu-alta-ec2-web --query 'MetricAlarms[0].[StateValue,StateReason]' --output text
+OK	Threshold Crossed: 1 datapoint [38.50393306277869 (19/11/26 17:23:00)] was not greater than the threshold (60.0).

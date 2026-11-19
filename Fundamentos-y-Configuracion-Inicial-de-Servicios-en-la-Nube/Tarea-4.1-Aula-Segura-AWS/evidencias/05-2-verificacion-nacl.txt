@@ -1,0 +1,27 @@
+## Verificación con nacl-privada asociada
+# SSH a ec2-privada con salto por ec2-web (22 de entrada, efímeros de salida)
+[ec2-user@ip-10-20-2-82 ~]$ hostname -I
+10.20.2.82 
+[ec2-user@ip-10-20-2-82 ~]$ timeout 15 aws s3 ls s3://practica-lopez-26119/public/ ; echo codigo: $?
+2026-11-19 17:02:10          0 
+2026-11-19 17:03:39        475 index.html
+codigo: 0
+# ping desde ec2-web: falla porque la NACL no tiene regla ICMP
+[ec2-user@ip-10-20-1-196 ~]$ ping -c 3 -W 2 10.20.2.82
+PING 10.20.2.82 (10.20.2.82) 56(84) bytes of data.
+
+--- 10.20.2.82 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2095ms
+
+
+## Reflexión: quitar temporalmente la regla de entrada 110
+$ aws ec2 delete-network-acl-entry --network-acl-id acl-040642651fb30408b --ingress --rule-number 110
+[ec2-user@ip-10-20-2-82 ~]$ echo el SSH sigue funcionando
+el SSH sigue funcionando
+[ec2-user@ip-10-20-2-82 ~]$ timeout 15 aws s3 ls s3://practica-lopez-26119/public/ ; echo codigo: $?
+codigo: 124
+$ aws ec2 create-network-acl-entry --network-acl-id acl-040642651fb30408b --ingress --rule-number 110 --protocol tcp --port-range From=1024,To=65535 --cidr-block 0.0.0.0/0 --rule-action allow
+[ec2-user@ip-10-20-2-82 ~]$ timeout 15 aws s3 ls s3://practica-lopez-26119/public/ ; echo codigo: $?
+2026-11-19 17:02:10          0 
+2026-11-19 17:03:39        475 index.html
+codigo: 0

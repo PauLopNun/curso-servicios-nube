@@ -1,0 +1,24 @@
+$ ID_WEB=$(aws ec2 describe-instances --filters Name=tag:Name,Values=ec2-web Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
+$ aws ec2 monitor-instances --instance-ids $ID_WEB
+{
+    "InstanceMonitorings": [
+        {
+            "InstanceId": "i-00e81041ac9bb105a",
+            "Monitoring": {
+                "State": "pending"
+            }
+        }
+    ]
+}
+$ echo $ID_WEB
+i-00e81041ac9bb105a
+
+$ aws cloudwatch put-metric-alarm \
+  --alarm-name cpu-alta-ec2-web \
+  --namespace AWS/EC2 --metric-name CPUUtilization \
+  --dimensions Name=InstanceId,Value=$ID_WEB \
+  --statistic Average --period 60 --evaluation-periods 2 \
+  --threshold 60 --comparison-operator GreaterThanThreshold \
+  --treat-missing-data notBreaching
+$ aws cloudwatch describe-alarms --alarm-names cpu-alta-ec2-web --query 'MetricAlarms[0].StateValue' --output text
+INSUFFICIENT_DATA

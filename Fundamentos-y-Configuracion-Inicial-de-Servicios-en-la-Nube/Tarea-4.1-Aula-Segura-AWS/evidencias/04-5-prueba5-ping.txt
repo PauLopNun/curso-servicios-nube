@@ -1,0 +1,9 @@
+[ec2-user@ip-10-20-1-196 ~]$ ping -c 3 10.20.2.82
+PING 10.20.2.82 (10.20.2.82) 56(84) bytes of data.
+64 bytes from 10.20.2.82: icmp_seq=1 ttl=127 time=0.306 ms
+64 bytes from 10.20.2.82: icmp_seq=2 ttl=127 time=0.276 ms
+64 bytes from 10.20.2.82: icmp_seq=3 ttl=127 time=0.281 ms
+
+--- 10.20.2.82 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2100ms
+rtt min/avg/max/mdev = 0.276/0.287/0.306/0.013 ms

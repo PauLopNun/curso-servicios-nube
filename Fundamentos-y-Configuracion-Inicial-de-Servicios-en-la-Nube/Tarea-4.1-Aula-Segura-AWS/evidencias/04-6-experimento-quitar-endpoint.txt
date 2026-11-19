@@ -1,0 +1,39 @@
+## Antes: rutas de rt-privada
+$ aws ec2 describe-route-tables --route-table-ids rtb-0048b1ab73883ae92 --query 'RouteTables[0].Routes[].[DestinationCidrBlock||DestinationPrefixListId,GatewayId]' --output table
+--------------------------------------------
+|            DescribeRouteTables           |
++---------------+--------------------------+
+|  10.20.0.0/16 |  local                   |
+|  pl-63a5400a  |  vpce-0ac7e414492dcd40b  |
++---------------+--------------------------+
+
+## 1. Quitar la asociación del endpoint con rt-privada
+$ aws ec2 modify-vpc-endpoint --vpc-endpoint-id vpce-0ac7e414492dcd40b --remove-route-table-ids rtb-0048b1ab73883ae92
+True
+$ aws ec2 describe-route-tables ... (rt-privada)
+---------------------------
+|   DescribeRouteTables   |
++---------------+---------+
+|  10.20.0.0/16 |  local  |
++---------------+---------+
+
+## 2. Desde ec2-privada: S3 ya no es alcanzable
+[ec2-user@ip-10-20-2-82 ~]$ timeout 15 aws s3 ls s3://practica-lopez-26119/public/ ; echo codigo: $?
+codigo: 124
+
+## 3. Restaurar la asociación
+$ aws ec2 modify-vpc-endpoint --vpc-endpoint-id vpce-0ac7e414492dcd40b --add-route-table-ids rtb-0048b1ab73883ae92
+True
+$ aws ec2 describe-route-tables ... (rt-privada)
+--------------------------------------------
+|            DescribeRouteTables           |
++---------------+--------------------------+
+|  10.20.0.0/16 |  local                   |
+|  pl-63a5400a  |  vpce-0ac7e414492dcd40b  |
++---------------+--------------------------+
+
+## 4. Desde ec2-privada: vuelve a funcionar
+[ec2-user@ip-10-20-2-82 ~]$ timeout 15 aws s3 ls s3://practica-lopez-26119/public/ ; echo codigo: $?
+2026-11-19 17:02:10          0 
+2026-11-19 17:03:39        475 index.html
+codigo: 0

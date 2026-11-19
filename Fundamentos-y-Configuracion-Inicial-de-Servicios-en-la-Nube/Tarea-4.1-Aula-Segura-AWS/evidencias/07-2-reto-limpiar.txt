@@ -1,0 +1,11 @@
+$ curl -s http://3.90.247.41
+<h1>ec2-reto</h1><p>Servidor: ip-10-30-1-70.ec2.internal</p>
+
+$ ./reto.sh limpiar
+{
+    "Return": true,
+    "GroupId": "sg-097bf8d7a391348fe"
+}
+vpc-reto y sus recursos eliminados
+$ aws ec2 describe-vpcs --filters Name=tag:Name,Values=vpc-reto --query 'Vpcs[].VpcId' --output text
+(sin resultados: vpc-reto eliminada)

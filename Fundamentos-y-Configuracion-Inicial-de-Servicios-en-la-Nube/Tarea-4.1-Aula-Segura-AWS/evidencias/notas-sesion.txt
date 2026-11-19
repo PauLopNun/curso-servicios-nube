@@ -1,0 +1,11 @@
+Datos de la práctica (Learner Lab, cuenta 992382802532, us-east-1)
+Bucket: practica-lopez-26119
+VPC endpoint (vpce-s3): vpce-0ac7e414492dcd40b
+Lista de prefijos de S3 en rt-privada: pl-63a5400a
+IP pública de origen (regla SSH de sgr-web): 213.0.87.16/32
+vpc-practica: vpc-0971bc47c782e6f04
+sn-publica: subnet-006468dfe4c806bfc   sn-privada: subnet-031b21a5d29a987aa
+igw-practica: igw-09ef4073e76de49c3
+rt-publica: rtb-0624d983cb080c329   rt-privada: rtb-0048b1ab73883ae92
+sgr-web: sg-074b3ef73acbbd85f   sgr-privada: sg-0df3bf515a081495b
+ec2-web: i-00e81041ac9bb105a  IP pública 3.93.51.151  IP privada 10.20.1.196

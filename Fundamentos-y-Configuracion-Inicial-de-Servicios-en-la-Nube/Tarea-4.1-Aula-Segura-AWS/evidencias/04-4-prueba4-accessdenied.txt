@@ -1,0 +1,6 @@
+$ aws s3 cp s3://$BUCKET/public/index.html /tmp/index.html
+Completed 475 Bytes/475 Bytes (1.0 KiB/s) with 1 file(s) remainingdownload: s3://practica-lopez-26119/public/index.html to ../../../../../tmp/index.html
+
+$ aws s3api get-object --bucket $BUCKET --key private/informe-i-0d56ce9361a35cd7e.txt /tmp/x.txt
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the GetObject operation: User: arn:aws:sts::992382802532:assumed-role/voclabs/user5525906=PAU_LOPEZ_NU__EZ is not authorized to perform: s3:GetObject on resource: "arn:aws:s3:::practica-lopez-26119/private/informe-i-0d56ce9361a35cd7e.txt" with an explicit deny in a resource-based policy
