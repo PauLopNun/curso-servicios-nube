@@ -19,7 +19,7 @@ Crear un volumen EBS, conectarlo a la instancia **Lab**, darle un sistema de arc
 
 ## Entrega (Tarea 2.1)
 
-El laboratorio se repitió desde la consola el 18/11/2026 para la Tarea 2.1, con 14 capturas del proceso (carpeta [`capturas/`](capturas)) y el documento [`entrega/ebs_t21_lopez_nunez.pdf`](entrega/ebs_t21_lopez_nunez.pdf).
+El laboratorio se repitió desde la consola el 18/11/2026 para la Tarea 2.1, con 14 capturas del proceso (carpeta [`capturas/`](capturas)) y el documento [`entrega/ebs_t2.1_lopez_nunez.pdf`](entrega/ebs_t2.1_lopez_nunez.pdf).
 
 ## Primera realización (API y SSM Run Command)
 
