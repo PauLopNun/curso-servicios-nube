@@ -2,7 +2,7 @@
 
 - Plataforma: AWS Academy (laboratorio guiado, se corrige con el botón Submit del propio laboratorio)
 - Duración aproximada: 30 minutos
-- Sin entregable en Aules
+- Entrega en Aules como Tarea 2.1 (Trabajando con EBS): documento con los pasos y capturas
 
 Crear un volumen EBS, conectarlo a una instancia, darle un sistema de archivos, hacer un snapshot y restaurarlo en un volumen nuevo.
 
