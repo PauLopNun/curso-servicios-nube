@@ -1,0 +1,40 @@
+## 1-2. CloudWatch y terminar instancias
+$ aws cloudwatch delete-alarms --alarm-names cpu-alta-ec2-web
+$ aws cloudwatch delete-dashboards --dashboard-names aula-segura
+$ aws ec2 unmonitor-instances --instance-ids i-00e81041ac9bb105a --query 'InstanceMonitorings[].Monitoring.State' --output text
+disabling
+$ aws ec2 terminate-instances --instance-ids i-00e81041ac9bb105a i-0d56ce9361a35cd7e --query 'TerminatingInstances[].CurrentState.Name' --output text
+shutting-down	shutting-down
+$ aws ec2 wait instance-terminated --instance-ids i-00e81041ac9bb105a i-0d56ce9361a35cd7e
+## 3. Endpoint
+$ aws ec2 delete-vpc-endpoints --vpc-endpoint-ids vpce-0ac7e414492dcd40b --query 'Unsuccessful' --output text
+## 4. Bucket
+$ aws s3 rb s3://practica-lopez-26119 --force
+delete: s3://practica-lopez-26119/public/index.html
+delete: s3://practica-lopez-26119/public/
+delete: s3://practica-lopez-26119/private/
+delete: s3://practica-lopez-26119/private/informe-i-0d56ce9361a35cd7e.txt
+remove_bucket: practica-lopez-26119
+## 5. Subredes
+$ aws ec2 delete-subnet --subnet-id subnet-006468dfe4c806bfc
+$ aws ec2 delete-subnet --subnet-id subnet-031b21a5d29a987aa
+## 6. NACL y tablas de rutas
+$ aws ec2 delete-network-acl --network-acl-id acl-040642651fb30408b
+$ aws ec2 delete-route-table --route-table-id rtb-0624d983cb080c329
+$ aws ec2 delete-route-table --route-table-id rtb-0048b1ab73883ae92
+## 7. Internet Gateway
+$ aws ec2 detach-internet-gateway --internet-gateway-id igw-09ef4073e76de49c3 --vpc-id vpc-0971bc47c782e6f04
+$ aws ec2 delete-internet-gateway --internet-gateway-id igw-09ef4073e76de49c3
+## 8. Security Groups (primero sgr-privada)
+$ aws ec2 delete-security-group --group-id sg-0df3bf515a081495b --output text
+sg-0df3bf515a081495b	True
+$ aws ec2 delete-security-group --group-id sg-074b3ef73acbbd85f --output text
+sg-074b3ef73acbbd85f	True
+## 9. VPC
+$ aws ec2 delete-vpc --vpc-id vpc-0971bc47c782e6f04
+## Comprobación
+$ aws ec2 describe-vpcs --query 'Vpcs[].[VpcId,CidrBlock,IsDefault]' --output text
+vpc-006763309f95d0ebc	172.31.0.0/16	True
+$ aws ec2 describe-instances --filters Name=instance-state-name,Values=pending,running,stopped --query 'Reservations[].Instances[].InstanceId' --output text
+$ aws s3 ls | grep practica || echo 'sin buckets de la práctica'
+sin buckets de la práctica

@@ -31,6 +31,7 @@ Hecho el 19/11/2026 en el Learner Lab (us-east-1). Las fases 1 a 3 por consola y
 | 5. NACL | `nacl-privada` con 22 y efímeros de entrada, 443 y efímeros de salida. El ping deja de funcionar y, sin la regla 110 de entrada, S3 falla pero el SSH no |
 | 6. CloudWatch | Monitorización detallada, [dashboard](scripts/dashboard-aula-segura.json) `aula-segura` y alarma `cpu-alta-ec2-web`, que pasa a ALARM con `yes` en los dos núcleos y vuelve a OK |
 | 7. Reto | [`reto.sh`](scripts/reto.sh) crea `vpc-reto` y `ec2-reto` de principio a fin y `./reto.sh limpiar` lo borra todo |
+| Limpieza | Todo borrado en el orden del guion: instancias, CloudWatch, endpoint, bucket, subredes, NACL, tablas, IGW, SG y VPC ([evidencia](evidencias/07-3-limpieza.txt)) |
 
 El `labsuser.pem` guardado era de otra sesión del laboratorio, así que los saltos SSH se hicieron con una clave temporal enviada con EC2 Instance Connect.
 
