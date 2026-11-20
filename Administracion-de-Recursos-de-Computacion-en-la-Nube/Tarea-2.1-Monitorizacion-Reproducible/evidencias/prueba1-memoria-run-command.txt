@@ -1,0 +1,16 @@
+Run Command AWS-RunShellScript en web-pln-2 (CommandId 776513ba-2b92-40c3-9acf-37f3aa3a566b) - Estado: Success
+
+               total        used        free      shared  buff/cache   available
+Mem:             908         340          89           3         589         567
+Swap:              0           0           0
+Disponible: 567 MB. Reservo 447 MB
+stress-ng: info:  [1757] setting to a 6 mins run per stressor
+stress-ng: info:  [1757] dispatching hogs: 1 vm
+stress-ng: info:  [1759] vm: using 447MB per stressor instance
+               total        used        free      shared  buff/cache   available
+Mem:             908         781          90           3         145         127
+Swap:              0           0           0
+ 17:11:39 up  1:22,  0 users,  load average: 0.06, 0.02, 0.00
+stress-ng: info:  [1757] passed: 1: vm (1)
+stress-ng: info:  [1757] failed: 0
+stress-ng: info:  [1757] successful run completed in 6 mins

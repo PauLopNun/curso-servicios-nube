@@ -18,6 +18,7 @@ Gestión de instancias EC2: tipos de instancia, ciclo de vida y automatización 
 | UD01 | [Tarea 1.2 - WordPress en dos capas](Tarea-1.2-WordPress-Dos-Capas) | WordPress con capa web y capa de datos MariaDB en instancias EC2 separadas |
 | UD01 | [Tarea 1.3 - Despliegue automatizado reproducible](Tarea-1.3-Despliegue-Reproducible-Webmin) | Servidor Webmin reproducible con plantilla versionada, datos de usuario e IMDSv2 |
 | UD02 | [Actividad 2.1 - Alarmas de CloudWatch](Actividad-2.1-Alarmas-CloudWatch) | Métricas, alarmas con SNS, recuperación, reinicio, comprobación de la aplicación y panel |
+| UD02 | [Tarea 2.1 - Monitorización reproducible](Tarea-2.1-Monitorizacion-Reproducible) | Agente de CloudWatch desde el Almacén de parámetros, plantilla, alarmas por script y pruebas con Run Command |
 
 ---
 

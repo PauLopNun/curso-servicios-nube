@@ -1,0 +1,32 @@
+{
+  "widgets": [
+    {
+      "type": "metric", "x": 0, "y": 0, "width": 12, "height": 6,
+      "properties": {
+        "title": "Memoria usada (%) - web-pln y web-pln-2",
+        "region": "us-east-1", "view": "timeSeries", "stacked": false,
+        "stat": "Average", "period": 60,
+        "metrics": [
+          ["CWAgent", "mem_used_percent", "InstanceId", "i-0e518058ff4b32bea", {"label": "web-pln"}],
+          ["CWAgent", "mem_used_percent", "InstanceId", "i-0b949704807570584", {"label": "web-pln-2"}]
+        ],
+        "annotations": {"horizontal": [{"label": "Umbral 70 %", "value": 70}]},
+        "yAxis": {"left": {"min": 0, "max": 100}}
+      }
+    },
+    {
+      "type": "alarm", "x": 12, "y": 0, "width": 12, "height": 6,
+      "properties": {
+        "title": "Estado de las seis alarmas",
+        "alarms": [
+          "arn:aws:cloudwatch:us-east-1:992382802532:alarm:web-pln-cpu",
+          "arn:aws:cloudwatch:us-east-1:992382802532:alarm:web-pln-mem",
+          "arn:aws:cloudwatch:us-east-1:992382802532:alarm:web-pln-disco",
+          "arn:aws:cloudwatch:us-east-1:992382802532:alarm:web-pln-2-cpu",
+          "arn:aws:cloudwatch:us-east-1:992382802532:alarm:web-pln-2-mem",
+          "arn:aws:cloudwatch:us-east-1:992382802532:alarm:web-pln-2-disco"
+        ]
+      }
+    }
+  ]
+}

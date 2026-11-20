@@ -1,0 +1,11 @@
+Run Command AWS-RunShellScript en web-pln-2 (CommandId 5b32cafa-78ec-48b5-9ef9-fbfa58653a47) - Estado: Success
+
+Total: 6770 MB. Usado: 2606 MB. Ocupo 3622 MB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       6.7G  6.1G  526M  93% /
+
+Alarma web-pln-2-disco en ALARM: "Threshold Crossed: 1 out of the last 1 datapoints [92.21 (20/11/26 17:18:00)] was greater than the threshold (85.0)"
+
+Run Command: rm /var/tmp/relleno; df -h /  - Estado: Success
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       6.7G  2.6G  4.1G  39% /
