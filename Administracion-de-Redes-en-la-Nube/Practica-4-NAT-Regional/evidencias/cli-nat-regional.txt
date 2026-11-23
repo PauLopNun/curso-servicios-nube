@@ -1,0 +1,12 @@
+Salida de scripts/nat_regional.sh en CloudShell (23/11/2026). En esta ejecución la espera tras asociar la tabla era de 15 s.
+
+Antes del NAT:            privada-A -> SIN-SALIDA   privada-B -> SIN-SALIDA
+NAT nat-11e3d906737b9f9f8 creado solo con --vpc-id y --availability-mode regional
+Modo regional, estado available, AutoZonas enabled, tabla del NAT rtb-0cfd801306f8b38f1
+NAT creado, sin rutas:    privada-A -> SIN-SALIDA
+Tabla privada única rtb-0c2feff0d6d2ec7ac asociada a las dos subredes privadas
+A los 15 s de asociarla:  privada-A -> SIN-SALIDA   privada-B -> SIN-SALIDA (la ruta aún se estaba aplicando)
+Al repetir la prueba:     172.16.64.100 -> 3.231.180.190   172.16.80.100 -> 34.231.141.239
+IP del NAT: us-east-1a 3.231.180.190, us-east-1b 34.231.141.239
+
+Por eso el script del repo espera ahora 60 s antes de la comprobación final.

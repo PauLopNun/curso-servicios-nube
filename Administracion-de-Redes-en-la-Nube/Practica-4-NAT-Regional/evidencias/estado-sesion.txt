@@ -1,0 +1,25 @@
+Práctica 4 - NAT Gateway regional (Learner Lab 197861, cuenta 992382802532, us-east-1)
+vpc natreg-vpc: vpc-079a7ce76c1ffdf87
+igw: igw-02b952f4fa78860e6
+nat-regional: nat-1cad5317501499df3   tabla propia: rtb-0429591914cd3bd11
+rtb privada 1a: rtb-0041ebef2bb465b67   rtb privada 1b: rtb-08faa81d639c90ad7
+sgbastion: sg-079b92e892332aea2   sgprivadas: sg-03f85c1895cadc1de
+bastion: i-028619388f07a97c0 (172.16.0.100)
+privada-A: i-0899bab0ef6fbcdb6 (172.16.64.100)
+privada-B: i-0abfbe306693d79e4 (172.16.80.100)
+
+Salida a Internet tras añadir las rutas:
+privada-A (us-east-1a) -> 44.215.217.196 = IP del NAT en us-east-1a
+privada-B (us-east-1b) -> 3.209.88.203   = IP del NAT en us-east-1b
+
+Ejemplo 4 (tercera zona, sin tocar el NAT):
+subred natreg-subnet-private3-us-east-1c: subnet-02c3db72b8d56857d (172.16.96.0/20), asociada a rtb-08faa81d639c90ad7
+privada-C: i-0d7736849d5f50126 (172.16.96.100), lanzada el 23/11/2026 a las 15:33 UTC
+Prueba por ssh a través del bastión:
+host: ip-172-16-96-100.ec2.internal
+ip: 172.16.96.100
+checkip: 44.215.217.196
+A las 15:38 UTC el NAT aún no tenía IP en us-east-1c: el tráfico de privada-C sale por la IP de us-east-1a.
+
+Expansión del NAT a us-east-1c: IP 34.205.219.191, vista como succeeded a las 15:58 UTC (25 min tras lanzar privada-C).
+privada-C checkip después de la expansión: 34.205.219.191 (la IP del NAT en su propia zona)
