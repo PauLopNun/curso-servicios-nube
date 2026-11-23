@@ -51,6 +51,7 @@ Se comprueba también que, sin Internet Gateway ni ruta `0.0.0.0/0`, la instanci
 | [`scripts/datos_usuario.sh`](scripts/datos_usuario.sh) | Datos de usuario de la instancia (Apache) |
 | [`capturas/`](capturas) | Capturas numeradas de cada paso |
 | [`entrega/LopezPau_Practica1.pdf`](entrega/LopezPau_Practica1.pdf) | Documento entregado |
+| [`enunciado.md`](enunciado.md) | Resumen del enunciado |
 
 ---
 

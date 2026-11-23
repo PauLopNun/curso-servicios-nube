@@ -5,7 +5,7 @@
 ![EC2](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logoColor=white)
 ![SSM](https://img.shields.io/badge/Systems%20Manager-Session%20Manager-232F3E?style=for-the-badge&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
 
 **UD01 - Servicios computacionales basados en máquinas virtuales**
 
@@ -46,6 +46,7 @@ Desplegar un servidor LAMP con una plantilla de lanzamiento versionada (datos de
 | [`scripts/user-data-v2.sh`](scripts/user-data-v2.sh) | Datos de usuario v2 (sin SSH, sin phpinfo, con IP privada) |
 | [`capturas/`](capturas) | Capturas de la consola y del terminal |
 | [`enunciado.md`](enunciado.md) | Resumen del enunciado |
+| [`entrega/`](entrega) | Sin entregable: actividad guiada |
 
 ---
 

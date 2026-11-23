@@ -71,6 +71,7 @@ Un resumen en texto de las ejecuciones, los Secrets y el contenido del bucket es
 |:--|:--|
 | [`entrega/`](entrega) | Documento para entregar y `s3.yml` |
 | [`material/`](material) | Enunciado en PDF |
+| [`enunciado.md`](enunciado.md) | Resumen del enunciado |
 | [`capturas/`](capturas) | Capturas de la entrega |
 | [`evidencias/`](evidencias) | Resumen de las ejecuciones |
 | [`app/`](app) | Primera versión de la página de login, antes de pasarla al repositorio propio |
