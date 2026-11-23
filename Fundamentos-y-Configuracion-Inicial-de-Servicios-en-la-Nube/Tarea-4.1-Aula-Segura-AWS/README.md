@@ -6,7 +6,7 @@
 ![EC2](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logoColor=white)
 ![S3](https://img.shields.io/badge/AWS-S3-569A31?style=for-the-badge&logoColor=white)
 ![CloudWatch](https://img.shields.io/badge/AWS-CloudWatch-FF4F8B?style=for-the-badge&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 **UP4 - Acceso y administración**
 

@@ -7,7 +7,7 @@
 ![Systems Manager](https://img.shields.io/badge/AWS-Systems_Manager-759C3E?style=for-the-badge&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-26.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-AWS_CLI-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 **UD02 - Monitorización y alta disponibilidad en máquinas virtuales**
 

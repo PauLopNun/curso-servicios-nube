@@ -5,7 +5,7 @@
 ![EBS](https://img.shields.io/badge/AWS-EBS-FF9900?style=for-the-badge&logoColor=white)
 ![EC2](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-AWS%20CLI-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 **UD04 - Servicios de almacenamiento de bloques**
 

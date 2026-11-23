@@ -5,7 +5,7 @@
 ![EBS](https://img.shields.io/badge/AWS-EBS-FF9900?style=for-the-badge&logoColor=white)
 ![EC2](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logoColor=white)
 ![SSM](https://img.shields.io/badge/AWS-Systems%20Manager-232F3E?style=for-the-badge&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 **Tarea 2.1 - Laboratorio 4 del módulo 7 de AWS Academy Cloud Foundations**
 
