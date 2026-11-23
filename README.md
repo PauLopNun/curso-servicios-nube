@@ -52,7 +52,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | **Administración de Bases de Datos y Almacenamiento en la Nube** | [`Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube`](Administracion-de-Bases-de-Datos-y-Almacenamiento-en-la-Nube) | 5 |
 | **Administración de Recursos de Computación en la Nube** | [`Administracion-de-Recursos-de-Computacion-en-la-Nube`](Administracion-de-Recursos-de-Computacion-en-la-Nube) |6 |
 | **Administración de Redes en la Nube** | [`Administracion-de-Redes-en-la-Nube`](Administracion-de-Redes-en-la-Nube) |4 |
-| **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios-Administrados-en-la-Nube`](Despliegue-de-Servicios-Administrados-en-la-Nube) | 3 |
+| **Despliegue de Servicios Administrados en la Nube** | [`Despliegue-de-Servicios-Administrados-en-la-Nube`](Despliegue-de-Servicios-Administrados-en-la-Nube) | 4 |
 
 </div>
 
@@ -86,6 +86,7 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 | Despliegue de Servicios | [Práctica 1 - Despliegue con CI/CD](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-1-Despliegue-CICD) · **código en su propio repositorio: [login-app-cicd](https://github.com/PauLopNun/login-app-cicd)** | ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white) ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![Jest](https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Despliegue de Servicios | [Práctica 2 - ELB Blue/Green y Canary](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-2-ELB-Blue-Green-Canary) | ![ELB](https://img.shields.io/badge/ELB-8C4FFF?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) | ![Entregada](https://img.shields.io/badge/Entregada-2ea44f?style=flat-square) |
 | Despliegue de Servicios | [Práctica 4 - Recogida de datos con Prometheus](Despliegue-de-Servicios-Administrados-en-la-Nube/Practica-4-Prometheus) | ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![SNS](https://img.shields.io/badge/SNS-FF4F8B?style=flat-square) | ![Realizada](https://img.shields.io/badge/Realizada-0366d6?style=flat-square) |
+| Despliegue de Servicios | [Tarea 3.2 - Visualización de datos con Grafana](Despliegue-de-Servicios-Administrados-en-la-Nube/Tarea-3.2-Grafana) | ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white) ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) | ![Realizada](https://img.shields.io/badge/Realizada-0366d6?style=flat-square) |
 
 </div>
 
@@ -124,7 +125,8 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 └── Despliegue-de-Servicios-Administrados-en-la-Nube/
     ├── Practica-1-Despliegue-CICD/
     ├── Practica-2-ELB-Blue-Green-Canary/
-    └── Practica-4-Prometheus/
+    ├── Practica-4-Prometheus/
+    └── Tarea-3.2-Grafana/
 ```
 
 Cada tarea sigue la misma organización:

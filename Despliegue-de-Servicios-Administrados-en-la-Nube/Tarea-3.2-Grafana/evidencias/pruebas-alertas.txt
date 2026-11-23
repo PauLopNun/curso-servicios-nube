@@ -1,0 +1,17 @@
+Tarea 3.2 - Grafana. Learner Lab 197861 (cuenta 992382802532), 23/11/2026. Horas en UTC (en las capturas, hora local +1).
+
+Instalación (Run Command, script user_data_todo_en_uno.sh, md5 d5360e81081d13f7a68f5b1480607024)
+node_exporter: active   prometheus: active   grafana-server: active
+/api/health -> "database": "ok", "version": "13.3.1"   target de Prometheus -> "health":"up"
+
+Prueba CPU (17:27:28): stress-ng --cpu 2 --timeout 300
+Valor de la consulta a los 2,5 min: 50,85 %; a los 4,5 min: 92,43 %
+CPU alta: Pending 17:31:50 (B=87,29) -> Alerting 17:32:50 (B=97,16) -> Normal 17:34:50 (B=56,13)
+
+Prueba memoria y disco (17:33:48)
+Disponible 1255 MB, reservo 1055 MB -> available 244 MB durante la carga
+Disco: total 8116 MB, usado 3986 MB, relleno 2912 MB -> 85 %
+Memoria alta: Pending 17:34:56 (B=87,21) -> Alerting 17:35:56 (B=88,13) -> Normal 17:40:56 (B=32,72)
+Disco casi lleno: Pending 17:34:53 (B=84,99) -> Alerting 17:35:53 (B=84,98) -> Normal 17:40:53 (B=49,10)
+
+Limpieza: instancia ec2-pln-grafana terminada y grupo sec-pln-grafana borrado.
