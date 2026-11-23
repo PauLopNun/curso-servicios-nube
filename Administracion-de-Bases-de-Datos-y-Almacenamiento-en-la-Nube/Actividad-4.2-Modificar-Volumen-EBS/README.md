@@ -15,7 +15,7 @@
 
 ## Qué se pide
 
-El enunciado ([PDF](material/enunciado-modificar-volumen-ebs.pdf), resumen en [`enunciado.md`](enunciado.md)) pide ampliar el volumen raíz de una instancia EC2 Linux de 8 GB a 10 GB con la AWS CLI: localizar el volumen, hacer un snapshot de seguridad, modificar el volumen, ampliar la partición y el sistema de archivos y borrar el snapshot. Es una tarea guiada sin entregable, pero se ha preparado igualmente el documento.
+El enunciado ([PDF](material/enunciado-modificar-volumen-ebs.pdf), resumen en [`enunciado.md`](enunciado.md)) pide ampliar el volumen raíz de una instancia EC2 Linux de 8 GB a 10 GB con la AWS CLI: localizar el volumen, hacer un snapshot de seguridad, modificar el volumen, ampliar la partición y el sistema de archivos y borrar el snapshot. El enunciado la plantea como tarea guiada sin entregable, pero se entregó en Aules como «Tarea 2.2. Modificación de un Volumen EBS».
 
 ## Qué se ha hecho
 
