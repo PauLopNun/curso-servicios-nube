@@ -1,0 +1,44 @@
+$ aws iam list-groups --query 'Groups[].GroupName' --output table
+-----------------
+|  ListGroups   |
++---------------+
+|  EC2-Admin    |
+|  EC2-Support  |
+|  S3-Support   |
++---------------+
+
+$ aws iam list-attached-group-policies --group-name EC2-Support --output table
+---------------------------------------------------------------------
+|                     ListAttachedGroupPolicies                     |
++-------------------------------------------------------------------+
+||                        AttachedPolicies                         ||
+|+------------+----------------------------------------------------+|
+||  PolicyArn |  arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess   ||
+||  PolicyName|  AmazonEC2ReadOnlyAccess                           ||
+|+------------+----------------------------------------------------+|
+
+$ aws iam list-attached-group-policies --group-name S3-Support --output table
+--------------------------------------------------------------------------------
+|                           ListAttachedGroupPolicies                          |
++------------------------------------------------------------------------------+
+||                              AttachedPolicies                              ||
+|+-------------------------------------------------+--------------------------+|
+||                    PolicyArn                    |       PolicyName         ||
+|+-------------------------------------------------+--------------------------+|
+||  arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess |  AmazonS3ReadOnlyAccess  ||
+|+-------------------------------------------------+--------------------------+|
+
+$ aws iam list-attached-group-policies --group-name EC2-Admin --output table
+---------------------------
+|ListAttachedGroupPolicies|
++-------------------------+
+
+$ aws iam list-group-policies --group-name EC2-Admin --output table
+------------------------
+|   ListGroupPolicies  |
++----------------------+
+||     PolicyNames    ||
+|+--------------------+|
+||  EC2-Admin-Policy  ||
+|+--------------------+|
+

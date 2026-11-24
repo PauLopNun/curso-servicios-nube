@@ -1,0 +1,6 @@
+$ aws ec2 describe-instances --instance-ids i-05ce00cf9074391f1 --query "Reservations[].Instances[].[InstanceId,State.Name,StateTransitionReason]" --output table
+--------------------------------------------------------------------------------
+|                               DescribeInstances                              |
++----------------------+----------+--------------------------------------------+
+|  i-05ce00cf9074391f1 |  stopped |  User initiated (2026-11-24 18:22:03 GMT)  |
++----------------------+----------+--------------------------------------------+

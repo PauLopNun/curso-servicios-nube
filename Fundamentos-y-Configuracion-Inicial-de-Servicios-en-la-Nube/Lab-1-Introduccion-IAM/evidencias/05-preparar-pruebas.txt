@@ -1,0 +1,41 @@
+URL de inicio de sesión de los usuarios IAM: https://134464868125.signin.aws.amazon.com/console
+
+$ aws iam list-account-aliases --output text
+
+$ aws ec2 describe-instances --filters Name=tag:Name,Values=LabHost --query 'Reservations[].Instances[].[InstanceId,State.Name,InstanceType]' --output table
+------------------------------------------------
+|               DescribeInstances              |
++----------------------+----------+------------+
+|  i-05ce00cf9074391f1 |  running |  t2.micro  |
++----------------------+----------+------------+
+
+$ aws s3 ls
+2026-11-24 18:55:08 samplebucket--2a13a200
+
+$ aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::134464868125:user/user-1 --action-names s3:ListAllMyBuckets ec2:DescribeInstances ec2:StopInstances --query 'EvaluationResults[].[EvalActionName,EvalDecision]' --output table
+-------------------------------------------
+|         SimulatePrincipalPolicy         |
++------------------------+----------------+
+|  s3:ListAllMyBuckets   |  allowed       |
+|  ec2:DescribeInstances |  implicitDeny  |
+|  ec2:StopInstances     |  implicitDeny  |
++------------------------+----------------+
+
+$ aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::134464868125:user/user-2 --action-names s3:ListAllMyBuckets ec2:DescribeInstances ec2:StopInstances --query 'EvaluationResults[].[EvalActionName,EvalDecision]' --output table
+-------------------------------------------
+|         SimulatePrincipalPolicy         |
++------------------------+----------------+
+|  s3:ListAllMyBuckets   |  implicitDeny  |
+|  ec2:DescribeInstances |  allowed       |
+|  ec2:StopInstances     |  implicitDeny  |
++------------------------+----------------+
+
+$ aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::134464868125:user/user-3 --action-names s3:ListAllMyBuckets ec2:DescribeInstances ec2:StopInstances --query 'EvaluationResults[].[EvalActionName,EvalDecision]' --output table
+-------------------------------------------
+|         SimulatePrincipalPolicy         |
++------------------------+----------------+
+|  s3:ListAllMyBuckets   |  implicitDeny  |
+|  ec2:DescribeInstances |  allowed       |
+|  ec2:StopInstances     |  allowed       |
++------------------------+----------------+
+

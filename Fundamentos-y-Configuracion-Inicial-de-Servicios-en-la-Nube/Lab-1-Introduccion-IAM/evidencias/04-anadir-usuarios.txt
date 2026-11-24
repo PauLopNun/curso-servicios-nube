@@ -1,0 +1,18 @@
+$ aws iam add-user-to-group --group-name S3-Support --user-name user-1
+
+$ aws iam add-user-to-group --group-name EC2-Support --user-name user-2
+
+$ aws iam add-user-to-group --group-name EC2-Admin --user-name user-3
+
+$ aws iam get-group --group-name S3-Support --query '[Group.GroupName, length(Users), Users[].UserName]' --output text
+S3-Support	1
+user-1
+
+$ aws iam get-group --group-name EC2-Support --query '[Group.GroupName, length(Users), Users[].UserName]' --output text
+EC2-Support	1
+user-2
+
+$ aws iam get-group --group-name EC2-Admin --query '[Group.GroupName, length(Users), Users[].UserName]' --output text
+EC2-Admin	1
+user-3
+

@@ -1,0 +1,31 @@
+$ aws iam list-users --query 'Users[].[UserName,CreateDate]' --output table
+---------------------------------------------
+|                 ListUsers                 |
++-------------+-----------------------------+
+|  awsstudent |  2026-11-24T17:55:42+00:00  |
+|  user-1     |  2026-11-24T17:55:06+00:00  |
+|  user-2     |  2026-11-24T17:55:06+00:00  |
+|  user-3     |  2026-11-24T17:55:06+00:00  |
++-------------+-----------------------------+
+
+$ aws iam list-groups-for-user --user-name user-1 --query 'Groups[].GroupName' --output text
+
+$ aws iam list-attached-user-policies --user-name user-1 --output text
+
+$ aws iam get-login-profile --user-name user-1 --query 'LoginProfile.[UserName,CreateDate]' --output text
+user-1	2026-11-24T17:55:42+00:00
+
+$ aws iam list-groups-for-user --user-name user-2 --query 'Groups[].GroupName' --output text
+
+$ aws iam list-attached-user-policies --user-name user-2 --output text
+
+$ aws iam get-login-profile --user-name user-2 --query 'LoginProfile.[UserName,CreateDate]' --output text
+user-2	2026-11-24T17:55:42+00:00
+
+$ aws iam list-groups-for-user --user-name user-3 --query 'Groups[].GroupName' --output text
+
+$ aws iam list-attached-user-policies --user-name user-3 --output text
+
+$ aws iam get-login-profile --user-name user-3 --query 'LoginProfile.[UserName,CreateDate]' --output text
+user-3	2026-11-24T17:55:41+00:00
+
