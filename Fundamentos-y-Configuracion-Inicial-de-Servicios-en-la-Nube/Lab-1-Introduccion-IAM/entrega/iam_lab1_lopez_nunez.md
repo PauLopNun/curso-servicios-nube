@@ -167,6 +167,27 @@ $ aws ec2 describe-instances --instance-ids i-05ce00cf9074391f1 \
 |  i-05ce00cf9074391f1 |  stopped |  User initiated (2026-11-24 18:22:03 GMT)  |
 ```
 
+# Si las políticas se contradicen, gana la más restrictiva
+
+Un usuario puede tener varias políticas a la vez: las suyas propias y las de todos los grupos en los que esté. Cuando AWS recibe una petición, junta todas las políticas que se aplican y decide así:
+
+1. **Por defecto todo está denegado** (denegación implícita). Por eso user-1 no podía ver EC2: ninguna política se lo permitía.
+2. Si alguna política tiene un **Allow** para esa acción, se permite...
+3. ...salvo que otra política tenga un **Deny explícito** para la misma acción. En ese caso **el Deny gana siempre**, da igual cuántos Allow haya.
+
+| Allow en alguna política | Deny explícito en alguna política | Resultado |
+|:-:|:-:|:--|
+| No | No | Denegado (implícito) |
+| Sí | No | Permitido |
+| Sí | Sí | **Denegado (explícito)** |
+
+Ejemplo con este laboratorio: si user-3, además de estar en EC2-Admin, estuviera en otro grupo con una política `"Effect": "Deny"` sobre `ec2:StopInstances`, ya no podría detener LabHost, aunque EC2-Admin se lo permita. La documentación de AWS lo resume en que, cuando hay un Allow y un Deny, "the `Deny` statement trumps the `Allow` statement".
+
+Documentación oficial de AWS:
+
+- *Policy evaluation logic*: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html>
+- *The difference between explicit and implicit denies*: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_AccessPolicyLanguage_Interplay.html>
+
 # Conclusiones
 
 - Los permisos se dan mejor a **grupos** que a usuarios sueltos: el usuario hereda lo que tenga su grupo y es mucho más fácil de mantener.
