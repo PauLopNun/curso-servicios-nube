@@ -43,6 +43,8 @@ El `labsuser.pem` guardado era de otra sesión del laboratorio, así que los sal
 - el [informe](entrega/informe_fci_t4.1_lopez_nunez.pdf) de 2 páginas con las 12 preguntas y la tabla consola frente a CLI;
 - las capturas que pide el guion y los scripts.
 
+Además, una [guía paso a paso](entrega/guia_fci_t4.1_lopez_nunez.pdf) que explica de forma sencilla qué se ha montado, en qué orden y por qué.
+
 ## Contenido de esta carpeta
 
 | Ruta | Descripción |
@@ -50,7 +52,7 @@ El `labsuser.pem` guardado era de otra sesión del laboratorio, así que los sal
 | [`scripts/`](scripts) | `index.html`, User Data de las dos instancias, política del bucket, dashboard y `reto.sh` |
 | [`evidencias/`](evidencias) | Comandos y salidas de las fases 4 a 7 y datos de los recursos |
 | [`capturas/`](capturas) | Capturas de la consola y del terminal |
-| [`entrega/`](entrega) | Memoria e informe en DOCX y PDF y el zip entregado |
+| [`entrega/`](entrega) | Memoria, informe y guía paso a paso en DOCX y PDF, y el zip entregado |
 
 ---
 
