@@ -6,7 +6,7 @@
 ![EC2](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logoColor=white)
 ![EFS](https://img.shields.io/badge/AWS-EFS-FF9900?style=for-the-badge&logoColor=white)
 ![RDS](https://img.shields.io/badge/AWS-RDS-527FFF?style=for-the-badge&logoColor=white)
-![Estado](https://img.shields.io/badge/Estado-Realizada-0366d6?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-Entregada-2ea44f?style=for-the-badge)
 
 **Laboratorio de SkillBuilder Multi-Service Backup Management with AWS Backup (SAL-TF-100-STBACK-1)**
 
