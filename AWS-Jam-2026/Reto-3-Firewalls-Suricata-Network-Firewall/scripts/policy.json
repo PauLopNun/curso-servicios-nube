@@ -1,0 +1,2 @@
+{"StatelessDefaultActions":["aws:forward_to_sfe"],"StatelessFragmentDefaultActions":["aws:forward_to_sfe"],
+ "StatefulRuleGroupReferences":[{"ResourceArn":"arn:aws:network-firewall:us-east-1:ACCOUNT_ID:stateful-rulegroup/Inspection-Suricata-IPS-Rule-Group"}]}

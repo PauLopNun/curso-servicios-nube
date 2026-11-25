@@ -1,0 +1,2 @@
+alert icmp any any -> any any (msg:"Alert on any ICMP"; sid: 100000;)
+drop http any any -> any any (msg:"amazon.com is blocked"; http.host; content:"amazon.com"; startswith; endswith; sid:1;)

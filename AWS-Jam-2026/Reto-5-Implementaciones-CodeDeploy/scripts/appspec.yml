@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/codedeploy/
+hooks:
+  ApplicationStop:
+    - location: deploy/applicationstop.sh
+      timeout: 60
+      runas: root
+  BeforeInstall:
+    - location: deploy/before.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: deploy/applicationstart.sh
+      timeout: 90
+      runas: root

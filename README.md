@@ -94,6 +94,27 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 
 ---
 
+## AWS Jam 2026
+
+<div align="center">
+
+Guía de estudio de los **6 retos** del AWS Jam hecho en clase (25/11/2026): enunciados, paso a paso en la consola y con la CLI, errores típicos y preguntas de repaso.
+
+| Reto | Servicios | Estado |
+|:--|:--|:-:|
+| [1 - Deduplicación de hallazgos con IA](AWS-Jam-2026/Reto-1-Deduplicacion-Hallazgos-IA) | ![Bedrock](https://img.shields.io/badge/Bedrock%20AgentCore-01A88D?style=flat-square) ![Lambda](https://img.shields.io/badge/Lambda-FF9900?style=flat-square) ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| [2 - Redes globales con Cloud WAN](AWS-Jam-2026/Reto-2-Redes-Globales-Cloud-WAN) | ![Cloud WAN](https://img.shields.io/badge/Cloud%20WAN-8C4FFF?style=flat-square) ![VPN](https://img.shields.io/badge/VPN-8C4FFF?style=flat-square) ![TGW](https://img.shields.io/badge/Transit%20Gateway-8C4FFF?style=flat-square) | ![Propuesta](https://img.shields.io/badge/Propuesta-dbab09?style=flat-square) |
+| [3 - De Suricata a AWS Network Firewall](AWS-Jam-2026/Reto-3-Firewalls-Suricata-Network-Firewall) | ![Network Firewall](https://img.shields.io/badge/Network%20Firewall-DD344C?style=flat-square) ![GWLB](https://img.shields.io/badge/GWLB-8C4FFF?style=flat-square) ![Suricata](https://img.shields.io/badge/Suricata-EF3B2D?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| [4 - DevOps Detective (CodePipeline)](AWS-Jam-2026/Reto-4-DevOps-Detective-CodePipeline) | ![CodePipeline](https://img.shields.io/badge/CodePipeline-4053D6?style=flat-square) ![EC2](https://img.shields.io/badge/EC2-FF9900?style=flat-square) ![ALB](https://img.shields.io/badge/ALB-8C4FFF?style=flat-square) | ![Propuesta](https://img.shields.io/badge/Propuesta-dbab09?style=flat-square) |
+| [5 - CodeDeploy con Auto Scaling](AWS-Jam-2026/Reto-5-Implementaciones-CodeDeploy) | ![CodeDeploy](https://img.shields.io/badge/CodeDeploy-3F8624?style=flat-square) ![Auto Scaling](https://img.shields.io/badge/Auto%20Scaling-FF9900?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| [6 - VPC Flow Logs y Athena](AWS-Jam-2026/Reto-6-Pruebe-el-Flujo-VPC-Flow-Logs) | ![VPC](https://img.shields.io/badge/Flow%20Logs-8C4FFF?style=flat-square) ![CloudWatch](https://img.shields.io/badge/CloudWatch-FF4F8B?style=flat-square) ![Athena](https://img.shields.io/badge/Athena-8C4FFF?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+
+**[Índice y método de trabajo del Jam](AWS-Jam-2026)**
+
+</div>
+
+---
+
 ## Estructura
 
 ```text
@@ -124,11 +145,15 @@ Cada asignatura tiene su carpeta y cada tarea su propio README con el objetivo, 
 │   ├── Practica-3-Redes-Privadas/
 │   ├── Practica-4-NAT-Regional/
 │   └── Scripting-Boto3/
-└── Despliegue-de-Servicios-Administrados-en-la-Nube/
-    ├── Practica-1-Despliegue-CICD/
-    ├── Practica-2-ELB-Blue-Green-Canary/
-    ├── Practica-4-Prometheus/
-    └── Tarea-3.2-Grafana/
+├── Despliegue-de-Servicios-Administrados-en-la-Nube/
+│   ├── Practica-1-Despliegue-CICD/
+│   ├── Practica-2-ELB-Blue-Green-Canary/
+│   ├── Practica-4-Prometheus/
+│   └── Tarea-3.2-Grafana/
+└── AWS-Jam-2026/              ← retos del AWS Jam (fuera de las asignaturas)
+    ├── Reto-1-Deduplicacion-Hallazgos-IA/
+    ├── ...
+    └── Reto-6-Pruebe-el-Flujo-VPC-Flow-Logs/
 ```
 
 Cada tarea sigue la misma organización:

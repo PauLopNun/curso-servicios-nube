@@ -1,0 +1,1 @@
+{"body": "{\"groups\": [{\"root_cause\": \"CVE-2024-21626\", \"title\": \"Container escape via runc\", \"severity\": \"CRITICAL\", \"member_count\": 4, \"priority_score\": 95, \"priority_rank\": 1, \"resource_type\": \"AWS::Lambda::Function\", \"data_classification\": \"internal\", \"environment\": \"production\"}]}"}

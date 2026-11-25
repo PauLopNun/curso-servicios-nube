@@ -1,0 +1,3 @@
+{"RulesSource":{"StatefulRules":[
+{"Action":"PASS","Header":{"Protocol":"IP","Source":"Any","SourcePort":"Any","Direction":"ANY","Destination":"Any","DestinationPort":"Any"},"RuleOptions":[{"Keyword":"sid","Settings":["1000"]}]},
+{"Action":"PASS","Header":{"Protocol":"ICMP","Source":"Any","SourcePort":"Any","Direction":"ANY","Destination":"Any","DestinationPort":"Any"},"RuleOptions":[{"Keyword":"sid","Settings":["1001"]}]}]}}

@@ -1,0 +1,45 @@
+{
+  "version": "2021.12",
+  "core-network-configuration": {
+    "vpn-ecmp-support": true,
+    "asn-ranges": ["64512-65534"],
+    "edge-locations": [{ "location": "us-west-2" }]
+  },
+  "segments": [
+    { "name": "prod",           "require-attachment-acceptance": false },
+    { "name": "nonprod",        "require-attachment-acceptance": false },
+    { "name": "sharedservices", "require-attachment-acceptance": false },
+    { "name": "hybrid",         "require-attachment-acceptance": false }
+  ],
+  "attachment-policies": [
+    {
+      "rule-number": 100,
+      "condition-logic": "or",
+      "conditions": [{ "type": "tag-value", "operator": "equals", "key": "segment", "value": "prod" }],
+      "action": { "association-method": "constant", "segment": "prod" }
+    },
+    {
+      "rule-number": 200,
+      "conditions": [{ "type": "tag-value", "operator": "equals", "key": "segment", "value": "nonprod" }],
+      "action": { "association-method": "constant", "segment": "nonprod" }
+    },
+    {
+      "rule-number": 300,
+      "conditions": [{ "type": "tag-value", "operator": "equals", "key": "segment", "value": "sharedservices" }],
+      "action": { "association-method": "constant", "segment": "sharedservices" }
+    },
+    {
+      "rule-number": 400,
+      "conditions": [{ "type": "attachment-type", "operator": "equals", "value": "site-to-site-vpn" }],
+      "action": { "association-method": "constant", "segment": "hybrid" }
+    }
+  ],
+  "segment-actions": [
+    {
+      "action": "share",
+      "mode": "attachment-route",
+      "segment": "hybrid",
+      "share-with": ["sharedservices", "prod", "nonprod"]
+    }
+  ]
+}
