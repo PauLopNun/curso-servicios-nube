@@ -1,7 +1,6 @@
 #!/bin/bash
 # Reto 2 - ¡Dijeron que la creación de redes globales es fácil! (AWS Cloud WAN)
-# Comandos de investigación y solución propuesta. Este reto lo resolvió otro miembro
-# del equipo: los pasos de cambio son la solución esperada, no se ejecutaron aquí.
+# Comandos de investigación y solución de las 3 tareas.
 # Cloud WAN es un servicio global: su API se usa en us-west-2.
 
 export AWS_REGION=us-west-2

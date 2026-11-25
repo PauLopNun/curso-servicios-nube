@@ -9,15 +9,17 @@
 
 **Nombre en el Jam:** *¡Dijeron que la creación de redes globales es fácil!* · 3 tareas · AWS Cloud WAN
 
-![Propuesta](https://img.shields.io/badge/Soluci%C3%B3n%20propuesta-dbab09?style=flat-square)
+![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square)
 
 </div>
 
-> Este reto lo resolvió otro miembro del equipo. Aquí están los enunciados, cómo razonarlos y la solución esperada, explicada paso a paso. Al practicarlo, hay que confirmar los nombres reales de segmentos y attachments en la política del laboratorio.
+> **Ojo con el enunciado:** en las Tareas 1 y 2 el rango de Shared Services aparece como `10.0.3.0/16`, y en la Tarea 3 como `10.3.0.0/16`. El CGW recibe **`10.3.0.0/16`**, que es el correcto.
 
 ## De qué va
 
-Nice and Simple Company es una cadena de tiendas global y todo tiene que ser "sencillo". Tu jefa empezó una prueba de concepto con **AWS Cloud WAN**: una red global gestionada desde una **política** en JSON. Las oficinas on-prem se conectan por **Site-to-Site VPN**. El ingeniero de on-prem asegura que su router (el CGW) está bien configurado, así que **todo se arregla en Cloud WAN**. El CGW solo se usa para comprobar.
+Nice and Simple Company es una cadena de tiendas global que lo tiene todo en AWS, y todo tiene que ser "sencillo". Tu jefa empezó una prueba de concepto con **AWS Cloud WAN**: conectar **3 VPC nuevas (Prod, Shared y NonProd)** en una sola región, entre ellas y con las oficinas on-prem, usando solo Cloud WAN y una **Site-to-Site VPN**. Si sale bien, se desplegará en varias regiones y sustituirá la arquitectura actual de **Transit Gateways con peering**.
+
+Tu jefa cayó enferma antes de terminarla, pero dejó apuntados en **JIRA** los fallos que había visto. Tu misión es resolver los tickets y terminar la prueba de concepto. El ingeniero de on-prem asegura que su router (el CGW) está bien configurado, así que **todo se arregla en Cloud WAN**. El CGW solo se usa para comprobar.
 
 ## Arquitectura
 
@@ -67,14 +69,14 @@ Los cambios en Cloud WAN tardan **5 minutos o más** en llegar al CGW.
 
 ### Cómo pensarlo
 
-Para que una ruta de una VPC llegue al CGW, se tienen que cumplir **cuatro condiciones**. Hay que revisarlas en orden:
+Para que una ruta de una VPC llegue al CGW, se tienen que cumplir **cuatro condiciones**. Hay que revisarlas en orden, y la que falle es la avería:
 
 1. El attachment de la **VPN** existe y está **Available**, no `Pending acceptance`.
 2. La VPN ha caído en el **segmento correcto** (el híbrido), según las `attachment-policies`.
 3. La VPC de Shared Services ha caído en su segmento y está Available.
 4. Hay un **share** entre el segmento de la VPN y el de Shared Services.
 
-La causa más probable es una de dos: el attachment de la VPN está pendiente de aceptar, o falta el share entre segmentos.
+Se arregla aceptando el attachment de la VPN si está pendiente y añadiendo en la política el **share** entre el segmento de la VPN y el de Shared Services.
 
 ### Paso a paso en la consola
 
@@ -94,7 +96,7 @@ Bloques *1*, *2* y *3* de [`scripts/comandos.sh`](scripts/comandos.sh): `list-at
 
 ---
 
-## Tarea 2 - [JIRA-534] Las VPC de Prod y Non Prod no llegan a on-prem
+## Tarea 2 - [JIRA-534] Las VPC de Prod y Non Prod no llegan a on-prem (80 puntos)
 
 ### Qué pide
 
@@ -155,7 +157,7 @@ Bloque *4* de [`scripts/comandos.sh`](scripts/comandos.sh): `create-transit-gate
 
 ## Errores típicos
 
-| Síntoma | Causa probable | Solución |
+| Síntoma | Causa | Solución |
 |:--|:--|:--|
 | El CGW no recibe ninguna ruta | Attachment de VPN pendiente, o sin share | Aceptar y añadir un share |
 | Editada la política, pero nada cambia | No se ha ejecutado el *change set* | **Apply changes** |
@@ -200,7 +202,7 @@ Son direcciones **link-local**, que solo existen dentro de cada túnel IPsec. Se
 | Ruta | Descripción |
 |:--|:--|
 | [`enunciado.md`](enunciado.md) | Enunciado de las 3 tareas |
-| [`scripts/comandos.sh`](scripts/comandos.sh) | Comandos de investigación y solución propuesta |
+| [`scripts/comandos.sh`](scripts/comandos.sh) | Comandos de investigación y solución de las 3 tareas |
 | [`scripts/core-network-policy-ejemplo.json`](scripts/core-network-policy-ejemplo.json) | Ejemplo de política con segmentos, reglas y share |
 
 ---

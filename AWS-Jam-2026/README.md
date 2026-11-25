@@ -30,7 +30,7 @@ Para cada reto hay:
 | # | Reto (nombre en el Jam) | Servicios | Tareas | Estado |
 |:-:|:--|:--|:-:|:-:|
 | 1 | [La seguridad impulsada por la IA descubre la deduplicación y la priorización](Reto-1-Deduplicacion-Hallazgos-IA) | Bedrock AgentCore, Lambda, DynamoDB, S3 | 4 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 2 | [¡Dijeron que la creación de redes globales es fácil!](Reto-2-Redes-Globales-Cloud-WAN) | Cloud WAN, Site-to-Site VPN, Transit Gateway | 3 | ![Propuesta](https://img.shields.io/badge/Propuesta-dbab09?style=flat-square) |
+| 2 | [¡Dijeron que la creación de redes globales es fácil!](Reto-2-Redes-Globales-Cloud-WAN) | Cloud WAN, Site-to-Site VPN, Transit Gateway | 3 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 3 | [AWS, ¡ayúdeme a administrar mis firewalls!](Reto-3-Firewalls-Suricata-Network-Firewall) | Suricata, Gateway Load Balancer, Network Firewall | 4 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 4 | [DevOps Detective: La difícil situación del oleoducto](Reto-4-DevOps-Detective-CodePipeline) | CodePipeline, EC2, ALB | 2 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 5 | [Implementaciones en desarrollo](Reto-5-Implementaciones-CodeDeploy) | CodeDeploy, Auto Scaling, S3 | 3 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
@@ -38,8 +38,7 @@ Para cada reto hay:
 
 </div>
 
-- **Resuelto:** hecho y comprobado en el laboratorio. Los comandos y las salidas son reales.
-- **Propuesta:** lo resolvió otro miembro del equipo (Reto 2). La guía explica el razonamiento y la solución esperada, pero no se ejecutó paso a paso aquí. Al practicarlo, hay que confirmar los nombres reales del laboratorio.
+Los 6 retos están resueltos. Cada guía explica cómo pensar el problema y la solución paso a paso.
 
 ## Cómo funciona un AWS Jam
 
