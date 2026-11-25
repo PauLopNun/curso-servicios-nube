@@ -32,14 +32,14 @@ Para cada reto hay:
 | 1 | [La seguridad impulsada por la IA descubre la deduplicación y la priorización](Reto-1-Deduplicacion-Hallazgos-IA) | Bedrock AgentCore, Lambda, DynamoDB, S3 | 4 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 2 | [¡Dijeron que la creación de redes globales es fácil!](Reto-2-Redes-Globales-Cloud-WAN) | Cloud WAN, Site-to-Site VPN, Transit Gateway | 3 | ![Propuesta](https://img.shields.io/badge/Propuesta-dbab09?style=flat-square) |
 | 3 | [AWS, ¡ayúdeme a administrar mis firewalls!](Reto-3-Firewalls-Suricata-Network-Firewall) | Suricata, Gateway Load Balancer, Network Firewall | 4 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 4 | [DevOps Detective: La difícil situación del oleoducto](Reto-4-DevOps-Detective-CodePipeline) | CodePipeline, EC2, ALB | 2 | ![Propuesta](https://img.shields.io/badge/Propuesta-dbab09?style=flat-square) |
+| 4 | [DevOps Detective: La difícil situación del oleoducto](Reto-4-DevOps-Detective-CodePipeline) | CodePipeline, EC2, ALB | 2 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 5 | [Implementaciones en desarrollo](Reto-5-Implementaciones-CodeDeploy) | CodeDeploy, Auto Scaling, S3 | 3 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 6 | [Pruebe el flujo](Reto-6-Pruebe-el-Flujo-VPC-Flow-Logs) | VPC Flow Logs, CloudWatch, SNS, Athena | 3 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 
 </div>
 
 - **Resuelto:** hecho y comprobado en el laboratorio. Los comandos y las salidas son reales.
-- **Propuesta:** lo resolvió otro miembro del equipo. La guía explica el razonamiento y la solución esperada, pero no se ejecutó paso a paso aquí. Al practicarlo, hay que confirmar los nombres reales del laboratorio.
+- **Propuesta:** lo resolvió otro miembro del equipo (Reto 2). La guía explica el razonamiento y la solución esperada, pero no se ejecutó paso a paso aquí. Al practicarlo, hay que confirmar los nombres reales del laboratorio.
 
 ## Cómo funciona un AWS Jam
 
@@ -92,6 +92,8 @@ export AWS_REGION=us-west-2    # la región del reto (la pone en la página: us-
 | El nombre que da el enunciado puede no ser el real: listar y buscar | Rol `Jam-CodeDeploy-<cuenta>-us-east-1` (Reto 5) |
 | Los permisos de la cuenta del Jam son limitados: si la CLI no deja, la consola o las propiedades de salida sí | SCP en el Reto 6 |
 | Los cambios de red y de reglas tardan: esperar a *In sync*, *liveVersion* o 5 minutos de BGP | Retos 1, 2, 3 y 6 |
+| Una ejecución abandonada de CodePipeline puede seguir bloqueando la acción: se desbloquea **renombrando la acción** | Reto 4, Tarea 2 |
+| El `deployspec.yml` de la acción EC2 usa `scripts:` (versión 0.1), no `hooks:` | Reto 4, Tarea 2 |
 | Sin `ssm:SendCommand` se pueden ejecutar comandos con `start-session` | [`ssm-ejecutar.sh`](Reto-3-Firewalls-Suricata-Network-Firewall/scripts/ssm-ejecutar.sh) |
 
 ## Cómo practicar en casa

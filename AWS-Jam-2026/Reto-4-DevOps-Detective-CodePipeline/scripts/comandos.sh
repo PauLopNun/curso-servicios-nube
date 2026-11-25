@@ -1,9 +1,8 @@
 #!/bin/bash
 # Reto 4 - DevOps Detective: La difícil situación del oleoducto (CodePipeline -> EC2)
-# Comandos de investigación y solución propuesta. Este reto lo resolvió otro miembro
-# del equipo: los cambios son la solución esperada, no se ejecutaron aquí.
+# Comandos de investigación y solución. La Tarea 2 se ejecutó y verificó así.
 
-export AWS_REGION=us-east-1
+export AWS_REGION=us-west-2
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 PIPELINE=devops-detective-pipeline
 SOURCE_BUCKET="devops-detective-jam-source-bucket-${ACCOUNT_ID}"
@@ -63,6 +62,12 @@ aws s3 cp source.zip "s3://${SOURCE_BUCKET}/${OBJECT_KEY}"
 # Seguir la ejecución
 aws codepipeline list-pipeline-executions --pipeline-name "$PIPELINE" --max-items 1 \
   --query 'pipelineExecutionSummaries[0].[pipelineExecutionId,status]'
+
+# Si una ejecución abandonada bloquea las nuevas ("A previous action execution is still in progress"):
+# renombrar la acción de despliegue y lanzar otra ejecución
+# python3 -c 'import json;d=json.load(open("pipeline.json"));d.pop("metadata",None);[a.update(name="EC2Deploy-v2") for st in d["pipeline"]["stages"] for a in st["actions"] if a["name"]=="EC2Deploy"];json.dump(d,open("pipeline-nuevo.json","w"))'
+# aws codepipeline update-pipeline --cli-input-json file://pipeline-nuevo.json
+# aws codepipeline start-pipeline-execution --name "$PIPELINE"
 
 # Respuesta de la tarea: el DNS del ALB
 aws elbv2 describe-load-balancers --names devops-detective-lb --query 'LoadBalancers[0].DNSName' --output text

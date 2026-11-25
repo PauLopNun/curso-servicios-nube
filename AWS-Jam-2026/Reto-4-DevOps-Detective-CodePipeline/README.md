@@ -7,13 +7,13 @@
 ![ALB](https://img.shields.io/badge/Application-Load%20Balancer-8C4FFF?style=for-the-badge&logoColor=white)
 ![Apache](https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white)
 
-**Nombre en el Jam:** *DevOps Detective: La difícil situación del oleoducto* (*The Pipeline Predicament*) · 2 tareas · us-east-1
+**Nombre en el Jam:** *DevOps Detective: La difícil situación del oleoducto* (*The Pipeline Predicament*) · 2 tareas · us-west-2
 
-![Propuesta](https://img.shields.io/badge/Soluci%C3%B3n%20propuesta-dbab09?style=flat-square)
+![Resuelto](https://img.shields.io/badge/Resuelto%20y%20verificado-2ea44f?style=flat-square)
 
 </div>
 
-> Este reto lo resolvió otro miembro del equipo. Aquí están los enunciados, cómo razonarlos y la solución esperada, explicada paso a paso. Los ficheros de [`scripts/`](scripts) son el paquete preparado para la Tarea 2.
+> La Tarea 1 la resolvió otro miembro del equipo. La Tarea 2 se terminó y se verificó entre los dos: el pipeline acabó en *Succeeded* y la web cargó desde el ALB. Los ficheros de [`scripts/`](scripts) son los que funcionaron.
 
 ## De qué va
 
@@ -142,6 +142,21 @@ Los scripts de [`scripts/`](scripts) contemplan las dos dudas típicas: si la in
 3. Si el despliegue se queda **"In progress" mucho rato** con una instancia: **EC2** → **Target groups** → `jam-codepipeline-target-group` → **Targets**. Si sale *unhealthy*, Apache no responde con un 200 en `/`. Primero hay que revisar el deployspec: `scripts:` y `version: 0.1`, no `hooks:`. Para que una subida nueva se despliegue, se puede parar la ejecución atascada (**Stop execution** → *Stop and abandon*).
    - **Ojo:** al parar con *Stop and abandon*, el pipeline marca la acción como *Abandoned*, pero la acción de despliegue EC2 **sigue en marcha por debajo**, esperando al health check. Mientras tanto, las ejecuciones nuevas fallan en Deploy con *"A previous action execution is still in progress"*, y la etapa no se puede reintentar (*StageNotRetryableException*). Hay que esperar a que la acción vieja termine y lanzar otra ejecución con **Release change** (`aws codepipeline start-pipeline-execution`).
 4. Otras causas habituales: scripts sin permiso de ejecución, `dnf` o `yum` equivocado, ficheros dentro de una subcarpeta del zip, o el zip subido con un nombre distinto del `S3ObjectKey`.
+
+### Cómo se resolvió de verdad (resultado obtenido)
+
+1. El primer paquete del equipo tenía el `deployspec.yml` en formato `version: 0.0` con `hooks:`. Los scripts no se ejecutaban, las 2 instancias quedaban *unhealthy* y el ALB daba **502**.
+2. Se cambió a `version: 0.1` con `files:` y `scripts:` (el de [`scripts/deployspec.yml`](scripts/deployspec.yml)) y se volvió a subir `source.zip`.
+3. La ejecución anterior se había parado con *Stop and abandon*, pero su acción seguía colgada y bloqueaba todas las ejecuciones nuevas (*"A previous action execution is still in progress"*). **Truco para desbloquearlo:** cambiar el **nombre de la acción** de despliegue (`EC2Deploy` → `EC2Deploy-v2`) con la misma configuración. Como es otra acción, la vieja ya no la bloquea:
+
+   ```bash
+   aws codepipeline get-pipeline --name devops-detective-pipeline > p.json
+   # quitar "metadata" y renombrar la acción EC2Deploy -> EC2Deploy-v2
+   aws codepipeline update-pipeline --cli-input-json file://p-nuevo.json
+   aws codepipeline start-pipeline-execution --name devops-detective-pipeline
+   ```
+
+4. En unos 6 minutos: 2/2 instancias desplegadas (una cada vez), las dos *healthy*, pipeline en **Succeeded** y el ALB sirviendo *"AWS JAM - Cloud Challenge Platform"*. El validador comprueba: archivos válidos, target group encontrado, éxito del pipeline y coincidencia del HTML.
 
 ### Con la CLI
 
