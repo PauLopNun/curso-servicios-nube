@@ -1,7 +1,7 @@
 #!/bin/bash
 # Quest 3 - Operational Readiness (Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent)
-# Esta quest la resolvió el compañero desde la consola. Los comandos son el equivalente por CLI,
-# sacados de la configuración que quedó en la cuenta. Ejecutar por bloques.
+# Esta quest la resolvió el compañero desde AWS CloudShell (CLI en el navegador) y la consola.
+# Los comandos son los que registró CloudTrail, con la configuración que quedó en la cuenta. Ejecutar por bloques.
 
 export AWS_REGION=us-east-1
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -76,6 +76,10 @@ aws resiliencehub list-app-assessments --app-arn "$APP_ARN" \
 # --------------------------------------------------------------------------
 TOMCAT_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Web Server - Availability Service" \
   --query 'Reservations[0].Instances[0].InstanceId' --output text)
+
+# El rol de la instancia NO tenía permiso para publicar métricas: hay que añadirle CloudWatchAgentServerPolicy
+ROLE=$(aws iam list-roles --query 'Roles[?contains(RoleName,`LegacyWebAppRole`)].RoleName | [0]' --output text)
+aws iam attach-role-policy --role-name "$ROLE" --policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
 
 # El primer intento (heredoc dentro de Run Command) FALLÓ por cómo se escapan los saltos de línea.
 # Lo que funcionó: pasar el JSON en base64 y decodificarlo en la instancia.

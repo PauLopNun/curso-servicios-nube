@@ -41,11 +41,11 @@ Para cada quest hay:
 | 1 | [Network Foundations](Quest-1-Network-Foundations) | VPC IPAM, CloudFormation, Transit Gateway, NAT | 3 | 149.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 2 | [Forge the Mythic Bond](Quest-2-Forge-the-Mythic-Bond) | PrivateLink, NLB, AWS WAF | 2 | 84.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 3 | [Operational Readiness](Quest-3-Operational-Readiness) | Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent | 5 | 161.815 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 112.200 | ![En curso](https://img.shields.io/badge/3%20de%205-DBAB09?style=flat-square) |
+| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 112.200 | ![En curso](https://img.shields.io/badge/4%20de%205-DBAB09?style=flat-square) |
 
 </div>
 
-Las quests 1 y 2 se hicieron por CLI; la 3 y la 4 las hizo el compañero desde la consola, y su guía está reconstruida a partir de lo que quedó en la cuenta. En la Quest 4 faltaban, al escribir esto, el restore de AWS Backup y el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
+Las quests 1 y 2 se hicieron por CLI. La 3 y la 4 las hizo el compañero con la consola, CloudShell y Amazon Q, y su guía está reconstruida con **CloudTrail** y con lo que quedó en la cuenta. En la Quest 4 faltaba, al escribir esto, el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
 
 ## Cómo lo resolvimos
 
@@ -53,10 +53,30 @@ Las quests 1 y 2 se hicieron por CLI; la 3 y la 4 las hizo el compañero desde l
 |:--|:--|:--|
 | Network Foundations | Pau | AWS CLI desde PowerShell, con un asistente de IA (**Claude Code**) que proponía y lanzaba los comandos; cada paso se comprobó con `describe-...` antes de seguir |
 | Forge the Mythic Bond | Pau | Igual: CLI y Claude Code, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
-| Operational Readiness | Compañero | Consola de AWS |
-| Storage Security | Compañero | Consola de AWS |
+| Operational Readiness | Compañero | Consola de AWS, **AWS CloudShell** (la AWS CLI en el navegador) para casi todos los cambios, y **Amazon Q** para consultas |
+| Storage Security | Compañero | Consola de AWS, CloudShell y Amazon Q (para entender un error `MalformedPolicy`) |
 
 Cada README tiene un apartado **Cómo lo resolvimos** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés. La carpeta `capturas/` de este índice tiene la portada del evento y la herramienta *Best Team Name* (votar por el nombre de otro equipo daba 5.000 puntos extra).
+
+### Cómo se reconstruyó lo que hizo cada uno: CloudTrail
+
+Todo lo que se hace en la cuenta queda en **CloudTrail**: la hora, la llamada a la API, los parámetros, la IP y el *user agent*. El *user agent* distingue la consola (`Mozilla/...`), la CLI (`aws-cli/2.x`), CloudShell y los servicios de AWS. Así se sacó la cronología de las quests 3 y 4. Es un buen ejercicio repetirlo:
+
+```bash
+# Eventos de escritura (no lecturas) desde una hora, con quién y desde dónde
+aws cloudtrail lookup-events --lookup-attributes AttributeKey=ReadOnly,AttributeValue=false \
+  --start-time 2026-11-26T08:30:00Z \
+  --query 'Events[].[EventTime,EventName,CloudTrailEvent]' --output json > eventos.json
+jq -r '.[] | [.[0], .[1], (.[2]|fromjson|.sourceIPAddress), (.[2]|fromjson|.userAgent|split(" ")[0])] | @tsv' eventos.json | sort
+
+# Eventos de datos de S3 (GetObject, PutObject...): solo si un trail los registra, y están en SU bucket
+aws s3 sync s3://<bucket-del-trail>/AWSLogs/<cuenta>/CloudTrail/us-east-1/2026/11/26/ ./trail
+zcat trail/*.json.gz | jq -r '.Records[] | select(.eventSource=="s3.amazonaws.com") | [.eventTime,.eventName,.userIdentity.arn,.requestParameters.key] | @tsv'
+```
+
+> `lookup-events` solo muestra eventos de **gestión** de los últimos 90 días. Los eventos de **datos** (objetos de S3, invocaciones de Lambda) solo existen si un trail los tiene activados.
+
+En CloudTrail también aparece, a las 10:40, una entrada con el rol `WSOpsRole`: es el **personal del evento** revisando la cuenta, no alguien del equipo.
 
 ## GameDay frente a Jam
 

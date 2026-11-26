@@ -1,7 +1,7 @@
 #!/bin/bash
 # Quest 4 - Storage Security (CloudTrail, S3, versionado y AWS Backup)
-# Tareas 1, 2 y 3: las resolvió el compañero. Aquí está el equivalente por CLI.
-# Tareas 4 y 5 y la pregunta 4: PENDIENTES al escribir esto. Los bloques son el plan, sin ejecutar.
+# Tareas 1 a 4: las resolvió el compañero (consola + CloudShell). Aquí está el equivalente por CLI.
+# Tarea 5: PENDIENTE al escribir esto. Ese bloque es el plan, sin ejecutar.
 
 export AWS_REGION=us-east-1
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -66,7 +66,7 @@ aws s3 cp "s3://${SECURE}/trainer-details.txt" -    # entrenadores: buscar el "A
 aws s3 cp "s3://${SECURE}/unicorn-details.txt" -
 
 # --------------------------------------------------------------------------
-# TAREA 4 - PENDIENTE - Restaurar unicorn-stories desde AWS Backup
+# TAREA 4 - Restaurar unicorn-stories desde AWS Backup (hecho desde la consola, 11:32)
 # --------------------------------------------------------------------------
 VAULT=unicorn-stories-backup-vault
 aws backup list-recovery-points-by-backup-vault --backup-vault-name "$VAULT" \

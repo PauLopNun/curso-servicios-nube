@@ -13,7 +13,7 @@
 
 </div>
 
-> Esta quest la resolvió el compañero desde la consola. La guía está reconstruida a partir de la configuración que quedó en la cuenta (state machine, colas, canary, app de Resilience Hub, historial de Run Command y métricas) y de la página del GameDay. Lo que no se pudo comprobar está marcado con **(a confirmar)**.
+> Esta quest la resolvió el compañero con la consola, CloudShell y Amazon Q. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de la configuración que quedó en la cuenta y de la página del GameDay.
 
 ## De qué va
 
@@ -70,7 +70,7 @@ En la cuenta, la versión "arreglada" ya venía montada por el propio entorno de
 API Gateway  GET /v1/getitem  ──(AWS_PROXY)──►  Lambda GetItemWorkflowTrigger  ──(sfn_arn)──►  Step Function "StateMachine"
 ```
 
-Ninguno de esos recursos se modificó durante el GameDay. **(a confirmar)** cómo se validó exactamente el reto: la página no tiene caja de respuesta, así que todo apunta a que el check detectaba la solución (la orquestación con Step Functions) sin que hubiera que cambiar nada.
+Ninguno de esos recursos se modificó durante el GameDay: en CloudTrail no hay ninguna llamada nuestra sobre ellos. La página no tiene caja de respuesta, así que el check detectaba la solución (la orquestación con Step Functions) sin que hubiera que cambiar nada. El reto es de **entender** el antipatrón.
 
 ### Comprobación
 
@@ -182,7 +182,7 @@ Monitorizar de forma continua la memoria de la EC2 `Web Server - Availability Se
 
 ### Cómo pensarlo
 
-EC2 solo publica métricas del **hipervisor** (CPU, red, disco y *status checks*). La **memoria** (y el espacio libre en disco) solo se ven desde **dentro del sistema operativo**, así que hace falta el **CloudWatch Agent**. Publica en el namespace `CWAgent`. La instancia ya tenía SSM y un rol (`LegacyWebAppInstanceProfile`) con permiso para publicar métricas.
+EC2 solo publica métricas del **hipervisor** (CPU, red, disco y *status checks*). La **memoria** (y el espacio libre en disco) solo se ven desde **dentro del sistema operativo**, así que hace falta el **CloudWatch Agent**. Publica en el namespace `CWAgent`. La instancia ya tenía SSM, pero su rol (`...LegacyWebAppRole...`, en el perfil `LegacyWebAppInstanceProfile`) **no** tenía permiso para publicar métricas: hubo que añadirle la política gestionada **`CloudWatchAgentServerPolicy`**.
 
 Configuración usada ([`scripts/amazon-cloudwatch-agent.json`](scripts/amazon-cloudwatch-agent.json)): las métricas `mem_used_percent`, `mem_available_percent`, `mem_used`, `mem_total` y `mem_available` cada 60 s, con la dimensión `InstanceId`.
 
@@ -215,16 +215,22 @@ La página de la quest entera, de arriba abajo, con los 5 retos superados. La qu
 
 ## Cómo lo resolvimos
 
-Esta quest la hizo el compañero, sobre todo desde la **consola**, en paralelo a las quests de red. El orden, según las fechas de los recursos en la cuenta:
+Esta quest la hizo el compañero en paralelo a las quests de red. Usó la consola, **AWS CloudShell** (la AWS CLI dentro del navegador, versión 2.39.0) para casi todos los cambios, y **Amazon Q** en la consola para consultar dudas. La cronología sale de **CloudTrail** (`lookup-events`), donde cada llamada queda con su hora, su IP y si vino de la consola o de la CLI:
 
-| Hora | Qué se hizo |
-|:--|:--|
-| — | Reto 1 superado sin cambios en la cuenta (la Step Function ya existía) |
-| — | Reto 2: DLQ `AvailabilityRequestDLQ` + redrive policy con `maxReceiveCount = 3` en `AvailabilityRequestQueue` |
-| 10:17-10:19 | Reto 3: rol `CloudWatchSyntheticsRole-unicorn` y canary `unicorn-heartbeat` con el blueprint *Heartbeat monitoring*, cada minuto |
-| 10:22 | Reto 4: política `unicorn-resiliency-policy` y app `unicorn-inventory-app` desde el stack, con evaluación diaria y una evaluación inicial |
-| 10:35 | Reto 5, primer intento: Run Command con heredoc. **Falló** |
-| 10:36 | Reto 5, segundo intento: el mismo JSON en base64. Funcionó; métricas `mem_*` en `CWAgent` |
+| Hora | Herramienta | Qué se hizo |
+|:--|:--|:--|
+| 10:13 | Consola | Abre CloudShell |
+| 10:14:49 | CloudShell | Reto 2: `sqs create-queue AvailabilityRequestDLQ` con retención de 14 días |
+| 10:14:54 | CloudShell | Reto 2: `sqs set-queue-attributes` con la redrive policy (`maxReceiveCount = 3`) en `AvailabilityRequestQueue` |
+| 10:17:46-10:17:52 | CloudShell | Reto 3: bucket `cw-synthetics-unicorn-<cuenta>` para los artefactos y rol `CloudWatchSyntheticsRole-unicorn` con su política |
+| 10:19:00-10:19:15 | CloudShell | Reto 3: `synthetics create-canary` (runtime `syn-nodejs-puppeteer-19.1`, handler del blueprint `pageLoadBlueprint.handler`, `rate(1 minute)`) y `start-canary` |
+| 10:19:48 | Consola | Pregunta a **Amazon Q** (el texto de la conversación no queda en CloudTrail) |
+| 10:22:09-10:23:15 | CloudShell | Reto 4: `create-resiliency-policy`, `create-app` (evaluación *Daily*), `import-resources-to-draft-app-version` con el stack, `resolve-app-version-resources` (el primero dio `ValidationException`; al repetirlo funcionó), `publish-app-version` y `start-app-assessment` |
+| 10:35:11 | CloudShell | Reto 5: `iam attach-role-policy` de **`CloudWatchAgentServerPolicy`** al rol de la EC2 (`...LegacyWebAppRole...`): sin este permiso, el agente no puede publicar métricas |
+| 10:35:14 | CloudShell | Reto 5: primer `ssm send-command` con el JSON en un heredoc. **Falló** |
+| 10:36:42 | CloudShell | Reto 5: segundo `ssm send-command` con el JSON en base64. Funcionó; métricas `mem_*` en `CWAgent` |
+
+Del reto 1 no hay **ningún** cambio en CloudTrail: se superó sin tocar la cuenta, porque la Step Function ya venía desplegada.
 
 ---
 
