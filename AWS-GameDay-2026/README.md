@@ -1,4 +1,3 @@
-
 <div align="center">
 
 ![Header](https://capsule-render.vercel.app/api?type=waving&color=0:FF9900,100:232F3E&height=180&section=header&text=AWS%20GameDay%202026&fontSize=44&fontColor=fff&animation=fadeIn&fontAlignY=36&desc=Unicorn.Rentals%20%7C%2026%2F11%2F2026&descAlignY=56&descAlign=50)
@@ -11,7 +10,7 @@
 
 ## Qué es esto
 
-Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1).
+Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región `us-east-1`).
 
 Para cada quest hay:
 
@@ -42,10 +41,10 @@ Las 4 quests están resueltas. Para cada una se explica el proceso real de resol
 
 | Quest | Herramientas |
 |:--|:--|
-| Network Foundations | AWS CLI desde PowerShell (Windows); cada paso se comprobó con `describe-...` antes de seguir |
-| Forge the Mythic Bond | AWS CLI desde PowerShell, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
-| Operational Readiness | Consola de AWS y AWS CLI desde Ubuntu para casi todos los cambios |
-| Storage Security | Consola de AWS y AWS CLI desde Ubuntu |
+| **Network Foundations** | AWS CLI desde PowerShell (Windows); cada paso se comprobó con `describe-...` antes de seguir |
+| **Forge the Mythic Bond** | AWS CLI desde PowerShell, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
+| **Operational Readiness** | Consola de AWS y AWS CLI desde Ubuntu para casi todos los cambios |
+| **Storage Security** | Consola de AWS y AWS CLI desde Ubuntu |
 
 Cada README tiene un apartado **Cómo se resolvió** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés.
 
@@ -71,13 +70,13 @@ En CloudTrail también aparece, a las 10:40, una entrada con el rol `WSOpsRole`:
 
 ## GameDay frente a Jam
 
-| | AWS Jam (25/11) | AWS GameDay (26/11) |
-|:--|:--|
-| Cuentas | Una cuenta **por reto** | **Una sola cuenta** para todo el equipo y todas las quests |
-| Orden | Retos independientes | Quests con historia; las tareas se desbloquean en orden y algunas dependen de lo anterior (los pools de IPAM alimentan el stack de red) |
-| Validación | *Check my progress* o respuesta | Automática cada 1-2 minutos, respuesta en una caja o botón **Evaluate** |
-| Penalizaciones | Pistas | Pistas y, en alguna tarea, **puntos negativos por minuto** hasta que se cumple (Storage Security, tarea 2) |
-| Credenciales | Botón >_AWS_CLI de cada reto | **AWS Console** → *Command line access* del portal (Workshop Studio, rol `WSParticipantRole/Participant`) |
+| Aspecto | AWS Jam (25/11) | AWS GameDay (26/11) |
+|:--|:--|:--|
+| **Cuentas** | Una cuenta **por reto** | **Una sola cuenta** para todo el equipo y todas las quests |
+| **Orden** | Retos independientes | Quests con historia; las tareas se desbloquean en orden y algunas dependen de lo anterior (los pools de IPAM alimentan el stack de red) |
+| **Validación** | *Check my progress* o respuesta | Automática cada 1-2 minutos, respuesta en una caja o botón **Evaluate** |
+| **Penalizaciones** | Pistas | Pistas y, en alguna tarea, **puntos negativos por minuto** hasta que se cumple (Storage Security, tarea 2) |
+| **Credenciales** | Botón `>_AWS_CLI` de cada reto | **AWS Console** → *Command line access* del portal (Workshop Studio, rol `WSParticipantRole/Participant`) |
 
 ### Usar la CLI con las credenciales del GameDay
 
@@ -124,7 +123,7 @@ aws sts get-caller-identity --profile gameday    # rol WSParticipantRole/Partici
 
 ## Cómo practicar en casa
 
-- En el **Learner Lab** de AWS Academy (us-east-1, con `LabRole`) se pueden montar casi todas las piezas:
+- En el **Learner Lab** de AWS Academy (`us-east-1`, con `LabRole`) se pueden montar casi todas las piezas:
   - **Quest 1:** dos o tres VPC con un Transit Gateway y un NAT, y las tablas `spoke-rt` / `shared-rt`. IPAM puede no estar permitido; en ese caso los CIDR se ponen a mano.
   - **Quest 2:** dos VPC con el mismo CIDR, un ALB con una EC2 en una, NLB + endpoint service y el interface endpoint en la otra; después, el web ACL con la regla SQLi.
   - **Quest 3:** una cola SQS con DLQ y una Lambda que falle a propósito; el CloudWatch Agent en una EC2.
