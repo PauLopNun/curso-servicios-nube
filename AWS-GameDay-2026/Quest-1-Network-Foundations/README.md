@@ -221,7 +221,7 @@ El validador revisa cada 2 minutos. A las 10:17 todo seguía en rojo porque los 
 
 ## Cómo lo resolvimos
 
-Toda la quest se hizo **por la AWS CLI desde PowerShell**, con la ayuda de un asistente de IA (Claude Code) que proponía y lanzaba los comandos, y comprobando cada resultado antes de seguir.
+Toda la quest se hizo **por la AWS CLI desde PowerShell** (Windows), comprobando cada resultado antes de seguir.
 
 1. **Credenciales:** las del portal (*AWS Console → Command line access*) se guardaron en un perfil `jam` con `aws configure set`, porque las variables de entorno no se mantienen entre comandos. `sts get-caller-identity` confirmó el rol `WSParticipantRole/Participant`.
 2. **IPAM (≈10:00):**

@@ -13,7 +13,7 @@
 
 </div>
 
-> Esta quest la llevaba el compañero, con la consola, CloudShell y Amazon Q. Están hechas las tareas 1 a 4 y las 4 preguntas. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de lo que quedó en la cuenta y de la página del GameDay. La tarea 5 estaba **pendiente** cuando se escribió: aquí está el planteamiento, sin ejecutar.
+> Esta quest la llevaba el compañero, con la consola y la AWS CLI desde Ubuntu. Están hechas las tareas 1 a 4 y las 4 preguntas. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de lo que quedó en la cuenta y de la página del GameDay. La tarea 5 estaba **pendiente** cuando se escribió: aquí está el planteamiento, sin ejecutar.
 
 ## De qué va
 
@@ -66,7 +66,7 @@ Identificar por dónde está atacando el entrenador.
 La tarea no tiene caja de respuesta: el *"Monitor tool check"* mira la cuenta. Según CloudTrail, lo que se hizo fue **bloquear al sospechoso con una política del bucket**:
 
 1. **10:10-10:14:** la primera sospecha fue **`availability-lambda-role`**. Hubo 4 intentos de política rechazados (`MalformedPolicy`: el JSON pegado en el editor no era válido, por ejemplo una sentencia suelta sin `Version` ni `Statement`). A las 10:14 entró un **Deny** a ese rol.
-2. **10:21:** desde CloudShell se añadió una segunda sentencia, con el **Deny a `UnicornS3FullAccessRole`**, el rol que de verdad aparece en los eventos del ataque. A partir de ahí, la tarea dio *Passed*.
+2. **10:21:** desde la CLI se añadió una segunda sentencia, con el **Deny a `UnicornS3FullAccessRole`**, el rol que de verdad aparece en los eventos del ataque. A partir de ahí, la tarea dio *Passed*.
 3. El Deny a `availability-lambda-role` se quedó puesto. Sobra (no es el atacante), pero en ese bucket no molesta.
 
 ### El error que conviene recordar
@@ -202,17 +202,17 @@ Bloque *TAREA 5* de [`scripts/comandos.sh`](scripts/comandos.sh): buscar los obj
 
 ## Cómo lo resolvimos
 
-La quest la llevó el compañero, con la **consola**, **AWS CloudShell** (la AWS CLI en el navegador) y **Amazon Q**. La cronología sale de **CloudTrail**: los eventos de gestión con `lookup-events`, y los de S3 de los logs del trail `unicorn-crew-trail`.
+La quest la llevó el compañero, con la **consola** y la **AWS CLI** desde Ubuntu. La cronología sale de **CloudTrail**: los eventos de gestión con `lookup-events`, y los de S3 de los logs del trail `unicorn-crew-trail`.
 
 | Hora | Herramienta | Qué se hizo |
 |:--|:--|:--|
-| 10:02-10:04 | CloudShell y consola | Reconocimiento: `ListAccessPoints`, `GetBucketPolicy` y vistas del bucket en la consola |
+| 10:02-10:04 | CLI y consola | Reconocimiento: `ListAccessPoints`, `GetBucketPolicy` y vistas del bucket en la consola |
 | 10:10-10:13 | Consola | 4 intentos de política en el bucket comprometido rechazados por `MalformedPolicy` |
 | 10:14 | Consola | Política aceptada: Deny a `availability-lambda-role` (primera sospecha, equivocada) |
-| 10:21 | CloudShell | Se añade el **Deny a `UnicornS3FullAccessRole`**, el atacante real. Tarea 1 superada |
-| 10:37 | CloudShell | Tarea 2: **Block Public Access** 4/4 en `secure-unicorn-crew-<cuenta>` |
+| 10:21 | CLI | Se añade el **Deny a `UnicornS3FullAccessRole`**, el atacante real. Tarea 1 superada |
+| 10:37 | CLI | Tarea 2: **Block Public Access** 4/4 en `secure-unicorn-crew-<cuenta>` |
 | 10:43-10:49 | Consola | Retoques de la política del bucket comprometido (cambio de nombre del `Sid`) |
-| 10:49 | Consola + Amazon Q | Falla la política del bucket `secure-` (`MalformedPolicy`) y se pide ayuda a **Amazon Q** (*troubleshooting*) |
+| 10:49 | Consola | Falla la política del bucket `secure-` (`MalformedPolicy`: JSON incompleto en el editor) |
 | 10:52 | Consola | Tarea 2: política del bucket `secure-` con el Deny a `UnicornS3FullAccessRole`. Después, *Evaluate* |
 | 11:05-11:10 | Consola | Tarea 3: se revisa el bucket comprometido y se copian a mano las 3 versiones buenas al bucket `secure-` (11:08, 11:09 y 11:10) |
 | — | Lectura | Preguntas 3 y 4 respondidas leyendo los ficheros recuperados |

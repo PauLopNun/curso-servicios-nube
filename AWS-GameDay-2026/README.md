@@ -45,22 +45,22 @@ Para cada quest hay:
 
 </div>
 
-Las quests 1 y 2 se hicieron por CLI. La 3 y la 4 las hizo el compañero con la consola, CloudShell y Amazon Q, y su guía está reconstruida con **CloudTrail** y con lo que quedó en la cuenta. En la Quest 4 faltaba, al escribir esto, el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
+Las quests 1 y 2 se hicieron por CLI. La 3 y la 4 las hizo el compañero con la consola y la AWS CLI, y su guía está reconstruida con **CloudTrail** y con lo que quedó en la cuenta. En la Quest 4 faltaba, al escribir esto, el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
 
 ## Cómo lo resolvimos
 
 | Quest | Quién | Cómo |
 |:--|:--|:--|
-| Network Foundations | Pau | AWS CLI desde PowerShell, con un asistente de IA (**Claude Code**) que proponía y lanzaba los comandos; cada paso se comprobó con `describe-...` antes de seguir |
-| Forge the Mythic Bond | Pau | Igual: CLI y Claude Code, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
-| Operational Readiness | Compañero | Consola de AWS, **AWS CloudShell** (la AWS CLI en el navegador) para casi todos los cambios, y **Amazon Q** para consultas |
-| Storage Security | Compañero | Consola de AWS, CloudShell y Amazon Q (para entender un error `MalformedPolicy`) |
+| Network Foundations | Pau | AWS CLI desde PowerShell (Windows); cada paso se comprobó con `describe-...` antes de seguir |
+| Forge the Mythic Bond | Pau | AWS CLI desde PowerShell, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
+| Operational Readiness | Compañero | Consola de AWS y AWS CLI desde Ubuntu para casi todos los cambios |
+| Storage Security | Compañero | Consola de AWS y AWS CLI desde Ubuntu |
 
 Cada README tiene un apartado **Cómo lo resolvimos** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés. La carpeta `capturas/` de este índice tiene la portada del evento y la herramienta *Best Team Name* (votar por el nombre de otro equipo daba 5.000 puntos extra).
 
 ### Cómo se reconstruyó lo que hizo cada uno: CloudTrail
 
-Todo lo que se hace en la cuenta queda en **CloudTrail**: la hora, la llamada a la API, los parámetros, la IP y el *user agent*. El *user agent* distingue la consola (`Mozilla/...`), la CLI (`aws-cli/2.x`), CloudShell y los servicios de AWS. Así se sacó la cronología de las quests 3 y 4. Es un buen ejercicio repetirlo:
+Todo lo que se hace en la cuenta queda en **CloudTrail**: la hora, la llamada a la API, los parámetros, la IP y el *user agent*. El *user agent* distingue la consola (`Mozilla/...`), la CLI (`aws-cli/2.x`, con el sistema operativo) y los servicios de AWS. Así se sacó la cronología de las quests 3 y 4. Es un buen ejercicio repetirlo:
 
 ```bash
 # Eventos de escritura (no lecturas) desde una hora, con quién y desde dónde

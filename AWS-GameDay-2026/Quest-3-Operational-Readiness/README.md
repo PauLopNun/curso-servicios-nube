@@ -13,7 +13,7 @@
 
 </div>
 
-> Esta quest la resolvió el compañero con la consola, CloudShell y Amazon Q. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de la configuración que quedó en la cuenta y de la página del GameDay.
+> Esta quest la resolvió el compañero con la consola y la AWS CLI desde Ubuntu. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de la configuración que quedó en la cuenta y de la página del GameDay.
 
 ## De qué va
 
@@ -215,20 +215,18 @@ La página de la quest entera, de arriba abajo, con los 5 retos superados. La qu
 
 ## Cómo lo resolvimos
 
-Esta quest la hizo el compañero en paralelo a las quests de red. Usó la consola, **AWS CloudShell** (la AWS CLI dentro del navegador, versión 2.39.0) para casi todos los cambios, y **Amazon Q** en la consola para consultar dudas. La cronología sale de **CloudTrail** (`lookup-events`), donde cada llamada queda con su hora, su IP y si vino de la consola o de la CLI:
+Esta quest la hizo el compañero en paralelo a las quests de red. Usó la consola y, para casi todos los cambios, la **AWS CLI** (versión 2.39.0, desde Ubuntu). La cronología sale de **CloudTrail** (`lookup-events`), donde cada llamada queda con su hora, su IP y si vino de la consola o de la CLI:
 
 | Hora | Herramienta | Qué se hizo |
 |:--|:--|:--|
-| 10:13 | Consola | Abre CloudShell |
-| 10:14:49 | CloudShell | Reto 2: `sqs create-queue AvailabilityRequestDLQ` con retención de 14 días |
-| 10:14:54 | CloudShell | Reto 2: `sqs set-queue-attributes` con la redrive policy (`maxReceiveCount = 3`) en `AvailabilityRequestQueue` |
-| 10:17:46-10:17:52 | CloudShell | Reto 3: bucket `cw-synthetics-unicorn-<cuenta>` para los artefactos y rol `CloudWatchSyntheticsRole-unicorn` con su política |
-| 10:19:00-10:19:15 | CloudShell | Reto 3: `synthetics create-canary` (runtime `syn-nodejs-puppeteer-19.1`, handler del blueprint `pageLoadBlueprint.handler`, `rate(1 minute)`) y `start-canary` |
-| 10:19:48 | Consola | Pregunta a **Amazon Q** (el texto de la conversación no queda en CloudTrail) |
-| 10:22:09-10:23:15 | CloudShell | Reto 4: `create-resiliency-policy`, `create-app` (evaluación *Daily*), `import-resources-to-draft-app-version` con el stack, `resolve-app-version-resources` (el primero dio `ValidationException`; al repetirlo funcionó), `publish-app-version` y `start-app-assessment` |
-| 10:35:11 | CloudShell | Reto 5: `iam attach-role-policy` de **`CloudWatchAgentServerPolicy`** al rol de la EC2 (`...LegacyWebAppRole...`): sin este permiso, el agente no puede publicar métricas |
-| 10:35:14 | CloudShell | Reto 5: primer `ssm send-command` con el JSON en un heredoc. **Falló** |
-| 10:36:42 | CloudShell | Reto 5: segundo `ssm send-command` con el JSON en base64. Funcionó; métricas `mem_*` en `CWAgent` |
+| 10:14:49 | CLI | Reto 2: `sqs create-queue AvailabilityRequestDLQ` con retención de 14 días |
+| 10:14:54 | CLI | Reto 2: `sqs set-queue-attributes` con la redrive policy (`maxReceiveCount = 3`) en `AvailabilityRequestQueue` |
+| 10:17:46-10:17:52 | CLI | Reto 3: bucket `cw-synthetics-unicorn-<cuenta>` para los artefactos y rol `CloudWatchSyntheticsRole-unicorn` con su política |
+| 10:19:00-10:19:15 | CLI | Reto 3: `synthetics create-canary` (runtime `syn-nodejs-puppeteer-19.1`, handler del blueprint `pageLoadBlueprint.handler`, `rate(1 minute)`) y `start-canary` |
+| 10:22:09-10:23:15 | CLI | Reto 4: `create-resiliency-policy`, `create-app` (evaluación *Daily*), `import-resources-to-draft-app-version` con el stack, `resolve-app-version-resources` (el primero dio `ValidationException`; al repetirlo funcionó), `publish-app-version` y `start-app-assessment` |
+| 10:35:11 | CLI | Reto 5: `iam attach-role-policy` de **`CloudWatchAgentServerPolicy`** al rol de la EC2 (`...LegacyWebAppRole...`): sin este permiso, el agente no puede publicar métricas |
+| 10:35:14 | CLI | Reto 5: primer `ssm send-command` con el JSON en un heredoc. **Falló** |
+| 10:36:42 | CLI | Reto 5: segundo `ssm send-command` con el JSON en base64. Funcionó; métricas `mem_*` en `CWAgent` |
 
 Del reto 1 no hay **ningún** cambio en CloudTrail: se superó sin tocar la cuenta, porque la Step Function ya venía desplegada.
 

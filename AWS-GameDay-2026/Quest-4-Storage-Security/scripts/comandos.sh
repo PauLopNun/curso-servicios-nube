@@ -1,6 +1,6 @@
 #!/bin/bash
 # Quest 4 - Storage Security (CloudTrail, S3, versionado y AWS Backup)
-# Tareas 1 a 4: las resolvió el compañero (consola + CloudShell). Aquí está el equivalente por CLI.
+# Tareas 1 a 4: las resolvió el compañero (consola + AWS CLI). Aquí está el equivalente por CLI.
 # Tarea 5: PENDIENTE al escribir esto. Ese bloque es el plan, sin ejecutar.
 
 export AWS_REGION=us-east-1

@@ -135,7 +135,7 @@ sqli:   403      (?id=1' OR '1'='1)
 
 ## Cómo lo resolvimos
 
-Igual que la Quest 1: **AWS CLI desde PowerShell**, con un asistente de IA (Claude Code) que lanzaba los comandos, y pruebas reales desde la EC2 con **SSM Run Command**.
+Igual que la Quest 1: **AWS CLI desde PowerShell**, con pruebas reales desde la EC2 con **SSM Run Command**.
 
 1. **Reconocimiento:**
    - `describe-vpcs` enseñó que `Prod-VPC1-Region1` y `MystiqueRentalsVPC` son las dos 10.0.0.0/23. Eso descarta peering y TGW.
