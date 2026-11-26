@@ -86,9 +86,21 @@ La tarea no tiene caja de respuesta: el *"Monitor tool check"* mira la cuenta. S
 | ¿Qué bucket de CloudTrail se investigó? | `unicorn-cloudtrail-<cuenta>`, el destino del trail del reto `unicorn-crew-trail` (los otros dos trails son del evento) |
 | ¿Cuántos ficheros había antes del ataque? | **3**: `rental-fees.txt`, `trainer-details.txt` y `unicorn-details.txt` (las únicas versiones que no son `chaos_file_*`) |
 
+### Paso a paso en la consola
+
+1. **CloudTrail** → **Trails** → `unicorn-crew-trail` → ver su **bucket S3** (`unicorn-cloudtrail-<cuenta>`) y que en **Data events** registra los objetos de `unicorn-crew-<cuenta>`.
+2. **S3** → `unicorn-cloudtrail-<cuenta>` → `AWSLogs/<cuenta>/CloudTrail/us-east-1/<año>/<mes>/<día>/` → descargar los `.json.gz` de la hora del ataque y buscar los eventos `PutObject` y `DeleteObject` sobre `unicorn-crew-<cuenta>`: en `userIdentity.arn` aparece **`UnicornS3FullAccessRole`**.
+3. **IAM** → **Roles** → `UnicornS3FullAccessRole`: tiene `UnicornS3FullAccessPolicy` (todo S3) y se puede asumir desde la cuenta.
+4. **S3** → `unicorn-crew-<cuenta>` → **Show versions**: 3 ficheros legítimos (con delete marker encima) y unos 1.900 `chaos_file_Atlas_*`. Esto responde a la pregunta 2.
+5. **Permissions** → **Bucket policy** → **Edit** → pegar la política del Deny (la de arriba) con el bucket `unicorn-crew-<cuenta>` → **Save changes**.
+
 ### Con la CLI
 
-Bloque *TAREA 1* de [`scripts/comandos.sh`](scripts/comandos.sh): trails, descarga de logs, filtro con `jq` y recuento de versiones.
+Bloque *TAREA 1* de [`scripts/comandos.sh`](scripts/comandos.sh): trails, descarga de logs, filtro con `jq` y recuento de versiones. El Deny se aplica igual que en la tarea 2, con `put-bucket-policy` sobre `unicorn-crew-<cuenta>`.
+
+### Comprobación
+
+*"Monitor tool check: Passed! Mission accomplished! The UPD has arrested the swindler."*
 
 ---
 
@@ -109,6 +121,10 @@ Que `UnicornS3FullAccessRole` no pueda escribir ni modificar en el bucket `secur
 2. **Block public access (bucket settings)** → **Edit** → marcar **Block all public access** → **Save** → escribir `confirm`.
 3. **Bucket policy** → **Edit** → pegar [`scripts/politica-bucket-secure.json`](scripts/politica-bucket-secure.json), cambiando `ACCOUNT_ID` → **Save**.
 4. En el GameDay → **Evaluate**.
+
+### Con la CLI
+
+Bloque *TAREA 2* de [`scripts/comandos.sh`](scripts/comandos.sh): `put-bucket-policy` con [`scripts/politica-bucket-secure.json`](scripts/politica-bucket-secure.json) y `put-public-access-block` con las 4 opciones a `true`; después `get-bucket-policy` y `get-public-access-block` para comprobarlo.
 
 ### Comprobación
 

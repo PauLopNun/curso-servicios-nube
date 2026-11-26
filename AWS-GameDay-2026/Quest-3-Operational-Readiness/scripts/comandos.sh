@@ -17,6 +17,13 @@ aws stepfunctions list-state-machines --query 'stateMachines[].[name,stateMachin
 aws stepfunctions describe-state-machine --state-machine-arn "arn:aws:states:us-east-1:${ACCOUNT_ID}:stateMachine:StateMachine" \
   --query definition --output text > state-machine.asl.json
 
+# Seguir el camino de la petición: API Gateway -> Lambda trigger -> Step Function
+API_ID=$(aws apigateway get-rest-apis --query 'items[0].id' --output text)
+RES_ID=$(aws apigateway get-resources --rest-api-id "$API_ID" --query "items[?path=='/getitem'].id" --output text)
+aws apigateway get-integration --rest-api-id "$API_ID" --resource-id "$RES_ID" --http-method GET --query '[type,uri]'
+aws lambda list-functions --query 'Functions[?contains(FunctionName,`WorkflowTrigger`)].[FunctionName,Environment.Variables.sfn_arn]' --output text
+aws lambda get-function-configuration --function-name GenerateAvailabilityRequest --query Environment.Variables   # sqs_url
+
 # --------------------------------------------------------------------------
 # RETO 2 - Dead-letter queue para las peticiones al legacy que fallan
 # --------------------------------------------------------------------------
@@ -44,9 +51,41 @@ aws sqs get-queue-attributes --queue-url "$DLQ_URL" --attribute-names Approximat
 # --------------------------------------------------------------------------
 # RETO 3 - Canary de CloudWatch Synthetics con el blueprint "Heartbeat monitoring"
 # --------------------------------------------------------------------------
-# Lo más sencillo es la consola (el blueprint genera el código). Resultado en la cuenta:
-#   nombre unicorn-heartbeat, handler pageLoadBlueprint.handler, runtime syn-nodejs-puppeteer-*,
-#   rate(1 minute), artefactos en s3://cw-synthetics-unicorn-<cuenta>/, rol CloudWatchSyntheticsRole-unicorn
+# En la consola el blueprint genera el código solo. Por CLI hay que darle el código en un zip:
+# canary/pageLoadBlueprint.js es el equivalente al blueprint "Heartbeat monitoring".
+APP_URL="https://<api-id>.execute-api.us-east-1.amazonaws.com/v1/getitem?id=1111"   # la Application Url del reto
+CANARY_BUCKET=cw-synthetics-unicorn-${ACCOUNT_ID}
+
+# 1) Bucket para el código y los artefactos (capturas, HAR, logs de cada ejecución)
+aws s3 mb "s3://${CANARY_BUCKET}"
+
+# 2) Rol que asume la Lambda del canary
+aws iam create-role --role-name CloudWatchSyntheticsRole-unicorn --assume-role-policy-document \
+  '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
+sed "s/ACCOUNT_ID/${ACCOUNT_ID}/g" canary/politica-rol-canary.json > /tmp/politica-canary.json
+aws iam put-role-policy --role-name CloudWatchSyntheticsRole-unicorn --policy-name SyntheticsCanaryPolicy \
+  --policy-document file:///tmp/politica-canary.json
+ROLE_ARN=$(aws iam get-role --role-name CloudWatchSyntheticsRole-unicorn --query Role.Arn --output text)
+sleep 10   # el rol tarda unos segundos en poder asumirse
+
+# 3) Zip con la estructura que espera el runtime de Node.js: nodejs/node_modules/<fichero>.js
+rm -rf /tmp/canary && mkdir -p /tmp/canary/nodejs/node_modules
+cp canary/pageLoadBlueprint.js /tmp/canary/nodejs/node_modules/
+(cd /tmp/canary && zip -qr ../canary.zip nodejs)
+aws s3 cp /tmp/canary.zip "s3://${CANARY_BUCKET}/code/canary.zip"
+
+# 4) Crear el canary (cada minuto) y arrancarlo
+aws synthetics create-canary --name unicorn-heartbeat \
+  --code "S3Bucket=${CANARY_BUCKET},S3Key=code/canary.zip,Handler=pageLoadBlueprint.handler" \
+  --artifact-s3-location "s3://${CANARY_BUCKET}/" \
+  --execution-role-arn "$ROLE_ARN" \
+  --schedule 'Expression=rate(1 minute)' \
+  --runtime-version syn-nodejs-puppeteer-19.1 \
+  --run-config "{\"TimeoutInSeconds\":60,\"EnvironmentVariables\":{\"APP_URL\":\"${APP_URL}\"}}"
+until [ "$(aws synthetics get-canary --name unicorn-heartbeat --query Canary.Status.State --output text)" = "READY" ]; do sleep 5; done
+aws synthetics start-canary --name unicorn-heartbeat
+
+# Comprobación: RUNNING y ejecuciones PASSED
 aws synthetics describe-canaries --query 'Canaries[].[Name,Schedule.Expression,Status.State,RuntimeVersion,Code.Handler]' --output text
 aws synthetics get-canary-runs --name unicorn-heartbeat --max-results 5 --query 'CanaryRuns[].[Status.State,Timeline.Started]' --output text
 

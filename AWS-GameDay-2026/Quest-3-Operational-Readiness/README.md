@@ -70,6 +70,19 @@ En la cuenta, la versión "arreglada" ya venía montada por el propio entorno de
 API Gateway  GET /v1/getitem  ──(AWS_PROXY)──►  Lambda GetItemWorkflowTrigger  ──(sfn_arn)──►  Step Function "StateMachine"
 ```
 
+### Paso a paso en la consola (comprobar el flujo)
+
+1. **API Gateway** → la API de la app → **Resources** → `/getitem` → **GET** → **Integration request**: *Lambda proxy* hacia `...GetItemWorkflowTrigger...`.
+2. **Lambda** → esa función → **Configuration** → **Environment variables**: `sfn_arn` apunta a la Step Function `StateMachine`.
+3. **Step Functions** → `StateMachine` → **Definition** (vista gráfica): un estado **Parallel** con 3 ramas: `GetItemsFromInventory`, `GetItemPrice` y `GenerateAvailabilityRequest`.
+4. **Lambda** → `GenerateAvailabilityRequest` → **Environment variables**: `sqs_url` = `AvailabilityRequestQueue`. La disponibilidad no se espera: se deja en la cola y la procesa `GetItemAvailabilityFromLegacy`.
+
+### Con la CLI
+
+Bloque *RETO 1* de [`scripts/comandos.sh`](scripts/comandos.sh): la definición de la state machine y el camino API → Lambda → Step Function → SQS.
+
+### Qué se hizo
+
 Ninguno de esos recursos se modificó durante el GameDay: en CloudTrail no hay ninguna llamada nuestra sobre ellos. La página no tiene caja de respuesta, así que el check detectaba la solución (la orquestación con Step Functions) sin que hubiera que cambiar nada. El reto es de **entender** el antipatrón.
 
 ### Comprobación
@@ -131,6 +144,12 @@ Comprobar **cada minuto** que el endpoint de la app responde con un código de e
 3. **Application or endpoint URL:** la *Application Url* del reto. En el GameDay era la API de la app: `https://<api-id>.execute-api.us-east-1.amazonaws.com/v1/getitem?id=1111`.
 4. **Schedule:** *Run continuously* → cada **1 minuto**.
 5. **Data storage:** el bucket que propone (`cw-synthetics-...`) → **Access permissions:** *Create a new role* (sale `CloudWatchSyntheticsRole-unicorn`) → **Create canary**.
+
+### Con la CLI
+
+Bloque *RETO 3* de [`scripts/comandos.sh`](scripts/comandos.sh). Por CLI hay que darle al canary el código que en la consola genera el blueprint: [`scripts/canary/pageLoadBlueprint.js`](scripts/canary/pageLoadBlueprint.js), comprimido en un zip con la ruta `nodejs/node_modules/pageLoadBlueprint.js`. El rol lleva la política [`scripts/canary/politica-rol-canary.json`](scripts/canary/politica-rol-canary.json): escribir en el bucket de artefactos, logs y métricas en el namespace `CloudWatchSynthetics`.
+
+Pasos: bucket de artefactos → rol → zip a S3 → `create-canary` con `rate(1 minute)` y la URL como variable de entorno → esperar a `READY` → `start-canary`.
 
 ### Comprobación
 
@@ -289,6 +308,8 @@ Las del **sistema operativo**: memoria (`mem_used_percent`), uso de disco por si
 | [`scripts/comandos.sh`](scripts/comandos.sh) | Equivalente por CLI de los 5 retos |
 | [`scripts/state-machine.asl.json`](scripts/state-machine.asl.json) | Definición de la state machine desplegada (Parallel con 3 ramas) |
 | [`scripts/amazon-cloudwatch-agent.json`](scripts/amazon-cloudwatch-agent.json) | Configuración del CloudWatch Agent (métricas de memoria) |
+| [`scripts/canary/pageLoadBlueprint.js`](scripts/canary/pageLoadBlueprint.js) | Código del canary, equivalente al blueprint *Heartbeat monitoring* |
+| [`scripts/canary/politica-rol-canary.json`](scripts/canary/politica-rol-canary.json) | Política del rol del canary |
 | [`capturas/`](capturas) | La página de la quest en el GameDay, entera, con los 5 retos superados |
 
 ---
