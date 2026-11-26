@@ -30,7 +30,7 @@ Hay que implementar un mecanismo que **guarde las peticiones fallidas para repro
 
 ## Reto 3 - Detectar el latido de la aplicación
 
-Con el servicio de disponibilidad arreglado, el equipo quiere comprobar **cada minuto** la disponibilidad básica del endpoint de la aplicación (la URL que da el reto, *Application Url*) y actuar de forma proactiva. Hay que crear un mecanismo de **comprobaciones periódicas del código de estado**. Quieren usar un **blueprint existente**, sin crear ni mantener código propio.
+Con el servicio de disponibilidad arreglado, el equipo quiere comprobar **cada minuto** la disponibilidad básica del endpoint de la aplicación (*Application Url*: `https://<api-id>.execute-api.us-east-1.amazonaws.com/v1/getitem?id=1111`) y actuar de forma proactiva. Hay que crear un mecanismo de **comprobaciones periódicas del código de estado**. Quieren usar un **blueprint existente**, sin crear ni mantener código propio.
 
 **Validación:** automática.
 

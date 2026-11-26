@@ -12,7 +12,15 @@
 
 ## Qué es esto
 
-Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase en equipo el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El equipo **Lambdamentables** iba **1.º** con **513.835 puntos** cuando se escribió esta guía.
+Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase en equipo el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1). El equipo **Lambdamentables** iba **1.º** con **523.835 puntos** cuando se escribió esta guía.
+
+<div align="center">
+
+| Portada del evento | Votación *Best Team Name* (cerrada) |
+|:-:|:-:|
+| ![Portada del GameDay](capturas/web_01_portada_evento.jpg) | ![Best Team Name](capturas/web_02_best_team_name.jpg) |
+
+</div>
 
 Para cada quest hay:
 
@@ -33,11 +41,11 @@ Para cada quest hay:
 | 1 | [Network Foundations](Quest-1-Network-Foundations) | VPC IPAM, CloudFormation, Transit Gateway, NAT | 3 | 149.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 2 | [Forge the Mythic Bond](Quest-2-Forge-the-Mythic-Bond) | PrivateLink, NLB, AWS WAF | 2 | 84.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 3 | [Operational Readiness](Quest-3-Operational-Readiness) | Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent | 5 | 161.815 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 102.200 | ![En curso](https://img.shields.io/badge/3%20de%205-DBAB09?style=flat-square) |
+| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 112.200 | ![En curso](https://img.shields.io/badge/3%20de%205-DBAB09?style=flat-square) |
 
 </div>
 
-Las quests 1 y 2 se hicieron por CLI; la 3 y la 4 las hizo el compañero desde la consola, y su guía está reconstruida a partir de lo que quedó en la cuenta. En la Quest 4 faltaban, al escribir esto, la pregunta 4, el restore de AWS Backup y el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
+Las quests 1 y 2 se hicieron por CLI; la 3 y la 4 las hizo el compañero desde la consola, y su guía está reconstruida a partir de lo que quedó en la cuenta. En la Quest 4 faltaban, al escribir esto, el restore de AWS Backup y el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
 
 ## Cómo lo resolvimos
 
@@ -48,7 +56,7 @@ Las quests 1 y 2 se hicieron por CLI; la 3 y la 4 las hizo el compañero desde l
 | Operational Readiness | Compañero | Consola de AWS |
 | Storage Security | Compañero | Consola de AWS |
 
-Cada README tiene un apartado **Cómo lo resolvimos** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y capturas del GameDay con las tareas superadas.
+Cada README tiene un apartado **Cómo lo resolvimos** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés. La carpeta `capturas/` de este índice tiene la portada del evento y la herramienta *Best Team Name* (votar por el nombre de otro equipo daba 5.000 puntos extra).
 
 ## GameDay frente a Jam
 
@@ -117,6 +125,7 @@ aws sts get-caller-identity --profile gameday    # rol WSParticipantRole/Partici
 ```text
 AWS-GameDay-2026/
 ├── README.md                               ← este índice
+├── capturas/                               ← portada del evento y Best Team Name
 ├── Quest-1-Network-Foundations/
 ├── Quest-2-Forge-the-Mythic-Bond/
 ├── Quest-3-Operational-Readiness/
@@ -124,7 +133,7 @@ AWS-GameDay-2026/
     ├── README.md        ← guía paso a paso (consola + CLI), cómo lo resolvimos, errores y preguntas
     ├── enunciado.md     ← enunciado de todas las tareas
     ├── scripts/         ← comandos.sh y los ficheros usados (JSON, ASL, configuración)
-    └── capturas/        ← diagramas del enunciado y capturas del GameDay (quests 1, 2 y 3)
+    └── capturas/        ← diagramas del enunciado y la página de la quest en el GameDay, entera
 ```
 
 > En los ficheros de `scripts/`, los identificadores del laboratorio (cuenta, `vpc-...`, `rtb-...`, `ipam-pool-...`) son marcadores (`ACCOUNT_ID`, `xxxx`). Cada vez que se abre el GameDay son distintos.

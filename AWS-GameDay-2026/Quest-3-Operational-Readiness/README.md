@@ -205,9 +205,13 @@ Las 5 métricas `mem_*` del namespace `CWAgent` aparecen con la dimensión de la
 
 ## Capturas del GameDay
 
-| Quest completada | Retos 2, 3 y 4 | Retos 4 y 5 |
-|:-:|:-:|:-:|
-| ![Quest completada](capturas/01_quest_completada.jpg) | ![Retos 2 a 4](capturas/02_retos_2_3_4_ok.jpg) | ![Retos 4 y 5](capturas/03_retos_4_5_ok.jpg) |
+La página de la quest entera, de arriba abajo, con los 5 retos superados. La quest no traía diagramas.
+
+![Introducción y reto 1](capturas/web_01_intro_y_reto1.jpg)
+
+![Retos 2, 3 y 4](capturas/web_02_retos_2_3_4.jpg)
+
+![Retos 4 y 5 y quest completada](capturas/web_03_retos_4_5_quest_completada.jpg)
 
 ## Cómo lo resolvimos
 
@@ -281,7 +285,7 @@ Las del **sistema operativo**: memoria (`mem_used_percent`), uso de disco por si
 | [`scripts/comandos.sh`](scripts/comandos.sh) | Equivalente por CLI de los 5 retos |
 | [`scripts/state-machine.asl.json`](scripts/state-machine.asl.json) | Definición de la state machine desplegada (Parallel con 3 ramas) |
 | [`scripts/amazon-cloudwatch-agent.json`](scripts/amazon-cloudwatch-agent.json) | Configuración del CloudWatch Agent (métricas de memoria) |
-| [`capturas/`](capturas) | Capturas del GameDay con los 5 retos superados |
+| [`capturas/`](capturas) | La página de la quest en el GameDay, entera, con los 5 retos superados |
 
 ---
 

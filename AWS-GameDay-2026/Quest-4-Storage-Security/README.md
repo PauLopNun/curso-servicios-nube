@@ -7,13 +7,13 @@
 ![IAM](https://img.shields.io/badge/AWS-IAM-DD344C?style=for-the-badge&logoColor=white)
 ![Backup](https://img.shields.io/badge/AWS-Backup-3F8624?style=for-the-badge&logoColor=white)
 
-**Nombre en el GameDay:** *Storage Security* · 5 tareas + 4 preguntas · us-east-1 · 102.200 puntos (en curso)
+**Nombre en el GameDay:** *Storage Security* · 5 tareas + 4 preguntas · us-east-1 · 112.200 puntos (en curso)
 
 ![En curso](https://img.shields.io/badge/3%20de%205%20tareas%20resueltas-DBAB09?style=flat-square)
 
 </div>
 
-> Esta quest la llevaba el compañero. Están resueltas las tareas 1, 2 y 3 y las preguntas 1, 2 y 3; la guía está reconstruida a partir de lo que quedó en la cuenta y de la página del GameDay. Las tareas 4 y 5 y la pregunta 4 estaban **pendientes** cuando se escribió: aquí está el planteamiento, sin ejecutar.
+> Esta quest la llevaba el compañero. Están resueltas las tareas 1, 2 y 3 y las 4 preguntas; la guía está reconstruida a partir de lo que quedó en la cuenta y de la página del GameDay. Las tareas 4 y 5 estaban **pendientes** cuando se escribió: aquí está el planteamiento, sin ejecutar.
 
 ## De qué va
 
@@ -33,7 +33,7 @@ Un entrenador de Unicorn.Rentals con pasado de ciberdelincuente ataca el bucket 
 | 2 - Blindar el bucket `secure-` | Resuelta |
 | 3 - Rainbow Recovery | Resuelta |
 | Pregunta 3 - Precio del Glitter Unicorn | Resuelta |
-| Pregunta 4 - Nombre del estafador | Pendiente |
+| Pregunta 4 - Nombre del estafador | Resuelta (*Atlas Shimmer*) |
 | 4 - Restaurar las historias (AWS Backup) | Pendiente |
 | 5 - Eliminar el bucket contaminado | Pendiente |
 
@@ -134,7 +134,7 @@ Las dos se responden **leyendo** los ficheros recuperados (`aws s3 cp s3://secur
 | Pregunta | Dónde mirar | Estado |
 |:--|:--|:-:|
 | Precio diario de un Glitter Unicorn | `rental-fees.txt` | Resuelta (*"Perfect! That's the correct price"*) |
-| Nombre completo del estafador | El patrón de los ficheros de caos (`chaos_file_Atlas_*`: el nombre "Atlas") cruzado con `trainer-details.txt`, para sacar el apellido | Pendiente |
+| Nombre completo del estafador | El patrón de los ficheros de caos (`chaos_file_Atlas_*`: el nombre "Atlas") cruzado con `trainer-details.txt`, para sacar el apellido | Resuelta: **Atlas Shimmer** (*"Genius indeed! Atlas Shimmer unmasked!!"*) |
 
 ---
 
@@ -187,7 +187,29 @@ La quest la llevó el compañero, sobre todo desde la **consola**:
 3. **Preguntas 1 y 2:** el bucket de CloudTrail y el recuento de versiones legítimas (3).
 4. **Blindaje:** en `secure-unicorn-crew-<cuenta>`, la política con Deny al rol y Block Public Access 4/4. Después, **Evaluate**.
 5. **Rainbow Recovery:** las 3 versiones legítimas copiadas al bucket seguro, sin ningún `chaos_file_*`. La pregunta 3 se respondió leyendo `rental-fees.txt`.
-6. **Pendiente** al escribir esta guía: la pregunta 4, el restore de AWS Backup y el borrado del bucket con Object Lock.
+6. **Pregunta 4:** "Atlas" de los nombres `chaos_file_Atlas_*`, confirmado con los registros de entrenadores del bucket seguro: **Atlas Shimmer**.
+7. **Pendiente** al escribir esta guía: el restore de AWS Backup y el borrado del bucket con Object Lock.
+
+---
+
+## Capturas del GameDay
+
+La página de la quest entera, de arriba abajo, en el estado en que estaba al escribir la guía:
+
+<details>
+<summary>Ver las 5 capturas</summary>
+
+![Bienvenida y tarea 1](capturas/web_01_bienvenida_y_tarea1.jpg)
+
+![Preguntas 1 y 2 y tarea 2](capturas/web_02_preguntas_1_2_y_tarea2.jpg)
+
+![Tarea 3 y pregunta 3](capturas/web_03_tarea3_y_pregunta3.jpg)
+
+![Pregunta 4 y tarea 4](capturas/web_04_pregunta4_y_tarea4.jpg)
+
+![Tareas 4 y 5 pendientes](capturas/web_05_tareas_4_y_5.jpg)
+
+</details>
 
 ---
 
@@ -259,6 +281,7 @@ Restaura desde un recovery point (continuo o periódico) a un bucket **existente
 | [`enunciado.md`](enunciado.md) | Enunciado de las 5 tareas y las 4 preguntas |
 | [`scripts/comandos.sh`](scripts/comandos.sh) | Investigación, blindaje, recuperación por versiones y plan de las tareas 4 y 5 |
 | [`scripts/politica-bucket-secure.json`](scripts/politica-bucket-secure.json) | Política del bucket `secure-` con el Deny al rol comprometido |
+| [`capturas/`](capturas) | La página de la quest en el GameDay, entera |
 
 ---
 

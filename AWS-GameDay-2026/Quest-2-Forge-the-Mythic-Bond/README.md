@@ -95,7 +95,7 @@ Bloque *TAREA 1* de [`scripts/comandos.sh`](scripts/comandos.sh): NLB, target gr
 <div style="display:none;">hocus pocus, abracadabra, alakazam!</div>
 ```
 
-![Tarea 1 completada en el GameDay](capturas/04_tarea1_privatelink_ok.jpg)
+![Tarea 1 completada en el GameDay](capturas/web_04_tarea1_ok_y_tarea2.jpg)
 
 ---
 
@@ -129,7 +129,7 @@ normal: 200
 sqli:   403      (?id=1' OR '1'='1)
 ```
 
-![Tarea 2 y quest completadas](capturas/05_tarea2_waf_ok.jpg)
+![Tarea 2 y quest completadas](capturas/web_05_tarea2_ok_quest_completada.jpg)
 
 ---
 
@@ -152,6 +152,25 @@ Igual que la Quest 1: **AWS CLI desde PowerShell**, con un asistente de IA (Clau
    Conclusión: el target había pasado a `healthy` justo antes de la prueba. Al repetir: **3 × 200**.
 5. **Respuesta:** `http://<dns-del-endpoint>:80`, aceptada a la primera.
 6. **WAF:** web ACL con `AWSManagedRulesSQLiRuleSet` asociado al ALB. La primera asociación dio `WAFUnavailableEntityException` y entró al reintentar. Prueba final: 200 normal y 403 con inyección SQL.
+
+## Capturas del GameDay
+
+La página de la quest entera, de arriba abajo, tal como quedó al terminar:
+
+<details>
+<summary>Ver las 5 capturas</summary>
+
+![Estado y bienvenida](capturas/web_01_bienvenida.jpg)
+
+![Arquitectura inicial y enunciado de la tarea 1](capturas/web_02_enunciado_tarea1.jpg)
+
+![Diagrama de la tarea 1](capturas/web_03_diagrama_tarea1.jpg)
+
+![Tarea 1 superada y enunciado de la tarea 2](capturas/web_04_tarea1_ok_y_tarea2.jpg)
+
+![Tarea 2 superada y quest completada](capturas/web_05_tarea2_ok_quest_completada.jpg)
+
+</details>
 
 ## Errores típicos
 
@@ -216,7 +235,7 @@ La **acción por defecto** se aplica a las peticiones que no coinciden con ningu
 | [`enunciado.md`](enunciado.md) | Enunciado de las 2 tareas |
 | [`scripts/comandos.sh`](scripts/comandos.sh) | Solución por CLI: NLB, PrivateLink, WAF y pruebas con SSM |
 | [`scripts/waf-rules.json`](scripts/waf-rules.json) | Regla del web ACL con `AWSManagedRulesSQLiRuleSet` |
-| [`capturas/`](capturas) | Diagramas del enunciado y capturas del GameDay con las tareas completadas |
+| [`capturas/`](capturas) | Diagramas del enunciado y la página de la quest en el GameDay, entera |
 
 ---
 

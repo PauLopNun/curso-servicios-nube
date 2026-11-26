@@ -96,7 +96,7 @@ Bloque *TAREA 1* de [`scripts/comandos.sh`](scripts/comandos.sh): `create-ipam`,
 
 `describe-ipam-pools` muestra los 5 pools con sus reglas, y `get-ipam-pool-cidrs` da `provisioned` en todos. El GameDay respondió *"Top level pool configuration completed"* y después *"Well done! You have configured VPC IP Address Manager"*, con los IDs de los tres pools de entorno para la tarea siguiente:
 
-![Tarea de IPAM completada con los IDs de los pools](capturas/03_ipam_completado_pools.jpg)
+![Tarea de IPAM completada con los IDs de los pools](capturas/web_03_ipam_ok_y_tarea_stack.jpg)
 
 ---
 
@@ -215,7 +215,7 @@ Bloque *TAREA 3* de [`scripts/comandos.sh`](scripts/comandos.sh): reconocimiento
 
 El validador revisa cada 2 minutos. A las 10:17 todo seguía en rojo porque los attachments estaban en `pending`; a las 10:19 estaban los 9 caminos en verde:
 
-![Los 9 caminos de red funcionando y la quest completada](capturas/04_rutas_9_caminos_ok.jpg)
+![Los 9 caminos de red funcionando y la quest completada](capturas/web_06_rutas_ok_quest_completada.jpg)
 
 ---
 
@@ -251,6 +251,27 @@ Toda la quest se hizo **por la AWS CLI desde PowerShell**, con la ayuda de un as
 | Los spokes no salen a Internet pero SHARED sí | Falta `10.0.0.0/8 → TGW` en las tablas **públicas** (vuelta del NAT) | Añadir esa ruta |
 | No funciona nada entre VPC | Attachment sin **asociar** a ninguna tabla del TGW | Asociación + propagación |
 | PowerShell: `'$var' is not a valid ARN` | Variables sin comillas en `Key=$var,...` | Poner el argumento entre comillas dobles |
+
+## Capturas del GameDay
+
+La página de la quest entera, de arriba abajo, tal como quedó al terminar:
+
+<details>
+<summary>Ver las 6 capturas</summary>
+
+![Estado de la quest y detalles](capturas/web_01_estado_y_detalles.jpg)
+
+![Enunciado de IPAM con el diagrama](capturas/web_02_enunciado_ipam.jpg)
+
+![IPAM completado y tarea del stack](capturas/web_03_ipam_ok_y_tarea_stack.jpg)
+
+![Diagrama de la red base y stack completado](capturas/web_04_red_base_ok.jpg)
+
+![Enunciado de las rutas](capturas/web_05_enunciado_rutas.jpg)
+
+![Rutas funcionando y quest completada](capturas/web_06_rutas_ok_quest_completada.jpg)
+
+</details>
 
 ## Preguntas de repaso
 
@@ -307,7 +328,7 @@ El appliance mode ya está activado.
 |:--|:--|
 | [`enunciado.md`](enunciado.md) | Enunciado de las 3 tareas |
 | [`scripts/comandos.sh`](scripts/comandos.sh) | Solución por CLI: IPAM, stack y enrutamiento |
-| [`capturas/`](capturas) | Diagramas del enunciado (IPAM y red base) y capturas del GameDay con las tareas completadas |
+| [`capturas/`](capturas) | Diagramas del enunciado (IPAM y red base) y la página de la quest en el GameDay, entera |
 
 ---
 
