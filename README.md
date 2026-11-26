@@ -115,6 +115,25 @@ Guía de estudio de los **6 retos** del AWS Jam hecho en clase (25/11/2026): enu
 
 ---
 
+## AWS GameDay 2026
+
+<div align="center">
+
+Guía de estudio de las **4 quests** del AWS GameDay de Unicorn.Rentals hecho en clase (26/11/2026), con el equipo Lambdamentables: enunciados, paso a paso en la consola y con la CLI, errores típicos y preguntas de repaso.
+
+| Quest | Servicios | Estado |
+|:--|:--|:-:|
+| [1 - Network Foundations](AWS-GameDay-2026/Quest-1-Network-Foundations) | ![IPAM](https://img.shields.io/badge/VPC%20IPAM-8C4FFF?style=flat-square) ![TGW](https://img.shields.io/badge/Transit%20Gateway-8C4FFF?style=flat-square) ![CloudFormation](https://img.shields.io/badge/CloudFormation-E7157B?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| [2 - Forge the Mythic Bond](AWS-GameDay-2026/Quest-2-Forge-the-Mythic-Bond) | ![PrivateLink](https://img.shields.io/badge/PrivateLink-8C4FFF?style=flat-square) ![NLB](https://img.shields.io/badge/NLB-8C4FFF?style=flat-square) ![WAF](https://img.shields.io/badge/WAF-DD344C?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| [3 - Operational Readiness](AWS-GameDay-2026/Quest-3-Operational-Readiness) | ![Step Functions](https://img.shields.io/badge/Step%20Functions-E7157B?style=flat-square) ![SQS](https://img.shields.io/badge/SQS-FF4F8B?style=flat-square) ![CloudWatch](https://img.shields.io/badge/CloudWatch-FF4F8B?style=flat-square) | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| [4 - Storage Security](AWS-GameDay-2026/Quest-4-Storage-Security) | ![S3](https://img.shields.io/badge/S3-569A31?style=flat-square) ![CloudTrail](https://img.shields.io/badge/CloudTrail-FF4F8B?style=flat-square) ![Backup](https://img.shields.io/badge/AWS%20Backup-3F8624?style=flat-square) | ![En curso](https://img.shields.io/badge/3%20de%205-DBAB09?style=flat-square) |
+
+**[Índice y método de trabajo del GameDay](AWS-GameDay-2026)**
+
+</div>
+
+---
+
 ## Estructura
 
 ```text
@@ -150,10 +169,14 @@ Guía de estudio de los **6 retos** del AWS Jam hecho en clase (25/11/2026): enu
 │   ├── Practica-2-ELB-Blue-Green-Canary/
 │   ├── Practica-4-Prometheus/
 │   └── Tarea-3.2-Grafana/
-└── AWS-Jam-2026/              ← retos del AWS Jam (fuera de las asignaturas)
-    ├── Reto-1-Deduplicacion-Hallazgos-IA/
+├── AWS-Jam-2026/              ← retos del AWS Jam (fuera de las asignaturas)
+│   ├── Reto-1-Deduplicacion-Hallazgos-IA/
+│   ├── ...
+│   └── Reto-6-Pruebe-el-Flujo-VPC-Flow-Logs/
+└── AWS-GameDay-2026/          ← quests del AWS GameDay (fuera de las asignaturas)
+    ├── Quest-1-Network-Foundations/
     ├── ...
-    └── Reto-6-Pruebe-el-Flujo-VPC-Flow-Logs/
+    └── Quest-4-Storage-Security/
 ```
 
 Cada tarea sigue la misma organización:

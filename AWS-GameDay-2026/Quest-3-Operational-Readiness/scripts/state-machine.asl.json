@@ -1,0 +1,63 @@
+{
+  "Comment": "Operational Readiness State Machine",
+  "StartAt": "Get Item Parallel",
+  "States": {
+    "Get Item Parallel": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "Get Item Detail",
+          "States": {
+            "Get Item Detail": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "GetItemsFromInventory"
+              },
+              "ResultSelector": {
+                "item_details.$": "$.Payload.item_details.Item"
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "Get Item Price",
+          "States": {
+            "Get Item Price": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "GetItemPrice"
+              },
+              "ResultSelector": {
+                "item_price.$": "$.Payload.price.Price"
+              },                          
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "Get Item Availability",
+          "States": {
+            "Get Item Availability": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "GenerateAvailabilityRequest"
+              },
+              "ResultSelector": {
+                "item_availability_id.$": "$.Payload.availability_id"
+              },                          
+              "End": true
+            }
+          }
+        }                                     
+      ],
+      "End": true
+    }
+  }
+}

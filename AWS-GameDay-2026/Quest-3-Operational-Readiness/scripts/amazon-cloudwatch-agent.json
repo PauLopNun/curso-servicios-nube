@@ -1,0 +1,23 @@
+{
+  "agent": {
+    "metrics_collection_interval": 60,
+    "run_as_user": "root"
+  },
+  "metrics": {
+    "append_dimensions": {
+      "InstanceId": "${aws:InstanceId}"
+    },
+    "metrics_collected": {
+      "mem": {
+        "measurement": [
+          "mem_used_percent",
+          "mem_available_percent",
+          "mem_used",
+          "mem_total",
+          "mem_available"
+        ],
+        "metrics_collection_interval": 60
+      }
+    }
+  }
+}

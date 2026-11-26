@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenegarRolComprometido",
+      "Effect": "Deny",
+      "Principal": {
+        "AWS": "arn:aws:iam::ACCOUNT_ID:role/UnicornS3FullAccessRole"
+      },
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::secure-unicorn-crew-ACCOUNT_ID",
+        "arn:aws:s3:::secure-unicorn-crew-ACCOUNT_ID/*"
+      ]
+    }
+  ]
+}
