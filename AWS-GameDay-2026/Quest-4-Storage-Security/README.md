@@ -7,13 +7,13 @@
 ![IAM](https://img.shields.io/badge/AWS-IAM-DD344C?style=for-the-badge&logoColor=white)
 ![Backup](https://img.shields.io/badge/AWS-Backup-3F8624?style=for-the-badge&logoColor=white)
 
-**Nombre en el GameDay:** *Storage Security* · 5 tareas + 4 preguntas · us-east-1 · 112.200 puntos (en curso)
+**Nombre en el GameDay:** *Storage Security* · 5 tareas + 4 preguntas · us-east-1 · 152.200 puntos
 
-![En curso](https://img.shields.io/badge/4%20de%205%20tareas%20resueltas-DBAB09?style=flat-square)
+![Resuelto](https://img.shields.io/badge/5%20de%205%20tareas%20resueltas-2ea44f?style=flat-square)
 
 </div>
 
-> Esta quest la llevaba el compañero, con la consola y la AWS CLI desde Ubuntu. Están hechas las tareas 1 a 4 y las 4 preguntas. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de lo que quedó en la cuenta y de la página del GameDay. La tarea 5 estaba **pendiente** cuando se escribió: aquí está el planteamiento, sin ejecutar.
+> Esta quest la llevaba el compañero, con la consola y la AWS CLI desde Ubuntu. Están hechas las 5 tareas y las 4 preguntas. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de lo que quedó en la cuenta y de la página del GameDay.
 
 ## De qué va
 
@@ -23,7 +23,7 @@ Un entrenador de Unicorn.Rentals con pasado de ciberdelincuente ataca el bucket 
 2. **Blindar** el bucket nuevo `secure-`: Deny al rol y Block Public Access.
 3. **Recuperar** los 3 ficheros legítimos con el **versionado** de S3.
 4. **Restaurar** un bucket borrado desde **AWS Backup**.
-5. **Eliminar** el bucket comprometido, que tiene **Object Lock** *(pendiente)*.
+5. **Eliminar** el bucket comprometido, que tiene **Object Lock**.
 
 | Tarea / pregunta | Estado |
 |:--|:-:|
@@ -35,7 +35,7 @@ Un entrenador de Unicorn.Rentals con pasado de ciberdelincuente ataca el bucket 
 | Pregunta 3 - Precio del Glitter Unicorn | Resuelta (*$1000/día*) |
 | Pregunta 4 - Nombre del estafador | Resuelta (*Atlas Shimmer*) |
 | 4 - Restaurar las historias (AWS Backup) | Hecha: restore `COMPLETED` a las 11:32 con las 3 historias |
-| 5 - Eliminar el bucket contaminado | Pendiente |
+| 5 - Eliminar el bucket contaminado | Hecha: `DeleteBucket` a las 11:41 |
 
 ## Arquitectura
 
@@ -179,7 +179,7 @@ Así se hizo: desde la **consola** a las 11:32:21, con el recovery point `unicor
 
 ---
 
-## Tarea 5 - Eliminar el bucket contaminado *(pendiente)*
+## Tarea 5 - Eliminar el bucket contaminado
 
 ### Qué pide
 
@@ -194,9 +194,19 @@ Eliminar de forma permanente `unicorn-crew-<cuenta>`. Al menos un objeto tiene *
   - En modo **COMPLIANCE** no lo puede borrar nadie, ni siquiera root, hasta que acabe la retención.
 - La consola tiene la opción **Empty**, pero no siempre salta el Object Lock. Por CLI se borran todas las versiones con `delete-objects` por lotes de 1.000 y después los objetos bloqueados uno a uno con el bypass.
 
-### Plan
+### Paso a paso en la consola
 
-Bloque *TAREA 5* de [`scripts/comandos.sh`](scripts/comandos.sh): buscar los objetos con retención, borrarlos con bypass, vaciar el resto de versiones por lotes y `delete-bucket`.
+1. **S3** → `unicorn-crew-<cuenta>` → **Empty** → escribir `permanently delete` → **Empty**. Borra todas las versiones y delete markers que no estén bloqueados.
+2. Si queda algún objeto bloqueado: activar **Show versions**, seleccionar la versión con retención → **Delete** → `permanently delete`. Con el permiso `s3:BypassGovernanceRetention`, el borrado salta la retención en modo GOVERNANCE.
+3. Con el bucket vacío: **Delete bucket** → escribir el nombre del bucket → **Delete bucket**.
+
+### Con la CLI
+
+Bloque *TAREA 5* de [`scripts/comandos.sh`](scripts/comandos.sh): buscar los objetos con retención, borrarlos con `--bypass-governance-retention`, vaciar el resto de versiones por lotes y `delete-bucket`.
+
+### Comprobación
+
+En el GameDay se hizo desde la **consola**: el `DeleteBucket` quedó registrado a las 11:41:51 y la tarea respondió *"Bucket deleted! The tainted infrastructure has been completely eliminated."*. `aws s3api head-bucket --bucket unicorn-crew-<cuenta>` devuelve ahora `404 Not Found`.
 
 ---
 
@@ -217,7 +227,7 @@ La quest la llevó el compañero, con la **consola** y la **AWS CLI** desde Ubun
 | 11:05-11:10 | Consola | Tarea 3: se revisa el bucket comprometido y se copian a mano las 3 versiones buenas al bucket `secure-` (11:08, 11:09 y 11:10) |
 | — | Lectura | Preguntas 3 y 4 respondidas leyendo los ficheros recuperados |
 | 11:32 | Consola | Tarea 4: restore de AWS Backup al bucket original; completado a las 11:34 |
-| — | — | Tarea 5 (borrar el bucket con Object Lock): pendiente al escribir la guía |
+| hasta 11:41 | Consola | Tarea 5: se vacía el bucket comprometido (todas las versiones, incluida la bloqueada con Object Lock) y a las 11:41:51 `DeleteBucket`. *"Bucket deleted!"* |
 
 > Lo que se aprende de los fallos: `MalformedPolicy` es casi siempre un JSON incompleto en el editor. Y conviene confirmar en los eventos **quién** hizo el ataque antes de bloquear a nadie: el primer Deny fue al rol equivocado.
 

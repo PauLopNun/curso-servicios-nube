@@ -41,11 +41,11 @@ Para cada quest hay:
 | 1 | [Network Foundations](Quest-1-Network-Foundations) | VPC IPAM, CloudFormation, Transit Gateway, NAT | 3 | 149.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 2 | [Forge the Mythic Bond](Quest-2-Forge-the-Mythic-Bond) | PrivateLink, NLB, AWS WAF | 2 | 84.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 | 3 | [Operational Readiness](Quest-3-Operational-Readiness) | Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent | 5 | 161.815 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 112.200 | ![En curso](https://img.shields.io/badge/4%20de%205-DBAB09?style=flat-square) |
+| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 152.200 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 
 </div>
 
-Las quests 1 y 2 se hicieron por CLI. La 3 y la 4 las hizo el compañero con la consola y la AWS CLI, y su guía está reconstruida con **CloudTrail** y con lo que quedó en la cuenta. En la Quest 4 faltaba, al escribir esto, el borrado del bucket con Object Lock: está el planteamiento, sin ejecutar.
+Las quests 1 y 2 se hicieron por CLI. La 3 y la 4 las hizo el compañero con la consola y la AWS CLI, y su guía está reconstruida con **CloudTrail** y con lo que quedó en la cuenta. Las 4 quests están resueltas.
 
 ## Cómo lo resolvimos
 

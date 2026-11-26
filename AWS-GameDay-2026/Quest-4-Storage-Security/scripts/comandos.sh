@@ -1,7 +1,6 @@
 #!/bin/bash
 # Quest 4 - Storage Security (CloudTrail, S3, versionado y AWS Backup)
-# Tareas 1 a 4: las resolvió el compañero (consola + AWS CLI). Aquí está el equivalente por CLI.
-# Tarea 5: PENDIENTE al escribir esto. Ese bloque es el plan, sin ejecutar.
+# Las 5 tareas las resolvió el compañero (consola + AWS CLI). Aquí está el equivalente por CLI.
 
 export AWS_REGION=us-east-1
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -85,7 +84,7 @@ aws backup list-restore-jobs --query 'RestoreJobs[].[RestoreJobId,Status,StatusM
 aws s3 ls "s3://${STORIES}/" --recursive
 
 # --------------------------------------------------------------------------
-# TAREA 5 - PENDIENTE - Eliminar el bucket comprometido (con Object Lock GOVERNANCE)
+# TAREA 5 - Eliminar el bucket comprometido (con Object Lock GOVERNANCE). En el GameDay se hizo desde la consola
 # --------------------------------------------------------------------------
 # ¡Solo DESPUÉS de la tarea 3! Al borrar el bucket se pierden las versiones buenas.
 aws s3api get-object-lock-configuration --bucket "$CREW"
