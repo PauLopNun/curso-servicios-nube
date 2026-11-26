@@ -1,6 +1,6 @@
 #!/bin/bash
 # Quest 3 - Operational Readiness (Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent)
-# Esta quest la resolvió el compañero con la AWS CLI (desde Ubuntu) y la consola.
+# Esta quest se resolvió con la AWS CLI (desde Ubuntu) y la consola.
 # Los comandos son los que registró CloudTrail, con la configuración que quedó en la cuenta. Ejecutar por bloques.
 
 export AWS_REGION=us-east-1

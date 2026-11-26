@@ -1,6 +1,6 @@
 #!/bin/bash
 # Quest 4 - Storage Security (CloudTrail, S3, versionado y AWS Backup)
-# Las 5 tareas las resolvió el compañero (consola + AWS CLI). Aquí está el equivalente por CLI.
+# Las 5 tareas se resolvieron con la consola y la AWS CLI. Aquí está el equivalente por CLI.
 
 export AWS_REGION=us-east-1
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)

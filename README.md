@@ -119,7 +119,7 @@ Guía de estudio de los **6 retos** del AWS Jam hecho en clase (25/11/2026): enu
 
 <div align="center">
 
-Guía de estudio de las **4 quests** del AWS GameDay de Unicorn.Rentals hecho en clase (26/11/2026), con el equipo Lambdamentables: enunciados, paso a paso en la consola y con la CLI, errores típicos y preguntas de repaso.
+Guía de estudio de las **4 quests** del AWS GameDay de Unicorn.Rentals hecho en clase (26/11/2026): enunciados, paso a paso en la consola y con la CLI, errores típicos y preguntas de repaso.
 
 | Quest | Servicios | Estado |
 |:--|:--|:-:|

@@ -6,7 +6,7 @@
 ![TGW](https://img.shields.io/badge/Transit-Gateway-8C4FFF?style=for-the-badge&logoColor=white)
 ![CloudFormation](https://img.shields.io/badge/AWS-CloudFormation-E7157B?style=for-the-badge&logoColor=white)
 
-**Nombre en el GameDay:** *Network Foundations* · 3 tareas · nivel 400 · us-east-1 · 149.910 puntos
+**Nombre en el GameDay:** *Network Foundations* · 3 tareas · nivel 400 · us-east-1
 
 ![Resuelto](https://img.shields.io/badge/Resuelto%20y%20verificado-2ea44f?style=flat-square)
 
@@ -40,7 +40,7 @@ Unicorn.Rentals va a migrar a AWS y necesita los cimientos de red de su *landing
 
 ### Qué pide
 
-Crear un IPAM que implemente el esquema del compañero: 10.0.0.0/8 en total, us-east-1 con 65.536 IP + 35 %, Producción y No producción con 8.192 cada uno y Servicios compartidos con 1.024. Cada entorno tiene un tamaño mínimo, máximo y por defecto para las asignaciones. Se valida escribiendo el **ID del pool top-level** y después el del **pool regional**.
+Crear un IPAM que implemente el esquema propuesto: 10.0.0.0/8 en total, us-east-1 con 65.536 IP + 35 %, Producción y No producción con 8.192 cada uno y Servicios compartidos con 1.024. Cada entorno tiene un tamaño mínimo, máximo y por defecto para las asignaciones. Se valida escribiendo el **ID del pool top-level** y después el del **pool regional**.
 
 ### Cómo pensarlo
 
@@ -219,7 +219,7 @@ El validador revisa cada 2 minutos. A las 10:17 todo seguía en rojo porque los 
 
 ---
 
-## Cómo lo resolvimos
+## Cómo se resolvió
 
 Toda la quest se hizo **por la AWS CLI desde PowerShell** (Windows), comprobando cada resultado antes de seguir.
 

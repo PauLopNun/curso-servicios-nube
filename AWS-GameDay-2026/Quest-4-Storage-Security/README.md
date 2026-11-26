@@ -7,13 +7,13 @@
 ![IAM](https://img.shields.io/badge/AWS-IAM-DD344C?style=for-the-badge&logoColor=white)
 ![Backup](https://img.shields.io/badge/AWS-Backup-3F8624?style=for-the-badge&logoColor=white)
 
-**Nombre en el GameDay:** *Storage Security* · 5 tareas + 4 preguntas · us-east-1 · 152.200 puntos
+**Nombre en el GameDay:** *Storage Security* · 5 tareas + 4 preguntas · us-east-1
 
 ![Resuelto](https://img.shields.io/badge/5%20de%205%20tareas%20resueltas-2ea44f?style=flat-square)
 
 </div>
 
-> Esta quest la llevaba el compañero, con la consola y la AWS CLI desde Ubuntu. Están hechas las 5 tareas y las 4 preguntas. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de lo que quedó en la cuenta y de la página del GameDay.
+> Esta quest se resolvió con la consola y la AWS CLI desde Ubuntu. Están hechas las 5 tareas y las 4 preguntas. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de lo que quedó en la cuenta y de la página del GameDay.
 
 ## De qué va
 
@@ -226,9 +226,9 @@ En el GameDay se hizo desde la **consola**: el `DeleteBucket` quedó registrado 
 
 ---
 
-## Cómo lo resolvimos
+## Cómo se resolvió
 
-La quest la llevó el compañero, con la **consola** y la **AWS CLI** desde Ubuntu. La cronología sale de **CloudTrail**: los eventos de gestión con `lookup-events`, y los de S3 de los logs del trail `unicorn-crew-trail`.
+La quest se resolvió con la **consola** y la **AWS CLI** desde Ubuntu. La cronología sale de **CloudTrail**: los eventos de gestión con `lookup-events`, y los de S3 de los logs del trail `unicorn-crew-trail`.
 
 | Hora | Herramienta | Qué se hizo |
 |:--|:--|:--|

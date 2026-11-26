@@ -5,14 +5,13 @@
 
 ![AWS](https://img.shields.io/badge/AWS-GameDay-FF9900?style=for-the-badge&logoColor=white)
 ![Quests](https://img.shields.io/badge/Quests-4-232F3E?style=for-the-badge)
-![Equipo](https://img.shields.io/badge/Equipo-Lambdamentables-232F3E?style=for-the-badge)
 ![CLI](https://img.shields.io/badge/AWS%20CLI-v2-232F3E?style=for-the-badge&logoColor=white)
 
 </div>
 
 ## Qué es esto
 
-Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase en equipo el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1). El equipo **Lambdamentables** iba **1.º** con **563.835 puntos** cuando se escribió esta guía.
+Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1).
 
 <div align="center">
 
@@ -36,27 +35,27 @@ Para cada quest hay:
 
 <div align="center">
 
-| # | Quest (nombre en el GameDay) | Servicios | Tareas | Puntos | Estado |
-|:-:|:--|:--|:-:|:-:|:-:|
-| 1 | [Network Foundations](Quest-1-Network-Foundations) | VPC IPAM, CloudFormation, Transit Gateway, NAT | 3 | 149.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 2 | [Forge the Mythic Bond](Quest-2-Forge-the-Mythic-Bond) | PrivateLink, NLB, AWS WAF | 2 | 84.910 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 3 | [Operational Readiness](Quest-3-Operational-Readiness) | Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent | 5 | 161.815 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
-| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | 152.200 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| # | Quest (nombre en el GameDay) | Servicios | Tareas | Estado |
+|:-:|:--|:--|:-:|:-:|
+| 1 | [Network Foundations](Quest-1-Network-Foundations) | VPC IPAM, CloudFormation, Transit Gateway, NAT | 3 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| 2 | [Forge the Mythic Bond](Quest-2-Forge-the-Mythic-Bond) | PrivateLink, NLB, AWS WAF | 2 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| 3 | [Operational Readiness](Quest-3-Operational-Readiness) | Step Functions, SQS DLQ, Synthetics, Resilience Hub, CloudWatch Agent | 5 | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
+| 4 | [Storage Security](Quest-4-Storage-Security) | CloudTrail, S3, IAM, AWS Backup | 5 + 4 preguntas | ![Resuelto](https://img.shields.io/badge/Resuelto-2ea44f?style=flat-square) |
 
 </div>
 
-Las quests 1 y 2 se hicieron por CLI. La 3 y la 4 las hizo el compañero con la consola y la AWS CLI, y su guía está reconstruida con **CloudTrail** y con lo que quedó en la cuenta. Las 4 quests están resueltas.
+Las 4 quests están resueltas. Para cada una se explica el proceso real de resolución, reconstruido con **CloudTrail** y con lo que quedó en la cuenta.
 
-## Cómo lo resolvimos
+## Cómo se resolvió cada quest
 
-| Quest | Quién | Cómo |
-|:--|:--|:--|
-| Network Foundations | Pau | AWS CLI desde PowerShell (Windows); cada paso se comprobó con `describe-...` antes de seguir |
-| Forge the Mythic Bond | Pau | AWS CLI desde PowerShell, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
-| Operational Readiness | Compañero | Consola de AWS y AWS CLI desde Ubuntu para casi todos los cambios |
-| Storage Security | Compañero | Consola de AWS y AWS CLI desde Ubuntu |
+| Quest | Herramientas |
+|:--|:--|
+| Network Foundations | AWS CLI desde PowerShell (Windows); cada paso se comprobó con `describe-...` antes de seguir |
+| Forge the Mythic Bond | AWS CLI desde PowerShell, con pruebas reales por `curl` desde la EC2 mediante SSM Run Command |
+| Operational Readiness | Consola de AWS y AWS CLI desde Ubuntu para casi todos los cambios |
+| Storage Security | Consola de AWS y AWS CLI desde Ubuntu |
 
-Cada README tiene un apartado **Cómo lo resolvimos** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés. La carpeta `capturas/` de este índice tiene la portada del evento y la herramienta *Best Team Name* (votar por el nombre de otro equipo daba 5.000 puntos extra).
+Cada README tiene un apartado **Cómo se resolvió** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés. La carpeta `capturas/` de este índice tiene la portada del evento y la herramienta *Best Team Name*.
 
 ### Cómo se reconstruyó lo que hizo cada uno: CloudTrail
 
@@ -76,12 +75,12 @@ zcat trail/*.json.gz | jq -r '.Records[] | select(.eventSource=="s3.amazonaws.co
 
 > `lookup-events` solo muestra eventos de **gestión** de los últimos 90 días. Los eventos de **datos** (objetos de S3, invocaciones de Lambda) solo existen si un trail los tiene activados.
 
-En CloudTrail también aparece, a las 10:40, una entrada con el rol `WSOpsRole`: es el **personal del evento** revisando la cuenta, no alguien del equipo.
+En CloudTrail también aparece, a las 10:40, una entrada con el rol `WSOpsRole`: es el **personal del evento** revisando la cuenta.
 
 ## GameDay frente a Jam
 
 | | AWS Jam (25/11) | AWS GameDay (26/11) |
-|:--|:--|:--|
+|:--|:--|
 | Cuentas | Una cuenta **por reto** | **Una sola cuenta** para todo el equipo y todas las quests |
 | Orden | Retos independientes | Quests con historia; las tareas se desbloquean en orden y algunas dependen de lo anterior (los pools de IPAM alimentan el stack de red) |
 | Validación | *Check my progress* o respuesta | Automática cada 1-2 minutos, respuesta en una caja o botón **Evaluate** |
@@ -150,7 +149,7 @@ AWS-GameDay-2026/
 ├── Quest-2-Forge-the-Mythic-Bond/
 ├── Quest-3-Operational-Readiness/
 └── Quest-4-Storage-Security/
-    ├── README.md        ← guía paso a paso (consola + CLI), cómo lo resolvimos, errores y preguntas
+    ├── README.md        ← guía paso a paso (consola + CLI), cómo se resolvió, errores y preguntas
     ├── enunciado.md     ← enunciado de todas las tareas
     ├── scripts/         ← comandos.sh y los ficheros usados (JSON, ASL, configuración)
     └── capturas/        ← diagramas del enunciado y la página de la quest en el GameDay, entera

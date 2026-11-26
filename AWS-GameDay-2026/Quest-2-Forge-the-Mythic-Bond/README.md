@@ -6,7 +6,7 @@
 ![NLB](https://img.shields.io/badge/Network-Load%20Balancer-8C4FFF?style=for-the-badge&logoColor=white)
 ![WAF](https://img.shields.io/badge/AWS-WAF-DD344C?style=for-the-badge&logoColor=white)
 
-**Nombre en el GameDay:** *Forge the Mythic Bond* · 2 tareas · us-east-1 · 84.910 puntos
+**Nombre en el GameDay:** *Forge the Mythic Bond* · 2 tareas · us-east-1
 
 ![Resuelto](https://img.shields.io/badge/Resuelto%20y%20verificado-2ea44f?style=flat-square)
 
@@ -133,7 +133,7 @@ sqli:   403      (?id=1' OR '1'='1)
 
 ---
 
-## Cómo lo resolvimos
+## Cómo se resolvió
 
 Igual que la Quest 1: **AWS CLI desde PowerShell**, con pruebas reales desde la EC2 con **SSM Run Command**.
 

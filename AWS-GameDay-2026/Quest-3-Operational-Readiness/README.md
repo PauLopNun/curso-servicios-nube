@@ -7,13 +7,13 @@
 ![CloudWatch](https://img.shields.io/badge/Amazon-CloudWatch-FF4F8B?style=for-the-badge&logoColor=white)
 ![Resilience Hub](https://img.shields.io/badge/AWS-Resilience%20Hub-3F8624?style=for-the-badge&logoColor=white)
 
-**Nombre en el GameDay:** *Operational Readiness* · 5 retos · us-east-1 · 161.815 puntos
+**Nombre en el GameDay:** *Operational Readiness* · 5 retos · us-east-1
 
 ![Resuelto](https://img.shields.io/badge/Resuelto%20y%20verificado-2ea44f?style=flat-square)
 
 </div>
 
-> Esta quest la resolvió el compañero con la consola y la AWS CLI desde Ubuntu. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de la configuración que quedó en la cuenta y de la página del GameDay.
+> Esta quest se resolvió con la consola y la AWS CLI desde Ubuntu. La guía está reconstruida a partir de **CloudTrail** (qué llamada se hizo, cuándo y desde dónde), de la configuración que quedó en la cuenta y de la página del GameDay.
 
 ## De qué va
 
@@ -232,9 +232,9 @@ La página de la quest entera, de arriba abajo, con los 5 retos superados. La qu
 
 ![Retos 4 y 5 y quest completada](capturas/web_03_retos_4_5_quest_completada.jpg)
 
-## Cómo lo resolvimos
+## Cómo se resolvió
 
-Esta quest la hizo el compañero en paralelo a las quests de red. Usó la consola y, para casi todos los cambios, la **AWS CLI** (versión 2.39.0, desde Ubuntu). La cronología sale de **CloudTrail** (`lookup-events`), donde cada llamada queda con su hora, su IP y si vino de la consola o de la CLI:
+Esta quest se hizo en paralelo a las quests de red, con la consola y, para casi todos los cambios, la **AWS CLI** (versión 2.39.0, desde Ubuntu). La cronología sale de **CloudTrail** (`lookup-events`), donde cada llamada queda con su hora, su IP y si vino de la consola o de la CLI:
 
 | Hora | Herramienta | Qué se hizo |
 |:--|:--|:--|
