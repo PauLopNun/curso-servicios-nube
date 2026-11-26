@@ -13,14 +13,6 @@
 
 Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1).
 
-<div align="center">
-
-| Portada del evento | Votación *Best Team Name* (cerrada) |
-|:-:|:-:|
-| ![Portada del GameDay](capturas/web_01_portada_evento.jpg) | ![Best Team Name](capturas/web_02_best_team_name.jpg) |
-
-</div>
-
 Para cada quest hay:
 
 - **Enunciado** de cada tarea, traducido.
@@ -55,7 +47,7 @@ Las 4 quests están resueltas. Para cada una se explica el proceso real de resol
 | Operational Readiness | Consola de AWS y AWS CLI desde Ubuntu para casi todos los cambios |
 | Storage Security | Consola de AWS y AWS CLI desde Ubuntu |
 
-Cada README tiene un apartado **Cómo se resolvió** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés. La carpeta `capturas/` de este índice tiene la portada del evento y la herramienta *Best Team Name*.
+Cada README tiene un apartado **Cómo se resolvió** con el orden real de los pasos, los fallos que salieron y cómo se arreglaron. Las carpetas `capturas/` tienen los diagramas del enunciado y la página de cada quest del GameDay entera, de arriba abajo, para leer el enunciado original en inglés.
 
 ### Cómo se reconstruyó lo que hizo cada uno: CloudTrail
 
@@ -144,7 +136,6 @@ aws sts get-caller-identity --profile gameday    # rol WSParticipantRole/Partici
 ```text
 AWS-GameDay-2026/
 ├── README.md                               ← este índice
-├── capturas/                               ← portada del evento y Best Team Name
 ├── Quest-1-Network-Foundations/
 ├── Quest-2-Forge-the-Mythic-Bond/
 ├── Quest-3-Operational-Readiness/
