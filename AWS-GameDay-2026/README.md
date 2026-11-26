@@ -12,7 +12,7 @@
 
 ## Qué es esto
 
-Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase en equipo el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1). El equipo **Lambdamentables** iba **1.º** con **523.835 puntos** cuando se escribió esta guía.
+Guía de estudio de las **4 quests** del AWS GameDay de **Unicorn.Rentals**, hecho en clase en equipo el 26/11/2026, el día después del [AWS Jam](../AWS-Jam-2026). El evento era el **Campeonato Nacional FP - Clasificatoria Online, AWS GameDay - Quest Combo** (región us-east-1). El equipo **Lambdamentables** iba **1.º** con **563.835 puntos** cuando se escribió esta guía.
 
 <div align="center">
 
