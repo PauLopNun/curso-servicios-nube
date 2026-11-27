@@ -1,0 +1,22 @@
+## Fase 4.4 - Política que exige MFA
+$ MFA_POL=$(aws iam create-policy --policy-name EC2-Requiere-MFA --policy-document file://requiere-mfa.json --query Policy.Arn --output text --profile admin); echo $MFA_POL
+arn:aws:iam::000000000000:policy/EC2-Requiere-MFA
+
+$ aws iam attach-group-policy --group-name EC2-Operadores --policy-arn arn:aws:iam::000000000000:policy/EC2-Requiere-MFA --profile admin
+
+$ aws iam list-attached-group-policies --group-name EC2-Operadores --profile admin --query AttachedPolicies[].PolicyName
+[
+    "EC2-Operacion",
+    "EC2-Requiere-MFA"
+]
+
+## Fase 4.5 - Parar sin MFA
+$ aws ec2 describe-instances --instance-ids --profile eva --query Reservations[].Instances[].[InstanceId,State.Name] --output text
+i-8fd02dc52226c3664	running
+i-ae59e41ea1141c527	running
+i-d89cdf775c4922062	running
+
+$ aws ec2 stop-instances --instance-ids --profile eva
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the StopInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:StopInstances
+

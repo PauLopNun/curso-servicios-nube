@@ -1,0 +1,13 @@
+######## Repetición de ec2 terminate-instances con el ID correcto (i-d89cdf775c4922062)
+$ aws ec2 terminate-instances --instance-ids i-d89cdf775c4922062 --profile ana
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:TerminateInstances
+
+$ aws ec2 terminate-instances --instance-ids i-d89cdf775c4922062 --profile luis
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:TerminateInstances
+
+$ aws ec2 terminate-instances --instance-ids i-d89cdf775c4922062 --profile eva
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:TerminateInstances
+

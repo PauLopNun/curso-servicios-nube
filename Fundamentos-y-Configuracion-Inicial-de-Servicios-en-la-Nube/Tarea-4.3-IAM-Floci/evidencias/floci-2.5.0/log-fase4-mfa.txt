@@ -1,0 +1,27 @@
+## Fase 4.1 - Dispositivo MFA virtual
+$ MFA_ARN=$(aws iam create-virtual-mfa-device --virtual-mfa-device-name eva-mfa --bootstrap-method Base32StringSeed --outfile eva.seed --query VirtualMFADevice.SerialNumber --output text --profile admin); echo $MFA_ARN
+arn:aws:iam::000000000000:mfa/eva-mfa
+
+## Fase 4.2 - Dos códigos consecutivos
+$ C1=$(python3 -I totp.py eva.seed); echo $C1
+799625
+
+$ sleep 31
+
+$ C2=$(python3 -I totp.py eva.seed); echo $C2
+323908
+
+## Fase 4.3 - Activación
+$ aws iam enable-mfa-device --user-name eva --serial-number arn:aws:iam::000000000000:mfa/eva-mfa --authentication-code1 799625 --authentication-code2 323908 --profile admin
+
+$ aws iam list-mfa-devices --user-name eva --profile admin
+{
+    "MFADevices": [
+        {
+            "UserName": "eva",
+            "SerialNumber": "arn:aws:iam::000000000000:mfa/eva-mfa",
+            "EnableDate": "2026-11-27T17:19:20.681000+00:00"
+        }
+    ]
+}
+

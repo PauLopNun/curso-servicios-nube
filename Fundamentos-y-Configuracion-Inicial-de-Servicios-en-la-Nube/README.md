@@ -18,6 +18,7 @@ Conceptos básicos de la nube y configuración inicial del entorno de trabajo.
 | UP2 | [Tarea 2.1 - Cálculo de costes](Tarea-2.1-Calculo-de-Costes) | Comparación de costes entre un CPD local y AWS |
 | UP4 | [Tarea 4.1 - Aula segura con AWS](Tarea-4.1-Aula-Segura-AWS) | DMZ con VPC pública y privada, S3 por VPC Endpoint con bucket policy, NACL, CloudWatch y reto por CLI |
 | UP4 | [Lab 1 - Introducción a AWS IAM](Lab-1-Introduccion-IAM) | Laboratorio de AWS Academy: usuarios en grupos con políticas administradas e inline y pruebas de acceso con cada usuario |
+| UP4 | [Tarea 4.3 - IAM con Floci](Tarea-4.3-IAM-Floci) | Admin en lugar de root, usuarios por grupos con mínimo privilegio, Deny explícito y MFA virtual en el emulador Floci |
 
 ---
 

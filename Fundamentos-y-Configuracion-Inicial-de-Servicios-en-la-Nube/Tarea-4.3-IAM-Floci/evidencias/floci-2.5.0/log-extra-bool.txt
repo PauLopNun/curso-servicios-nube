@@ -1,0 +1,25 @@
+## Prueba extra - Bool en lugar de BoolIfExists
+$ BOOL_POL=$(aws iam create-policy --policy-name EC2-Requiere-MFA-Bool --policy-document file://requiere-mfa-bool.json --query Policy.Arn --output text --profile admin); echo $BOOL_POL
+arn:aws:iam::000000000000:policy/EC2-Requiere-MFA-Bool
+
+$ aws iam attach-group-policy --group-name EC2-Operadores --policy-arn arn:aws:iam::000000000000:policy/EC2-Requiere-MFA-Bool --profile admin
+
+$ aws ec2 describe-instances --instance-ids i-d89cdf775c4922062 --profile eva --query Reservations[].Instances[].State.Name --output text
+running
+
+$ aws ec2 stop-instances --instance-ids i-d89cdf775c4922062 --profile eva --query StoppingInstances[].[InstanceId,CurrentState.Name] --output text
+i-d89cdf775c4922062	stopping
+
+$ aws iam detach-group-policy --group-name EC2-Operadores --policy-arn arn:aws:iam::000000000000:policy/EC2-Requiere-MFA-Bool --profile admin
+
+$ aws ec2 start-instances --instance-ids i-d89cdf775c4922062 --profile admin --query StartingInstances[].CurrentState.Name --output text
+pending
+
+$ aws iam attach-group-policy --group-name EC2-Operadores --policy-arn arn:aws:iam::000000000000:policy/EC2-Requiere-MFA --profile admin
+
+$ aws iam list-attached-group-policies --group-name EC2-Operadores --profile admin --query AttachedPolicies[].PolicyName
+[
+    "EC2-Operacion",
+    "EC2-Requiere-MFA"
+]
+

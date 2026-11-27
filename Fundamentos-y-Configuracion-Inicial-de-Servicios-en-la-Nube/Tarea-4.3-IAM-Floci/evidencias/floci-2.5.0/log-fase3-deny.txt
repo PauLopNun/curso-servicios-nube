@@ -1,0 +1,34 @@
+## Fase 3.2 - Denegación explícita
+$ DENY_POL=$(aws iam create-policy --policy-name S3-Sin-Descarga --policy-document file://sin-descarga.json --query Policy.Arn --output text --profile admin); echo $DENY_POL
+arn:aws:iam::000000000000:policy/S3-Sin-Descarga
+
+$ aws iam create-group --group-name Sin-Descarga --profile admin --query Group.Arn
+"arn:aws:iam::000000000000:group/Sin-Descarga"
+
+$ aws iam attach-group-policy --group-name Sin-Descarga --policy-arn arn:aws:iam::000000000000:policy/S3-Sin-Descarga --profile admin
+
+$ aws iam add-user-to-group --group-name Sin-Descarga --user-name eva --profile admin
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile eva
+fatal error: An error occurred (403) when calling the HeadObject operation: Forbidden
+
+$ aws iam remove-user-from-group --group-name Sin-Descarga --user-name eva --profile admin
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile eva
+Completed 15 Bytes/15 Bytes (2.2 KiB/s) with 1 file(s) remainingdownload: s3://lab-datos/hola.txt to ./descarga.txt             
+
+$ cat descarga.txt
+hola desde IAM
+
+## Fase 3.3 - Simulación de políticas
+$ EVA_ARN=$(aws iam get-user --user-name eva --query User.Arn --output text --profile admin); echo $EVA_ARN
+arn:aws:iam::000000000000:user/eva
+
+$ aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::000000000000:user/eva --action-names s3:GetObject ec2:RunInstances iam:CreateUser --profile admin --query EvaluationResults[].[EvalActionName,EvalDecision] --output text
+s3:GetObject	implicitDeny
+ec2:RunInstances	allowed
+iam:CreateUser	implicitDeny
+
+$ aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::000000000000:user/eva --action-names s3:GetObject --resource-arns arn:aws:s3:::lab-datos/hola.txt --profile admin --query EvaluationResults[].[EvalActionName,EvalResourceName,EvalDecision] --output text
+s3:GetObject	arn:aws:s3:::lab-datos/hola.txt	allowed
+

@@ -1,0 +1,16 @@
+## Fase 4.5 - Parar sin MFA
+$ aws ec2 describe-instances --instance-ids i-d89cdf775c4922062 --profile eva --query Reservations[].Instances[].[InstanceId,State.Name] --output text
+i-d89cdf775c4922062	running
+
+$ aws ec2 stop-instances --instance-ids i-d89cdf775c4922062 --profile eva
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the StopInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:StopInstances
+
+## Fase 4.7 - Parar con MFA
+$ aws ec2 stop-instances --instance-ids i-d89cdf775c4922062 --profile eva-mfa
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the StopInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:StopInstances
+
+$ aws ec2 describe-instances --instance-ids i-d89cdf775c4922062 --profile eva-mfa --query Reservations[].Instances[].[InstanceId,State.Name] --output text
+i-d89cdf775c4922062	running
+

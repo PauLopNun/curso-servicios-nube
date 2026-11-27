@@ -1,0 +1,121 @@
+## Fase 0 - Identificar a root
+$ aws sts get-caller-identity --profile root
+{
+    "UserId": "000000000000",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:root"
+}
+
+$ aws iam list-users --profile root
+{
+    "Users": []
+}
+
+## Fase 1 - Usuario administrador
+$ aws iam create-group --group-name Admins --profile root --query Group.Arn
+"arn:aws:iam::000000000000:group/Admins"
+
+$ aws iam attach-group-policy --group-name Admins --profile root --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+
+$ aws iam create-user --user-name admin-lab --profile root --query User.Arn
+"arn:aws:iam::000000000000:user/admin-lab"
+
+$ aws iam add-user-to-group --group-name Admins --user-name admin-lab --profile root
+
+$ aws sts get-caller-identity --profile admin
+{
+    "UserId": "AIDAFZEE84U0VGNWT37S",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:user/admin-lab"
+}
+
+## Fase 2 - Recursos, políticas, grupos y usuarios
+$ aws s3 mb s3://lab-datos --profile admin
+make_bucket: lab-datos
+
+$ aws s3 cp hola.txt s3://lab-datos/hola.txt --profile admin
+Completed 15 Bytes/15 Bytes (535 Bytes/s) with 1 file(s) remainingupload: ./hola.txt to s3://lab-datos/hola.txt                     
+
+Instancia ec2-pln: i-ea87d40cdf175cea6
+
+$ aws iam get-group --group-name S3-Lectura --profile admin --query Users[].UserName
+[
+    "ana",
+    "eva"
+]
+
+$ aws iam get-group --group-name EC2-Operadores --profile admin --query Users[].UserName
+[
+    "eva",
+    "luis"
+]
+
+## Fase 3 - Matriz de pruebas
+ana   s3-ls           Si
+ana   s3-descargar    Si
+ana   s3-subir        No
+ana   ec2-describe    No
+ana   ec2-run         No
+ana   ec2-terminate   No
+ana   iam-list-users  No
+luis  s3-ls           No
+luis  s3-descargar    No
+luis  s3-subir        No
+luis  ec2-describe    Si
+luis  ec2-run         Si
+luis  ec2-terminate   No
+luis  iam-list-users  No
+eva   s3-ls           Si
+eva   s3-descargar    Si
+eva   s3-subir        No
+eva   ec2-describe    Si
+eva   ec2-run         Si
+eva   ec2-terminate   No
+eva   iam-list-users  No
+
+## Fase 3.2 - Denegación explícita
+$ aws iam add-user-to-group --group-name Sin-Descarga --user-name eva --profile admin
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile eva
+fatal error: An error occurred (403) when calling the HeadObject operation: Forbidden
+
+$ aws iam remove-user-from-group --group-name Sin-Descarga --user-name eva --profile admin
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile eva
+Completed 15 Bytes/15 Bytes (2.4 KiB/s) with 1 file(s) remainingdownload: s3://lab-datos/hola.txt to ./descarga.txt             
+
+## Fase 4 - MFA
+Dispositivo: arn:aws:iam::000000000000:mfa/eva-mfa
+Código 1: 406736
+Código 2: 359146
+
+$ aws iam enable-mfa-device --user-name eva --serial-number arn:aws:iam::000000000000:mfa/eva-mfa --authentication-code1 406736 --authentication-code2 359146 --profile admin
+
+$ aws iam attach-group-policy --group-name EC2-Operadores --policy-arn arn:aws:iam::000000000000:policy/EC2-Requiere-MFA --profile admin
+
+## Fase 4.5 - Parar sin MFA
+$ aws ec2 stop-instances --instance-ids i-ea87d40cdf175cea6 --profile eva
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the StopInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:StopInstances
+
+## Fase 4.6 - Sesión temporal con MFA (esperando un intervalo TOTP nuevo)
+Perfil eva-mfa con la clave temporal ASIAG6TRBV7CULWNX92Y
+
+## Fase 4.7 - Parar con MFA
+$ aws ec2 stop-instances --instance-ids i-ea87d40cdf175cea6 --profile eva-mfa
+{
+    "StoppingInstances": [
+        {
+            "InstanceId": "i-ea87d40cdf175cea6",
+            "CurrentState": {
+                "Code": 64,
+                "Name": "stopping"
+            },
+            "PreviousState": {
+                "Code": 16,
+                "Name": "running"
+            }
+        }
+    ]
+}
+

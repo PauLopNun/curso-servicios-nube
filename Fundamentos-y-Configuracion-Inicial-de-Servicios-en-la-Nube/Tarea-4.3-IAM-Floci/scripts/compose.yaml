@@ -1,0 +1,10 @@
+services:
+  floci:
+    image: floci/floci:nightly-11262026
+    container_name: floci-nightly
+    ports:
+      - "4567:4566"
+    environment:
+      FLOCI_SERVICES_IAM_ENFORCEMENT_ENABLED: "true"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

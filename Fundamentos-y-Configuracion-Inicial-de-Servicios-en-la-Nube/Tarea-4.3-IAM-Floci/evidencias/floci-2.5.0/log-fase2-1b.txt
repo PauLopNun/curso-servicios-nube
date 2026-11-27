@@ -1,0 +1,5 @@
+$ ID=$(aws ec2 run-instances --image-id ami-alpine --instance-type t2.micro --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=ec2-pln}]" --query "Instances[0].InstanceId" --output text --profile admin)
+
+$ echo $ID
+i-d89cdf775c4922062
+

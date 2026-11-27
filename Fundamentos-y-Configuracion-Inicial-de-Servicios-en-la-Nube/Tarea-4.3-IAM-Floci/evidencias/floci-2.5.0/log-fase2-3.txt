@@ -1,0 +1,60 @@
+## Fase 2.3 - Grupos y políticas
+$ S3_POL=$(aws iam create-policy --policy-name S3-LabDatos-Lectura --policy-document file://s3-lectura.json --query Policy.Arn --output text --profile admin); echo $S3_POL
+arn:aws:iam::000000000000:policy/S3-LabDatos-Lectura
+
+$ EC2_POL=$(aws iam create-policy --policy-name EC2-Operacion --policy-document file://ec2-operadores.json --query Policy.Arn --output text --profile admin); echo $EC2_POL
+arn:aws:iam::000000000000:policy/EC2-Operacion
+
+$ aws iam create-group --group-name S3-Lectura --profile admin --query Group.Arn
+"arn:aws:iam::000000000000:group/S3-Lectura"
+
+$ aws iam create-group --group-name EC2-Operadores --profile admin --query Group.Arn
+"arn:aws:iam::000000000000:group/EC2-Operadores"
+
+$ aws iam attach-group-policy --group-name S3-Lectura --policy-arn arn:aws:iam::000000000000:policy/S3-LabDatos-Lectura --profile admin
+
+$ aws iam attach-group-policy --group-name EC2-Operadores --policy-arn arn:aws:iam::000000000000:policy/EC2-Operacion --profile admin
+
+## Fase 2.4 - Usuarios y claves
+$ aws iam create-user --user-name ana --profile admin --query User.Arn
+"arn:aws:iam::000000000000:user/ana"
+
+$ aws iam create-user --user-name luis --profile admin --query User.Arn
+"arn:aws:iam::000000000000:user/luis"
+
+$ aws iam create-user --user-name eva --profile admin --query User.Arn
+"arn:aws:iam::000000000000:user/eva"
+
+$ aws iam add-user-to-group --group-name S3-Lectura --user-name ana --profile admin
+
+$ aws iam add-user-to-group --group-name EC2-Operadores --user-name luis --profile admin
+
+$ aws iam add-user-to-group --group-name S3-Lectura --user-name eva --profile admin
+
+$ aws iam add-user-to-group --group-name EC2-Operadores --user-name eva --profile admin
+
+perfil ana -> AKIA4E4JS7ARFQT0M4QQ
+perfil luis -> AKIA3WNIARF7QSOJPJEF
+perfil eva -> AKIAJIM6WR5JQOCCVDR0
+
+$ aws iam get-group --group-name EC2-Operadores --profile admin --query Users[].UserName
+[
+    "eva",
+    "luis"
+]
+
+$ aws iam get-group --group-name S3-Lectura --profile admin --query Users[].UserName
+[
+    "ana",
+    "eva"
+]
+
+$ aws sts get-caller-identity --profile ana --query Arn
+"arn:aws:iam::000000000000:user/ana"
+
+$ aws sts get-caller-identity --profile luis --query Arn
+"arn:aws:iam::000000000000:user/luis"
+
+$ aws sts get-caller-identity --profile eva --query Arn
+"arn:aws:iam::000000000000:user/eva"
+

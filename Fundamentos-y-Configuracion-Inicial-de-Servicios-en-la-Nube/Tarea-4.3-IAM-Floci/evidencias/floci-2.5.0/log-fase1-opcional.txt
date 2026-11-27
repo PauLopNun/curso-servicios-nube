@@ -1,0 +1,18 @@
+## Fase 1 - paso opcional
+$ aws iam update-access-key --access-key-id test --status Inactive --profile admin
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter AccessKeyId, value: 4, valid min length: 16
+
+$ aws sts get-caller-identity --profile root
+{
+    "UserId": "000000000000",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:root"
+}
+
+$ aws iam list-users --profile root --query Users[].UserName
+[
+    "admin-lab"
+]
+

@@ -1,0 +1,61 @@
+## Fase 0
+$ aws sts get-caller-identity --profile root
+{
+    "UserId": "000000000000",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:root"
+}
+
+$ aws iam list-users --profile root
+{
+    "Users": []
+}
+
+## Fase 1
+$ aws iam create-group --group-name Admins --profile root
+{
+    "Group": {
+        "Path": "/",
+        "GroupName": "Admins",
+        "GroupId": "AGPA90ZA7BFP7JAU01P0",
+        "Arn": "arn:aws:iam::000000000000:group/Admins",
+        "CreateDate": "2026-11-27T17:14:51.299000+00:00"
+    }
+}
+
+$ aws iam attach-group-policy --group-name Admins --profile root --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+
+$ aws iam create-user --user-name admin-lab --profile root
+{
+    "User": {
+        "Path": "/",
+        "UserName": "admin-lab",
+        "UserId": "AIDAPMWEX9KIL9SK66TR",
+        "Arn": "arn:aws:iam::000000000000:user/admin-lab",
+        "CreateDate": "2026-11-27T17:14:53.265000+00:00"
+    }
+}
+
+$ aws iam add-user-to-group --group-name Admins --user-name admin-lab --profile root
+
+$ aws iam create-access-key --user-name admin-lab --profile root   (claves guardadas en el perfil admin)
+$ aws sts get-caller-identity --profile admin
+{
+    "UserId": "AIDAPMWEX9KIL9SK66TR",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:user/admin-lab"
+}
+
+$ aws iam list-users --profile admin
+{
+    "Users": [
+        {
+            "Path": "/",
+            "UserName": "admin-lab",
+            "UserId": "AIDAPMWEX9KIL9SK66TR",
+            "Arn": "arn:aws:iam::000000000000:user/admin-lab",
+            "CreateDate": "2026-11-27T17:14:53.265000+00:00"
+        }
+    ]
+}
+

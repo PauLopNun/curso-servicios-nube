@@ -1,0 +1,80 @@
+######## Usuario ana
+$ aws s3 ls s3://lab-datos --profile ana
+2026-11-27 18:15:34         15 hola.txt
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile ana
+Completed 15 Bytes/15 Bytes (1.9 KiB/s) with 1 file(s) remainingdownload: s3://lab-datos/hola.txt to ./descarga.txt             
+
+$ aws s3 cp hola.txt s3://lab-datos/subido.txt --profile ana
+Completed 15 Bytes/15 Bytes (516 Bytes/s) with 1 file(s) remainingupload failed: ./hola.txt to s3://lab-datos/subido.txt An error occurred (AccessDenied) when calling the PutObject operation: User is not authorized to perform: s3:PutObject
+
+$ aws ec2 describe-instances --query Reservations[].Instances[].InstanceId --profile ana
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the DescribeInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:DescribeInstances
+
+$ aws ec2 run-instances --image-id ami-alpine --instance-type t2.micro --query Instances[0].InstanceId --output text --profile ana
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the RunInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:RunInstances
+
+$ aws ec2 terminate-instances --instance-ids  --profile ana
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:TerminateInstances
+
+$ aws iam list-users --query Users[].UserName --profile ana
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the ListUsers operation: User is not authorized to perform: iam:ListUsers
+
+######## Usuario luis
+$ aws s3 ls s3://lab-datos --profile luis
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the ListObjectsV2 operation: User is not authorized to perform: s3:ListBucket
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile luis
+fatal error: An error occurred (403) when calling the HeadObject operation: Forbidden
+
+$ aws s3 cp hola.txt s3://lab-datos/subido.txt --profile luis
+Completed 15 Bytes/15 Bytes (577 Bytes/s) with 1 file(s) remainingupload failed: ./hola.txt to s3://lab-datos/subido.txt An error occurred (AccessDenied) when calling the PutObject operation: User is not authorized to perform: s3:PutObject
+
+$ aws ec2 describe-instances --query Reservations[].Instances[].InstanceId --profile luis
+[
+    "i-d89cdf775c4922062"
+]
+
+$ aws ec2 run-instances --image-id ami-alpine --instance-type t2.micro --query Instances[0].InstanceId --output text --profile luis
+i-ae59e41ea1141c527
+
+$ aws ec2 terminate-instances --instance-ids  --profile luis
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:TerminateInstances
+
+$ aws iam list-users --query Users[].UserName --profile luis
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the ListUsers operation: User is not authorized to perform: iam:ListUsers
+
+######## Usuario eva
+$ aws s3 ls s3://lab-datos --profile eva
+2026-11-27 18:15:34         15 hola.txt
+
+$ aws s3 cp s3://lab-datos/hola.txt descarga.txt --profile eva
+Completed 15 Bytes/15 Bytes (2.1 KiB/s) with 1 file(s) remainingdownload: s3://lab-datos/hola.txt to ./descarga.txt             
+
+$ aws s3 cp hola.txt s3://lab-datos/subido.txt --profile eva
+Completed 15 Bytes/15 Bytes (399 Bytes/s) with 1 file(s) remainingupload failed: ./hola.txt to s3://lab-datos/subido.txt An error occurred (AccessDenied) when calling the PutObject operation: User is not authorized to perform: s3:PutObject
+
+$ aws ec2 describe-instances --query Reservations[].Instances[].InstanceId --profile eva
+[
+    "i-ae59e41ea1141c527",
+    "i-d89cdf775c4922062"
+]
+
+$ aws ec2 run-instances --image-id ami-alpine --instance-type t2.micro --query Instances[0].InstanceId --output text --profile eva
+i-8fd02dc52226c3664
+
+$ aws ec2 terminate-instances --instance-ids  --profile eva
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:TerminateInstances
+
+$ aws iam list-users --query Users[].UserName --profile eva
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the ListUsers operation: User is not authorized to perform: iam:ListUsers
+

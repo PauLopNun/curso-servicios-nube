@@ -1,0 +1,25 @@
+## Fase 4.6 - Sesión temporal con MFA
+$ read AK SK TK < <(aws sts get-session-token --serial-number "$MFA_ARN" --token-code "$(python3 -I totp.py eva.seed)" --profile eva --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text)
+
+$ echo "AccessKeyId temporal: $AK"
+AccessKeyId temporal: ASIA1ER2IXF4BQFD3MOZ
+
+$ aws configure set aws_access_key_id/aws_secret_access_key/aws_session_token ... --profile eva-mfa
+
+$ aws sts get-caller-identity --profile eva-mfa
+{
+    "UserId": "AIDAPAGO6JDD7FPHH4UY",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:user/eva"
+}
+
+## Fase 4.7 - Parar con MFA
+$ aws ec2 stop-instances --instance-ids --profile eva-mfa
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the StopInstances operation: You are not authorized to perform this operation. User is not authorized to perform: ec2:StopInstances
+
+$ aws ec2 describe-instances --instance-ids --profile eva-mfa --query Reservations[].Instances[].[InstanceId,State.Name] --output text
+i-8fd02dc52226c3664	running
+i-ae59e41ea1141c527	running
+i-d89cdf775c4922062	running
+
